@@ -1,0 +1,30 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-school-detail-student-item';
+
+#{$classPrefix} {
+  @include card();
+  @include flex-row();
+
+  .item-info {
+    flex: 1;
+    margin-left: $spacing-md;
+  }
+
+  .item-name {
+    @include flex-row-between();
+    .student-name {
+      @include text();
+      flex: 1;
+    }
+  }
+  .item-parents {
+    @include flex-row();
+    flex-wrap: wrap;
+
+    & > view {
+      margin-top: $spacing-md;
+      margin-right: $spacing-md;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-select-modal';
+
+#{$classPrefix} {
+  &--content {
+    height: 80vh;
+  }
+
+  .teacher-select-modal {
+    radio {
+      border: $border-base;
+      border-radius: $border-radius-md;
+      padding: $spacing-xs $spacing-xs;
+      background: $color-bg;
+      color: $color-text-title;
+    }
+  }
+}

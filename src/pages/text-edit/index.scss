@@ -1,0 +1,9 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-input-edit-page';
+
+#{$classPrefix} {
+  &--container {
+    padding: $spacing-md;
+  }
+}

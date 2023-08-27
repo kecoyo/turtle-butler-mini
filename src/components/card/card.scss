@@ -1,0 +1,72 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-card';
+
+#{$classPrefix} {
+  @include card();
+  @include flex-row();
+
+  &--container {
+    @include flex-col();
+    flex: 1;
+  }
+
+  &--header {
+    @include flex-row();
+    margin-bottom: $spacing-v-md;
+  }
+
+  &--content {}
+
+  &--item-image {
+    @include flex-row(center, center);
+    margin-right: $spacing-xs;
+  }
+
+  &--item-icon {
+    @include flex-row(center, center);
+    margin-right: $spacing-xs;
+  }
+
+  &--item-content {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  &--item-title {
+    @include text(null, $font-size-lg);
+    @include line(1);
+    @include flex-row();
+    align-items: center;
+  }
+
+  &--item-red-point {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: #ec3834;
+    border-radius: 50%;
+    margin-left: $spacing-xs;
+  }
+
+  &--item-note {
+    @include text($color-text-desc);
+    @include line(2);
+  }
+
+  &--item-extra {
+    @include flex-row(center, center);
+    @include text($color-text-desc);
+    text-align: right;
+    margin-left: $spacing-xs;
+  }
+
+  &--item-arrow {
+    @include flex-row(center, center);
+    margin-left: $spacing-xs;
+    margin-right: -$spacing-xs;
+    .lj-icon {
+      color: $color-border-dark;
+    }
+  }
+}

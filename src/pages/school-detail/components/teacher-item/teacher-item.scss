@@ -1,0 +1,22 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-school-detail-teacher-item';
+
+#{$classPrefix} {
+  @include card();
+  @include flex-row-between();
+
+  .item-info {
+    @include flex-col-start();
+    flex: 1;
+    margin: 0 $spacing-md;
+  }
+  .item-name {
+    @include text();
+  }
+  .item-role {
+    @include text($color-text-desc);
+  }
+  .item-right {
+  }
+}

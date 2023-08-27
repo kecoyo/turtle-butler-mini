@@ -1,0 +1,13 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-school-detail-parent-item';
+
+#{$classPrefix} {
+  height: 69px;
+  line-height: 69px;
+  border: $border-base;
+  border-radius: $border-radius-md;
+  padding: 0 $spacing-sm;
+  @include text();
+  @include flex-row-between();
+}

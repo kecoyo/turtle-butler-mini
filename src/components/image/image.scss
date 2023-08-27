@@ -1,0 +1,42 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-image';
+
+#{$classPrefix} {
+  overflow: hidden;
+  border-radius: $border-radius-md;
+  background-clip: border-box;
+  overflow: hidden;
+
+  &--img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &--circle {
+    border-radius: 50%;
+    background-clip: border-box;
+    overflow: hidden;
+  }
+
+  &--large {
+    width: 180px;
+    height: 180px;
+    font-size: $font-size-xl;
+    line-height: 180px;
+  }
+
+  &--normal {
+    width: 96px;
+    height: 96px;
+    font-size: $font-size-base;
+    line-height: 96px;
+  }
+
+  &--small {
+    width: 68px;
+    height: 68px;
+    font-size: $font-size-xs;
+    line-height: 68px;
+  }
+}

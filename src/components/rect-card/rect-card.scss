@@ -1,0 +1,36 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-rect-card';
+
+#{$classPrefix} {
+  width: 100%;
+  @include flex-col-center();
+  background-color: #fff;
+  font-size: $font-size-base;
+  border-radius: $border-radius-lg;
+  // margin-bottom: $spacing-xs;
+  box-shadow: $box-shadow-card;
+
+  .icon {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+#{$classPrefix}-square {
+  // width: 222px;
+  height: 222px;
+  @include flex-col-center();
+}
+
+#{$classPrefix}-rect {
+  // width: ;
+  height: 103px;
+  @include flex-row(center, center);
+  justify-content: flex-start;
+
+  // .text {
+  //   position: relative;
+  //   left: -16px;
+  // }
+}

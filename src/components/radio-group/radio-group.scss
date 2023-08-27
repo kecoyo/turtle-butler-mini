@@ -1,0 +1,29 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-radio-group';
+
+#{$classPrefix} {
+  height: $input-height-md;
+  @include flex-row(center, center);
+
+  .lj-space {
+    width: 100%;
+  }
+
+  // 文字对齐方式
+  &--left {
+    .lj-space {
+      justify-content: flex-start;
+    }
+  }
+  &--center {
+    .lj-space {
+      justify-content: center;
+    }
+  }
+  &--right {
+    .lj-space {
+      justify-content: flex-end;
+    }
+  }
+}

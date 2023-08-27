@@ -1,0 +1,24 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-link';
+
+#{$classPrefix} {
+  color: $color-link;
+
+  &:active {
+    color: $color-link-active;
+  }
+
+  &:hover {
+    color: $color-link-hover;
+  }
+
+  &--disabled {
+    color: $color-link-disabled;
+
+    &:hover,
+    &:active {
+      color: $color-link-disabled;
+    }
+  }
+}

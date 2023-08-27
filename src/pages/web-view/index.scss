@@ -1,0 +1,8 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-web-view-page';
+
+#{$classPrefix} {
+  width: 100%;
+  height: 100vh;
+}

@@ -1,0 +1,17 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-footer';
+
+#{$classPrefix} {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: $footer-height;
+  background-color: $color-bg;
+  @include flex-row(space-evenly, center);
+
+  .at-button.at-button--full {
+    border-radius: 0;
+  }
+}

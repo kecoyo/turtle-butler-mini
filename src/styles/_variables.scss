@@ -1,0 +1,516 @@
+/**
+ * Custom Theme variables
+ */
+@import 'taro-ui/dist/style/mixins/libs/absolute-center';
+@import 'taro-ui/dist/style/mixins/libs/clearfix';
+@import 'taro-ui/dist/style/mixins/libs/line';
+@import 'taro-ui/dist/style/mixins/libs/overlay';
+@import 'taro-ui/dist/style/mixins/libs/shade';
+@import 'taro-ui/dist/style/mixins/libs/tint';
+@import 'taro-ui/dist/style/mixins/libs/flex';
+@import 'taro-ui/dist/style/mixins/libs/border';
+@import 'taro-ui/dist/style/mixins/libs/active';
+@import 'taro-ui/dist/style/mixins/libs/disabled';
+@import 'taro-ui/dist/style/mixins/libs/placeholder';
+@import 'taro-ui/dist/style/mixins/libs/alignhack';
+@import 'taro-ui/dist/style/mixins/libs/hairline';
+
+$hd: 2; // 基本单位
+
+/* 字体 */
+$font-family: -apple-system, blinkmacsystemfont, 'Helvetica Neue', helvetica, segoe ui, arial, roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+
+/* The Color of O2Team Brand */
+$color-brand: #00a790; // 品牌主色
+$color-brand-light: lighten($color-brand, 20%);
+$color-brand-dark: darken($color-brand, 20%);
+
+/* Color */
+$color-primary: $color-brand; // 用于表示品牌主色
+$color-secondary: #faad14; // 用于表示辅助色
+$color-success: #00b578; // 用于表示操作成功
+$color-error: #ff3141; // 用于表示操作失败
+$color-warning: #ff8f1f; // 用于表示操作警告
+$color-info: #1677ff; // 用于表示操作信息
+
+/* Color Palette */
+$color-black-0: #000;
+$color-black-1: #333;
+$color-black-2: #7f7f7f;
+$color-black-3: #b2b2b2;
+
+$color-grey-0: #333;
+$color-grey-1: #666;
+$color-grey-2: #999;
+$color-grey-3: #ccc;
+$color-grey-4: #e5e5e5;
+$color-grey-5: #f0f0f0;
+$color-grey-6: #f7f7f7;
+
+$color-white: #fff;
+
+/* Text Color */
+$color-text-base: #333; // 文字的基本色
+$color-text-base-inverse: #fff; // 反色
+$color-text-secondary: #36d57d; // 辅助色
+$color-text-placeholder: #c9c9c9;
+$color-text-disabled: #ccc;
+$color-text-title: #2c405a; // 文章标题
+$color-text-paragraph: #3f536e; // 文章段落
+$color-text-desc: lighten($color-text-base, 40%); // 文本描述
+
+/* Link */
+$color-link: #1677ff; // 超链接的颜色。
+$color-link-hover: #69b1ff; // 超链接悬浮颜色。
+$color-link-active: #0958d9; // 超链接点击颜色。
+$color-link-disabled: #bfbfbf; // 超链接禁用颜色。
+
+/* 背景色 */
+$color-bg: #fff;
+$color-bg-base: #f3f4f8;
+$color-bg-light: #ecf5fd;
+$color-bg-lighter: tint($color-bg-light, 50%);
+$color-bg-grey: #f7f7f7;
+
+/* 边框颜色 */
+$color-border-base: #dedede;
+$color-border-split: tint($color-border-base, 20%); // 分割线
+$color-border-light: tint($color-border-base, 30%);
+$color-border-lighter: tint($color-border-base, 50%);
+$color-border-lightest: tint($color-border-base, 80%);
+$color-border-grey: #ccc;
+$color-border-dark: darken($color-border-base, 10%); // 边框颜色(加深)
+
+/* 图标颜色 */
+$color-icon-base: #cccccc;
+$color-icon-light: lighten($color-icon-base, 10%);
+$color-icon-dark: darken($color-icon-base, 10%);
+
+/* Border Radius */
+$border-radius-sm: 3px * $hd;
+$border-radius-md: 5px * $hd;
+$border-radius-lg: 7px * $hd;
+$border-radius-circle: 50%;
+
+/* 透明度 */
+$opacity-active: 0.6; // Button 等组件点击态额透明度
+$opacity-disabled: 0.3; // Button 等组件禁用态的透明度
+
+/* Font */
+$font-size-xs: 10px * $hd; // 非常用字号，用于标签
+$font-size-sm: 12px * $hd; // 用于辅助信息
+$font-size-md: 14px * $hd; // 常用字号
+$font-size-lg: 16px * $hd; // 常规标题
+$font-size-xl: 18px * $hd; // 大标题
+$font-size-xxl: 20px * $hd; // 用于大号的数字
+$font-size-base: $font-size-md; // 常用字号
+
+/* Line Height */
+$line-height-base: 1; // 单行
+$line-height-en: 1.3; // 英文多行
+$line-height-zh: 1.5; // 中文多行
+
+/* 间距 */
+$spacing-xxs: 3px * $hd;
+$spacing-xs: 6px * $hd;
+$spacing-sm: 9px * $hd;
+$spacing-md: 12px * $hd;
+$spacing-lg: 15px * $hd;
+$spacing-xl: 18px * $hd;
+$spacing-xxl: 21px * $hd;
+
+/* 水平间距 */
+$spacing-h-xs: 7px * $hd;
+$spacing-h-sm: 10px * $hd;
+$spacing-h-md: 13px * $hd;
+$spacing-h-lg: 16px * $hd;
+$spacing-h-xl: 19px * $hd;
+
+/* 垂直间距 */
+$spacing-v-xs: 6px * $hd;
+$spacing-v-sm: 9px * $hd;
+$spacing-v-md: 12px * $hd;
+$spacing-v-lg: 15px * $hd;
+$spacing-v-xl: 18px * $hd;
+
+/* 图标尺寸 */
+$icon-size-sm: 18px * $hd;
+$icon-size-md: 22px * $hd;
+$icon-size-lg: 36px * $hd;
+
+// 头像大小
+$avatar-size-lg: 90px * $hd;
+$avatar-size-md: 65px * $hd;
+$avatar-size-sm: 48px * $hd;
+
+// 边框
+$border-width: '1PX'; // 边框宽度
+$border-type: solid; // 边框样式
+$border-base: #{$border-width} $border-type $color-border-base; // 默认边框
+$border-dark: #{$border-width} $border-type $color-border-dark; // 深色边框
+$border-split: #{$border-width} $border-type $color-border-split; // 分割线边框
+
+// 阴影
+$box-shadow-base: 0px 0px 8px 0px rgba(0, 0, 0, 0.15); // 默认
+$box-shadow-card: 0px 0px 8px 0px rgba(0, 0, 0, 0.15); // card
+
+// 分割
+$split-width-lg: 20px;
+$split-width-md: 14px;
+$split-width-sm: 8px;
+$split-color: $color-border-split;
+
+// 底部高度
+$footer-height: 90px;
+
+// 表单项高度
+$input-height-lg: 90px;
+$input-height-md: 75px;
+$input-height-sm: 56px;
+
+/* radio */
+$radio-color: $color-primary;
+$radio-size: $icon-size-sm;
+
+/* z-index */
+$zindex-divider: 100;
+$zindex-steps: 500;
+$zindex-tab: 600;
+$zindex-form: 700;
+$zindex-nav: 800;
+$zindex-search-bar: 800;
+$zindex-indexes: 805;
+$zindex-flot-layout: 810;
+$zindex-drawer: 900;
+$zindex-modal: 1000;
+$zindex-action-sheet: 1010;
+$zindex-picker: 1010;
+$zindex-curtain: 1080;
+$zindex-message: 1090;
+$zindex-toast: 1090;
+
+/* timing function */
+$timing-func: cubic-bezier(0.36, 0.66, 0.04, 1);
+
+/**
+ * CSS cubic-bezier timing functions
+ * http://bourbon.io/docs/#timing-functions
+ */
+$ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+$ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+$ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$ease-in-sine: cubic-bezier(0.47, 0, 0.745, 0.715);
+$ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+$ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+$ease-in-back: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+$ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+$ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+$ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
+$ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+$ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+$ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+$ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+$ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+$ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+$ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+$ease-in-out-sine: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+$ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
+$ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+$ease-in-out-back: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+/**
+ * 组件变量
+ */
+
+/* Accordion */
+$at-accordion-color-arrow: $color-grey-3;
+
+/* Activity Indicator */
+$at-activity-indicator-font-size: 28px;
+$at-activity-indicator-font-color: $color-grey-2;
+
+/* Avatar */
+$at-avatar-color: $color-white;
+$at-avatar-bg-color: $color-grey-4;
+$at-avatar-size-sm: $avatar-size-sm;
+$at-avatar-size-md: $avatar-size-md;
+$at-avatar-size-lg: $avatar-size-lg;
+
+/* Badge */
+$at-badge-color: $color-white;
+$at-badge-bg-color: $color-error;
+$at-badge-bg: $at-badge-bg-color;
+$at-badge-font-size: $font-size-xs;
+$at-badge-dot-size: 20px;
+
+/* Button */
+$at-button-height: 92px;
+$at-button-height-sm: 60px;
+$at-button-color: $color-brand;
+$at-button-border-color-primary: $color-brand;
+$at-button-border-color-secondary: $color-brand;
+$at-button-bg: $at-button-color;
+
+/* Float Button */
+$at-fab-size: 56px * $hd;
+$at-fab-size-sm: 40px * $hd;
+$at-fab-icon-size: 24px * $hd;
+$at-fab-bg-color: $color-brand;
+$at-fab-bg-color-active: $color-brand-dark;
+$at-fab-box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.2), 0 12px 20px 0 rgba(0, 0, 0, 0.14), 0 2px 36px 0 rgba(0, 0, 0, 0.12);
+$at-fab-box-shadow-active: 0 14px 16px -8px rgba(0, 0, 0, 0.2), 0 24px 34px 4px rgba(0, 0, 0, 0.14), 0 10px 44px 8px rgba(0, 0, 0, 0.12);
+
+/* Calendar */
+$at-calendar-day-size: 72px;
+$at-calendar-mark-size: 8px;
+$at-calendar-header-color: #b8bfc6;
+$at-calendar-main-color: $color-brand;
+$at-calendar-day-color: #7c86a2;
+
+/* Card */
+$at-card-thumb-size: 32px;
+$at-card-icon-size: 32px;
+$at-card-title-color: $color-text-title;
+$at-card-extra-color: $color-text-title;
+$at-card-info-color: $color-text-base;
+$at-card-note-color: $color-grey-2;
+
+/* Checkbox */
+$at-checkbox-circle-size: 40px;
+$at-checkbox-icon-size: $font-size-sm;
+$at-checkbox-icon-color: $color-brand;
+$at-checkbox-icon-color-checked: $color-white;
+$at-checkbox-title-color: $color-text-base;
+$at-checkbox-title-font-size: $font-size-lg;
+$at-checkbox-desc-font-size: $font-size-sm;
+$at-checkbox-desc-color: $color-grey-2;
+
+/* Countdown */
+$at-countdown-font-size: $font-size-lg;
+$at-countdown-num-color: $color-text-base;
+$at-countdown-card-num-color: #ff4949;
+$at-countdown-card-num-bg-color: $color-white;
+
+/* Curtain */
+$at-curtain-btn-color: $color-white;
+
+/* Divider */
+$at-divider-height: 112px;
+$at-divider-content-color: $color-brand;
+$at-divider-font-size: $font-size-lg;
+$at-divider-line-color: $color-grey-3;
+
+/* Drawer */
+$at-drawer-content-width: 460px;
+
+/* FloatLayout */
+$float-layout-height-min: 600px;
+$float-layout-height-max: 950px;
+$float-layout-header-bg-color: $color-bg-grey;
+$float-layout-title-color: $color-text-base;
+$float-layout-title-font-size: $font-size-lg;
+$float-layout-btn-color: $color-grey-3;
+
+/* Grid */
+$at-grid-text-color: $color-text-base;
+$at-grid-font-size: $font-size-lg;
+$at-grid-img-size: 80px;
+$at-gird-img-size-sm: 50px;
+
+/* ImagePicker */
+$at-image-picker-btn-add-color: $color-grey-3;
+$at-image-picker-btn-remove-color: $color-white;
+$at-image-picker-btn-remove-bg-color: $color-grey-2;
+
+/* Indexes */
+$at-indexes-nav-color: $color-link;
+$at-indexes-nav-font-size: $font-size-sm;
+$at-indexes-title-color: $color-black-2;
+$at-indexes-title-font-size: $font-size-sm;
+$at-indexes-title-bg-color: $color-grey-6;
+
+/* InputNumber */
+$at-input-number-text-color: $color-text-base;
+$at-input-number-font-size: $font-size-base;
+$at-input-number-font-size-lg: $font-size-xl;
+$at-input-number-btn-color: $color-brand;
+$at-input-number-btn-size: 30px;
+$at-input-number-btn-size-lg: 36px;
+$at-input-number-width-min: 80px;
+$at-input-number-width-min-lg: 120px;
+
+/* Input */
+$at-input-label-color: $color-text-base;
+$at-input-text-color: $color-text-base;
+$at-input-font-size: $font-size-lg;
+$at-input-placeholder-color: $color-grey-3;
+
+/* List */
+$at-list-thumb-size: 56px;
+$at-list-arrow-color: $color-grey-3;
+$at-list-text-color: $color-text-base;
+$at-list-content-color: $color-grey-2;
+$at-list-extra-color: $color-grey-2;
+$at-list-extra-width: 235px;
+
+/* LoadMore */
+$at-load-more-height: 80px;
+$at-load-more-tips-color: $color-grey-1;
+$at-load-more-tips-size: $font-size-lg;
+
+/* Loading */
+$at-loading-size: 36px;
+$at-loading-color: $color-brand;
+
+/* Message */
+$at-message-color: $color-white;
+$at-message-font-size: $font-size-base;
+$at-message-bg-color: $color-info;
+
+/* Modal */
+$at-modal-width: 540px;
+$at-modal-header-text-color: $color-text-base;
+$at-modal-content-text-color: $color-text-base;
+$at-modal-btn-default-color: $color-text-base;
+$at-modal-btn-confirm-color: $color-brand;
+$at-modal-bg-color: $color-white;
+
+/* NavBar */
+$at-nav-bar-title-color: $color-text-base;
+$at-nav-bar-link-color: $color-brand;
+
+/* NoticeBar */
+$at-noticebar-text-color: #de8c17;
+$at-noticebar-bg-color: #fcf6ed;
+$at-noticebar-font-size: $font-size-sm;
+$at-noticebar-icon-size: 30px;
+$at-noticebar-btn-close-size: 32px;
+$at-noticebar-btn-close-color: $color-grey-3;
+
+/* Pagination */
+$at-pagination-margin: 40px;
+$at-pagination-num-color: $color-text-base;
+$at-pagination-num-font-size: $font-size-base;
+$at-pagination-current-num-color: $color-brand;
+$at-pagination-icon-color: $color-text-base;
+$at-pagination-icon-font-size: 32px;
+
+/* Progress */
+$at-progress-height: 16px;
+$at-progress-text-size: $font-size-sm;
+$at-progress-icon-size: $font-size-xl;
+$at-progress-inner-bg-color: $color-grey-6;
+$at-progress-bar-bg-color: $color-brand-light;
+$at-progress-bar-bg-color-active: $color-white;
+
+/* Radio */
+$at-radio-title-color: $color-text-base;
+$at-radio-title-size: $font-size-lg;
+$at-radio-desc-color: $color-grey-2;
+$at-radio-desc-size: $font-size-sm;
+$at-radio-check-color: $color-brand;
+
+/* Range */
+// $at-range-slider-size: 28px;
+$at-range-rail-height: 2px;
+$at-range-rail-bg-color: #e9e9e9;
+$at-range-track-bg-color: $color-brand;
+$at-range-slider-color: $color-white;
+$at-range-slider-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+
+/* Rate */
+$at-rate-icon-size: 20px;
+$at-rate-star-color: #ececec;
+$at-rate-star-color-on: #ffca3e;
+
+/* SearchBar */
+$at-search-bar-btn-color: $color-white;
+$at-search-bar-btn-bg-color: $color-brand;
+
+/* SegmentedControl */
+$at-segmented-control-color: $color-brand;
+$at-segmented-control-color-active: $color-white;
+$at-segmented-control-bg-color: transparent;
+$at-segmented-control-font-size: $font-size-base;
+
+/* Slider */
+$at-slider-text-color: $color-grey-2;
+$at-slider-text-size: $font-size-base;
+
+/* Steps */
+$at-steps-circle-size: 56px;
+$at-steps-icon-size: $font-size-sm;
+$at-steps-color: $color-white;
+$at-steps-color-active: $color-grey-2;
+$at-steps-bg-color: $color-grey-4;
+$at-steps-bg-color-active: $color-brand;
+$at-steps-line-color: $color-grey-3;
+$at-steps-title-color: $color-black-0;
+$at-steps-title-size: $font-size-lg;
+$at-steps-desc-color: $color-grey-3;
+$at-steps-desc-size: $font-size-sm;
+
+/* SwipeAction */
+$at-swipe-action-color: $color-white;
+$at-swipe-action-font-size: $font-size-base;
+$at-swipe-action-bg-color: $color-white;
+$at-swipe-action-option-bg-color: $color-grey-2;
+
+/* Switch */
+$at-switch-title-color: $color-text-base;
+$at-switch-title-size: $font-size-base;
+
+/* TabBar */
+$at-tab-bar-bg-color: $color-white;
+$at-tab-bar-color: $color-text-base;
+$at-tab-bar-color-active: $color-brand;
+$at-tab-bar-font-size: $font-size-base;
+$at-tab-bar-icon-color: $color-grey-0;
+$at-tab-bar-icon-font-size: 48px;
+$at-tab-bar-icon-image-size: 50px;
+
+/* Tabs */
+$at-tabs-color: $color-text-base;
+$at-tabs-color-active: $color-brand;
+$at-tabs-font-size: $font-size-base;
+$at-tabs-line-height: 1px;
+$at-tabs-underline-color: $color-grey-5;
+$at-tabs-bg-color: $color-bg;
+
+/* Tag */
+$at-tag-height: 60px;
+$at-tag-height-sm: 40px;
+$at-tag-color: $color-grey-1;
+$at-tag-color-primary: $color-grey-1;
+$at-tag-color-active: $color-brand-light;
+$at-tag-color-primary-active: $color-text-base-inverse;
+$at-tag-font-size: $font-size-base;
+$at-tag-font-size-sm: $font-size-xs;
+$at-tag-bg-color: $color-bg-grey;
+$at-tag-bg-color-primary: $color-bg-grey;
+$at-tag-bg-color-active: $color-white;
+$at-tag-bg-color-primary-active: $at-tag-color-active;
+$at-tag-border-color: $at-tag-bg-color;
+$at-tag-border-color-primary: $at-tag-bg-color;
+$at-tag-border-color-active: $at-tag-color-active;
+
+/* Textarea */
+$at-textarea-font-size: $font-size-lg;
+$at-textarea-tips-color: $color-text-placeholder;
+$at-textarea-tips-size: $font-size-base;
+
+/* Timeline */
+$at-timeline-offset-left: 40px;
+$at-timeline-title-color: $color-grey-0;
+$at-timeline-title-font-size: $font-size-base;
+$at-timeline-desc-color: $color-grey-1;
+$at-timeline-desc-font-size: $font-size-sm;
+$at-timeline-dot-size: 24px;
+$at-timeline-dot-color: $color-bg;
+$at-timeline-dot-border-color: $color-brand-light;
+$at-timeline-line-color: $color-border-lighter;

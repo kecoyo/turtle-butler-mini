@@ -1,0 +1,9 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-area-picker';
+
+#{$classPrefix} {
+  &--picker-full {
+    width: 100%;
+  }
+}

@@ -1,0 +1,34 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-picker';
+
+#{$classPrefix} {
+  .at-drawer__content {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    width: 100%;
+    // height: 500px;
+  }
+
+  &.at-drawer--show .at-drawer__content {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  &--content {
+    padding-bottom: 130px;
+  }
+
+  .lj-footer {
+    padding: $spacing-md;
+    border-top: $border-base;
+    height: 130px;
+
+    .lj-button {
+      width: 40%;
+    }
+  }
+}

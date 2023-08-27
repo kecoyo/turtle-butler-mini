@@ -1,0 +1,17 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-textarea';
+
+#{$classPrefix} {
+  &--border {
+    border: $border-base;
+
+    textarea {
+      font-size: $font-size-base;
+    }
+  }
+
+  &--circle {
+    border-radius: $border-radius-md;
+  }
+}

@@ -1,0 +1,27 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-list-view';
+
+#{$classPrefix} {
+  // height: 100%;
+  // flex: 1;
+  // @include flex-col-center();
+  // overflow: hidden;
+
+  &-header {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  &-list {
+  }
+
+  &-footer {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  &-empty {
+    padding: 25%;
+  }
+}

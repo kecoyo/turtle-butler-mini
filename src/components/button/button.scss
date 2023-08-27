@@ -1,0 +1,65 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-button';
+
+#{$classPrefix} {
+  margin: 0;
+  border-radius: $border-radius-md;
+  border: $border-dark;
+  background-color: $color-white;
+
+  // type
+  &--primary {
+    border: $border-base;
+    border-color: $color-primary;
+    background: $color-primary;
+  }
+  &--secondary {
+    border: $border-base;
+    border-color: $color-secondary;
+    background: $color-secondary;
+  }
+  &--info {
+    border: $border-base;
+    border-color: $color-info;
+    background: $color-info;
+  }
+  &--success {
+    border: $border-base;
+    border-color: $color-success;
+    background: $color-success;
+  }
+  &--warning {
+    border: $border-base;
+    border-color: $color-warning;
+    background: $color-warning;
+  }
+  &--error {
+    border: $border-base;
+    border-color: $color-error;
+    background: $color-error;
+  }
+
+  // size
+  &--large {
+    height: $input-height-lg;
+    line-height: $input-height-lg;
+    font-size: $font-size-lg;
+  }
+  &--normal {
+    height: $input-height-md;
+    line-height: $input-height-md;
+    font-size: $font-size-base;
+  }
+  &--small {
+    height: $input-height-sm;
+    line-height: $input-height-sm;
+    font-size: $font-size-sm;
+  }
+
+  &--circle {
+    border-radius: 46rpx;
+    background-clip: border-box;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,51 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-divider';
+
+/* lj-divider */
+$lj-divider-content-color: $color-brand;
+$lj-divider-line-color: $color-grey-4;
+
+#{$classPrefix} {
+  .at-divider__content {
+    color: $lj-divider-content-color;
+    line-height: $line-height-zh;
+  }
+
+  .at-divider__line {
+    background-color: $lj-divider-line-color;
+  }
+
+  &--larger {
+    height: $spacing-v-xl * 2;
+    font-size: $font-size-xl;
+  }
+  &--large {
+    height: $spacing-v-lg * 2;
+    font-size: $font-size-lg;
+  }
+  &--normal {
+    height: $spacing-v-md * 2;
+    font-size: $font-size-md;
+  }
+  &--small {
+    height: $spacing-v-sm * 2;
+    font-size: $font-size-sm;
+  }
+  &--smaller {
+    height: $spacing-v-xs * 2;
+    font-size: $font-size-xs;
+  }
+
+  &--hide-line {
+    .at-divider__line {
+      height: 0;
+    }
+  }
+
+  &--line-size-full {
+    .at-divider__line {
+      height: 50%;
+    }
+  }
+}

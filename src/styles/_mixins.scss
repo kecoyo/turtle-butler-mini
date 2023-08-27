@@ -1,0 +1,76 @@
+/* 文本 */
+@mixin text($color: $color-text-base, $font-size: $font-size-base, $line-height: $line-height-base) {
+  color: $color;
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+/* 背景图 */
+@mixin bg-image($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 0 0;
+}
+
+/* Card */
+@mixin card() {
+  position: relative;
+  box-shadow: $box-shadow-card;
+  background-color: $color-bg;
+  border-radius: $border-radius-md;
+  margin: $spacing-v-md $spacing-h-md;
+  padding: $spacing-v-xl $spacing-h-md;
+}
+
+@mixin flex-row($justify-content: null, $align-items: null) {
+  display: flex;
+  flex-direction: row;
+
+  @if ($justify-content) {
+    justify-content: $justify-content;
+  }
+
+  @if ($align-items) {
+    align-items: $align-items;
+  }
+}
+
+@mixin flex-col($justify-content: null, $align-items: null) {
+  display: flex;
+  flex-direction: column;
+
+  @if ($justify-content) {
+    justify-content: $justify-content;
+  }
+
+  @if ($align-items) {
+    align-items: $align-items;
+  }
+}
+
+@mixin flex-row-center($align-items: center) {
+  @include flex-row(center, $align-items);
+}
+@mixin flex-row-between($align-items: center) {
+  @include flex-row(space-between, $align-items);
+}
+@mixin flex-row-start($align-items: center) {
+  @include flex-row(flex-start, $align-items);
+}
+@mixin flex-row-end($align-items: center) {
+  @include flex-row(flex-end, $align-items);
+}
+
+@mixin flex-col-center($align-items: flex-start) {
+  @include flex-col(center, $align-items);
+}
+@mixin flex-col-between($align-items: flex-start) {
+  @include flex-col(space-between, $align-items);
+}
+@mixin flex-col-start($align-items: flex-start) {
+  @include flex-col(flex-start, $align-items);
+}
+@mixin flex-col-end($align-items: flex-start) {
+  @include flex-col(flex-end, $align-items);
+}

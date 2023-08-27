@@ -1,0 +1,15 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-load-more';
+
+#{$classPrefix} {
+  @include flex-row(center, center);
+  height: 100px;
+  font-size: $font-size-base;
+  color: $color-text-desc;
+
+  .at-activity-indicator__content {
+    font-size: $font-size-base;
+    color: $color-text-desc;
+  }
+}
