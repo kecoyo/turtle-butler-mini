@@ -18,8 +18,8 @@ export default defineAppConfig({
         text: '首页',
       },
       {
-        iconPath: 'assets/mine.png',
-        selectedIconPath: 'assets/mine_fill.png',
+        iconPath: 'assets/my.png',
+        selectedIconPath: 'assets/my_fill.png',
         pagePath: 'pages/mine/index',
         text: '我的',
       },

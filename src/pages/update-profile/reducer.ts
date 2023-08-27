@@ -1,10 +1,9 @@
 import openApi from '@/apis/openApi';
 import userApi from '@/apis/userApi';
-import { showModal, showToast } from '@/common/utils';
-import { silentLogin } from '@/common/wxLogin';
+import { showToast } from '@/common/utils';
+import { updateUserInfo } from '@/redux/reducers/global';
 import { AppDispatch, AppGetState, RootState } from '@/redux/store';
 import { createSlice } from '@reduxjs/toolkit';
-import Taro from '@tarojs/taro';
 import dayjs from 'dayjs';
 
 // 为 slice state 定义一个类型
@@ -72,46 +71,12 @@ export const fetchExtendInfo = () => async (dispatch: AppDispatch) => {
   );
 };
 
-export const updateProfileAsync = () => async (dispatch: AppDispatch, getState: AppGetState) => {
-  const { avatar, name, phone, gender, email, idCard, code } = getState().updateProfile;
-  const { faceImg, birth, bloodType, interests, introduce } = getState().updateProfile;
-
-  if (!name) {
-    showToast('请输入真实姓名');
-    return;
-  }
-  if (!phone) {
-    showToast('请输入手机号');
-    return;
-  }
-
-  // 基本信息
-  const baseInfo = { avatar, name, phone, gender, email, idCard, code };
-  const extendInfo = {
-    faceImg,
-    birth: birth ? dayjs(birth).unix() : 0,
-    bloodType,
-    interests,
-    introduce,
-  };
-
-  await userApi.updateUserInfo({ role: 1, ...baseInfo, ...extendInfo });
-  // token变化了，静默登录，获取最新用户信息
-  silentLogin();
-
-  showModal({
-    content: '修改成功',
-    onOk: () => {
-      Taro.navigateBack();
-    },
-  });
-};
-
 // 修改基本信息
 export const updateBaseInfoAsync = (baseInfo: any) => async (dispatch: AppDispatch, getState: AppGetState) => {
   await openApi.updateBaseInfo(baseInfo);
   showToast('修改成功');
   dispatch(setUpdateProfileState(baseInfo));
+  dispatch(updateUserInfo(baseInfo));
 };
 
 export default updateProfileSlice.reducer;

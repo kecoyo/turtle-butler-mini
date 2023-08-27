@@ -1,30 +1,54 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 4226442 */
-  src: url('//at.alicdn.com/t/c/font_4226442_z202tdwkidd.woff2?t=1693095046402') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4226442_z202tdwkidd.woff?t=1693095046402') format('woff'),
-       url('//at.alicdn.com/t/c/font_4226442_z202tdwkidd.ttf?t=1693095046402') format('truetype');
+  font-family: 'iconfont'; /* Project id 4226442 */
+  src: url('//at.alicdn.com/t/c/font_4226442_6w0elfd34dt.woff2?t=1693129563265') format('woff2'),
+    url('//at.alicdn.com/t/c/font_4226442_6w0elfd34dt.woff?t=1693129563265') format('woff'),
+    url('//at.alicdn.com/t/c/font_4226442_6w0elfd34dt.ttf?t=1693129563265') format('truetype');
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
+  font-family: 'iconfont' !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.iconfont-profile:before {
+  content: '\e6b7';
+}
+
+.iconfont-exit:before {
+  content: '\e7cb';
+}
+
+.iconfont-home:before {
+  content: '\e6b8';
+}
+
+.iconfont-homefill:before {
+  content: '\e6bb';
+}
+
+.iconfont-my:before {
+  content: '\e78b';
+}
+
+.iconfont-myfill:before {
+  content: '\e78c';
+}
+
 .iconfont-right:before {
-  content: "\e683";
+  content: '\e683';
 }
 
 .iconfont-left:before {
-  content: "\e684";
+  content: '\e684';
 }
 
 .iconfont-under:before {
-  content: "\e685";
+  content: '\e685';
 }
 
 .iconfont-up:before {
-  content: "\e686";
+  content: '\e686';
 }

@@ -43,9 +43,9 @@ const TextEdit = () => {
     <View className={classPrefix}>
       <Space className={`${classPrefix}--container`} direction="column">
         {type === 'textarea' ? ( //
-          <Textarea placeholder="请输入" maxLength={maxLength} value={value} onChange={onChange} />
+          <Textarea placeholder="请输入" maxLength={maxLength} value={value || ''} onChange={onChange} />
         ) : (
-          <Input placeholder="请输入" maxLength={maxLength} value={value} onChange={onChange} />
+          <Input placeholder="请输入" maxLength={maxLength} value={value || ''} onChange={onChange} />
         )}
         <Button type="primary" onClick={onOk}>
           确 定

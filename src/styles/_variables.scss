@@ -21,13 +21,13 @@ $hd: 2; // 基本单位
 $font-family: -apple-system, blinkmacsystemfont, 'Helvetica Neue', helvetica, segoe ui, arial, roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
 
 /* The Color of O2Team Brand */
-$color-brand: #00a790; // 品牌主色
+$color-brand: #49c265; // 品牌主色
 $color-brand-light: lighten($color-brand, 20%);
 $color-brand-dark: darken($color-brand, 20%);
 
 /* Color */
 $color-primary: $color-brand; // 用于表示品牌主色
-$color-secondary: #faad14; // 用于表示辅助色
+$color-secondary: #f76d2f; // 用于表示辅助色
 $color-success: #00b578; // 用于表示操作成功
 $color-error: #ff3141; // 用于表示操作失败
 $color-warning: #ff8f1f; // 用于表示操作警告
@@ -164,9 +164,9 @@ $split-color: $color-border-split;
 $footer-height: 90px;
 
 // 表单项高度
-$input-height-lg: 90px;
-$input-height-md: 75px;
-$input-height-sm: 56px;
+$input-height-lg: 95px;
+$input-height-md: 80px;
+$input-height-sm: 65px;
 
 /* radio */
 $radio-color: $color-primary;

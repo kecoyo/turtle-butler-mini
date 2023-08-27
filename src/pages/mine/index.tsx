@@ -22,8 +22,8 @@ const Mine = () => {
   const { userInfo } = useAppSelector(globalSelector);
 
   const items = [
-    { key: 'update-profile', title: '修改个人资料', icon: <Icon prefixClass="fa" value="id-card-o" size="small" />, extra: null },
-    { key: 'logoff', title: '退出账号', icon: <Icon prefixClass="fa" value="sign-out" size="small" />, extra: null },
+    { key: 'update-profile', title: '修改个人资料', icon: <Icon prefixClass="iconfont" value="profile" size="small" />, extra: null },
+    { key: 'logoff', title: '退出账号', icon: <Icon prefixClass="iconfont" value="exit" size="small" />, extra: null },
   ];
 
   const onItemClick = useMemoizedFn((item) => {
