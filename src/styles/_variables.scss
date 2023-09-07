@@ -57,7 +57,7 @@ $color-text-placeholder: #c9c9c9;
 $color-text-disabled: #ccc;
 $color-text-title: #2c405a; // 文章标题
 $color-text-paragraph: #3f536e; // 文章段落
-$color-text-desc: lighten($color-text-base, 40%); // 文本描述
+$color-text-desc: #999999; // 文本描述
 
 /* Link */
 $color-link: #1677ff; // 超链接的颜色。
@@ -67,7 +67,7 @@ $color-link-disabled: #bfbfbf; // 超链接禁用颜色。
 
 /* 背景色 */
 $color-bg: #fff;
-$color-bg-base: #f3f4f8;
+$color-bg-base: #f4f4f4;
 $color-bg-light: #ecf5fd;
 $color-bg-lighter: tint($color-bg-light, 50%);
 $color-bg-grey: #f7f7f7;
@@ -139,16 +139,17 @@ $icon-size-md: 22px * $hd;
 $icon-size-lg: 36px * $hd;
 
 // 头像大小
-$avatar-size-lg: 90px * $hd;
-$avatar-size-md: 65px * $hd;
-$avatar-size-sm: 48px * $hd;
+$avatar-size-lg: 56px * $hd;
+$avatar-size-md: 44px * $hd;
+$avatar-size-sm: 32px * $hd;
 
 // 边框
 $border-width: '1PX'; // 边框宽度
 $border-type: solid; // 边框样式
 $border-base: #{$border-width} $border-type $color-border-base; // 默认边框
-$border-dark: #{$border-width} $border-type $color-border-dark; // 深色边框
 $border-split: #{$border-width} $border-type $color-border-split; // 分割线边框
+$border-light: #{$border-width} $border-type $color-border-light; // 浅色边框
+$border-dark: #{$border-width} $border-type $color-border-dark; // 深色边框
 
 // 阴影
 $box-shadow-base: 0px 0px 8px 0px rgba(0, 0, 0, 0.15); // 默认

@@ -8,7 +8,7 @@ import { useMemoizedFn, useMount, useUpdateEffect } from 'ahooks';
 import classNames from 'classnames';
 import _ from 'lodash';
 import { useState } from 'react';
-import { UPLOAD_URL } from '../../common/constants';
+import { RES_URL } from '../../common/constants';
 import './image.scss';
 
 export type ImageProps = {} & TaroImageProps & NativeProps;
@@ -33,8 +33,8 @@ const Image: React.FC<ImageProps> = (p) => {
 
   const updateImage = (imageSrc: string | undefined) => {
     if (imageSrc) {
-      if (imageSrc.startsWith('dmres/')) {
-        setSrc(UPLOAD_URL + imageSrc);
+      if (imageSrc.startsWith('upload/')) {
+        setSrc(RES_URL + imageSrc);
       } else {
         setSrc(imageSrc);
       }

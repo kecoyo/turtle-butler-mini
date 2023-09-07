@@ -3,13 +3,16 @@
 $classPrefix: '.lj-empty';
 
 #{$classPrefix} {
-  @include flex-col-center();
+  @include flex-col(center, center);
   padding: $spacing-md;
-  color: $color-icon-base;
 
   image {
     margin-bottom: $spacing-xs;
-    width: 201px;
-    height: 139px;
+    width: 400px;
+    height: 400px;
+  }
+
+  text {
+    color: $color-text-desc;
   }
 }

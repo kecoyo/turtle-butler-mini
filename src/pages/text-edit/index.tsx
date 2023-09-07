@@ -15,7 +15,6 @@ const classPrefix = 'lj-input-edit-page';
 const TextEdit = () => {
   const dispatch = useAppDispatch();
   const { type, value, title: title, require, maxLength } = useAppSelector(textEditSelector);
-  const eventChannel = getOpenerEventChannel();
 
   useMount(() => {
     Taro.setNavigationBarTitle({
@@ -35,6 +34,7 @@ const TextEdit = () => {
       return;
     }
 
+    const eventChannel = getOpenerEventChannel();
     eventChannel.emit('onOk', value);
     Taro.navigateBack();
   });

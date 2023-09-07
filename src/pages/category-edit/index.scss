@@ -1,0 +1,14 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-category-edit-page';
+
+#{$classPrefix} {
+  width: 100%;
+
+  &--container {
+  }
+
+  &--footer {
+    padding: $spacing-md $spacing-md;
+  }
+}

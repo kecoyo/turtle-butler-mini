@@ -3,18 +3,11 @@
 $classPrefix: '.lj-form-item';
 
 #{$classPrefix} {
+  position: relative;
   @include flex-row-between();
-  height: 80px;
-  border: $border-base;
-  border-radius: $border-radius-sm;
+  min-height: 90px;
   background-color: #ffffff;
-  margin-bottom: $spacing-md;
-  padding: 0 $spacing-md;
-
-  &--item-thumb {
-    @include flex-row(center, center);
-    margin-right: $spacing-xs;
-  }
+  padding: $spacing-xs $spacing-md;
 
   &--item-icon {
     margin-right: $spacing-xs;
@@ -22,29 +15,47 @@ $classPrefix: '.lj-form-item';
 
   &--item-title {
     margin-right: $spacing-xs;
+    width: 23%;
   }
 
   &--item-content {
     flex: 1;
-    text-align: right;
   }
 
   // input, select ....
 
-  .lj-select--picker {
-    width: 100%;
-  }
+  // .lj-select--picker {
+  //   width: 100%;
+  // }
 
-  .lj-select {
-    border: none;
-    min-width: 100%;
-    padding: 0;
-  }
+  // .lj-select {
+  //   border: none;
+  //   min-width: 100%;
+  //   padding: 0;
+  // }
 
   // 显示边框
   &--border {
-    padding: 0 $spacing-xs;
-    border: 1px solid #c8c8c8;
-    border-radius: $border-radius-sm;
+    &::after {
+      content: '';
+      position: absolute;
+      -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+      transform-origin: center;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      pointer-events: none;
+      top: auto;
+      left: 24px;
+      right: 0;
+      bottom: 0;
+      -webkit-transform: scaleY(0.5);
+      -ms-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      border-bottom: 1px solid #d6e4ef;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: rgb(214, 228, 239);
+    }
   }
 }

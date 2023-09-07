@@ -1,4 +1,4 @@
-import { DEFAULT_AVATAR_URL, UPLOAD_URL } from '@/common/constants';
+import { DEFAULT_AVATAR_URL, RES_URL } from '@/common/constants';
 import { NativeProps, withNativeProps } from '@/common/native-props';
 import mergeProps from '@/common/with-default-props';
 import { CommonEventFunction, Image, View } from '@tarojs/components';
@@ -35,7 +35,7 @@ const Avatar: React.FC<AvatarProps> = (p) => {
   const updateImage = (image: string | undefined) => {
     if (image) {
       if (image.startsWith('upload/')) {
-        setSrc(UPLOAD_URL + image);
+        setSrc(RES_URL + image);
       } else {
         setSrc(image);
       }
@@ -57,7 +57,7 @@ const Avatar: React.FC<AvatarProps> = (p) => {
       })}
       onClick={props.onClick}
     >
-      <Image className={`${classPrefix}--img`} src={src} onError={onError} mode="aspectFill" />
+      <Image className={`${classPrefix}--img`} src={src} onError={onError} mode="aspectFit" />
     </View>,
   );
 };

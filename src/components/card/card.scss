@@ -13,7 +13,7 @@ $classPrefix: '.lj-card';
 
   &--header {
     @include flex-row();
-    margin-bottom: $spacing-v-md;
+    margin-bottom: $spacing-md;
   }
 
   &--content {}

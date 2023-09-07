@@ -1,20 +1,25 @@
 export default defineAppConfig({
   pages: [
     // tabs
-    'pages/index/index', // 首页
+    'pages/category-list/index', // 分类列表
     'pages/mine/index', // 我的
     'pages/update-profile/index', // 修改个人资料
-    'pages/banpai-bind/index', // 班牌绑定
-    'pages/my-task/index', // 我的任务
-    'pages/school-detail/index', // 学校详情
-    'pages/text-edit/index', // 编辑框
+
+    'pages/category-edit/index', // 分类编辑
+
+    'pages/account-list/index', // 账号列表
+    'pages/account-edit/index', // 账号编辑
+    'pages/account-detail/index', // 账号详情
+
+    'pages/text-edit/index', // 文本编辑框
+    'pages/icon-select/index', // 图标选择
   ],
   tabBar: {
     list: [
       {
         iconPath: 'assets/home.png',
         selectedIconPath: 'assets/home_fill.png',
-        pagePath: 'pages/index/index',
+        pagePath: 'pages/category-list/index',
         text: '首页',
       },
       {

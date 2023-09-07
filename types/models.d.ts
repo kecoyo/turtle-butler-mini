@@ -53,23 +53,51 @@ interface SchoolInfo {
 }
 
 /**
- * 账号分类
+ * 账号分类信息
  */
-interface Category {
+interface CategoryInfo {
   id: number; // ID
   name: string; // 分类名称
   icon: string; // 分类图标
-  remark: string; // 分类备注
+  count?: number; // 该分类下的账号数量
+  isOpened?: boolean; // SwipeAction isOpened
 }
 
 /**
- * 班级信息
+ * 账号信息
  */
-interface ClassInfo {
-  id: number; //班级ID
-  name: string; //  班级名称
-  gradeId: number; // 所属年级
-  gradeName?: string; // 年级名称
+interface AccountInfo {
+  id: number; //账号ID
+  name: string; //  账号名称
+  icon: string; //  账号图标
+  properties: AccountProperty[]; // 属性
+  pictures: AccountPicture[]; // 图片
+  remark: string; // 备注
+  isOpened?: boolean; // SwipeAction isOpened
+}
+
+/**
+ * 账号属性
+ */
+interface AccountProperty {
+  name: string;
+  value: string;
+}
+
+/**
+ * 账号图片
+ */
+interface AccountPicture {
+  url: string;
+}
+
+/**
+ * 图标信息
+ */
+interface IconInfo {
+  id: number; // 图标分类ID
+  name: string; // 图标分类名称
+  icons: string[]; // 图标url列表
 }
 
 /**

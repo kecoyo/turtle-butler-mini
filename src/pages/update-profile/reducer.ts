@@ -1,5 +1,4 @@
 import openApi from '@/apis/openApi';
-import userApi from '@/apis/userApi';
 import { showToast } from '@/common/utils';
 import { updateUserInfo } from '@/redux/reducers/global';
 import { AppDispatch, AppGetState, RootState } from '@/redux/store';

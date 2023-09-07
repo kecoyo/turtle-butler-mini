@@ -19,8 +19,8 @@
   box-shadow: $box-shadow-card;
   background-color: $color-bg;
   border-radius: $border-radius-md;
-  margin: $spacing-v-md $spacing-h-md;
-  padding: $spacing-v-xl $spacing-h-md;
+  margin: $spacing-md $spacing-md;
+  padding: $spacing-xl $spacing-md;
 }
 
 @mixin flex-row($justify-content: null, $align-items: null) {

@@ -1,0 +1,38 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-icon-select-page';
+
+#{$classPrefix} {
+  width: 100%;
+  height: 100vh;
+
+  .at-tabs {
+    height: 100vh;
+    .at-tabs-pane {
+      height: calc(100vh - 88px);
+    }
+  }
+
+  &--icon-list {
+    @include flex-row(flex-start, flex-start);
+    flex-wrap: wrap;
+    padding: $spacing-xs $spacing-xs;
+  }
+
+  &--icon-item {
+    width: 16vw;
+    height: 16vw;
+    padding: $spacing-xs $spacing-xs;
+    border-radius: $border-radius-md;
+
+    .lj-avatar {
+      width: 100%;
+      height: 100%;
+    }
+
+    &:active {
+      background-color: $color-primary;
+      opacity: 0.6;
+    }
+  }
+}

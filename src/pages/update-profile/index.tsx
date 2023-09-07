@@ -68,7 +68,7 @@ const UpdateProfile = () => {
       <Textarea style={{ display: 'none' }} />
       <AtList>
         <Upload tags="avatar" onChange={onAvatarChange}>
-          <ListItem title="头像" extra={<Avatar image={avatar} circle size="small" />} />
+          <ListItem title="头像" extra={<Avatar image={avatar} circle />} />
         </Upload>
         <TextPicker type="input" title="姓名" maxLength={50} require value={name} onChange={onNameChange}>
           <ListItem title="姓名" extra={name} />

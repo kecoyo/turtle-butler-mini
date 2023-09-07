@@ -4,11 +4,9 @@ import { CommonEventFunction, View } from '@tarojs/components';
 import classNames from 'classnames';
 import { ReactNode } from 'react';
 import Icon from '../icon';
-import ImageIcon from '../image-icon';
 import './list-item.scss';
 
 type ListItemProps = {
-  image?: string | ReactNode; // 元素的缩略图
   icon?: string | ReactNode; // 元素的Icon
   title: string; // 元素的标题
   note?: string; // 元素的描述信息
@@ -37,7 +35,6 @@ const ListItem: React.FC<ListItemProps> = (p) => {
       })}
       onClick={props.onClick}
     >
-      {props.image && <View className={`${classPrefix}--item-image`}>{typeof props.image === 'string' ? <ImageIcon src={props.image} /> : props.image}</View>}
       {props.icon && <View className={`${classPrefix}--item-icon`}>{typeof props.icon === 'string' ? <Icon value={props.icon} /> : props.icon}</View>}
       <View className={`${classPrefix}--item-content`}>
         <View className={`${classPrefix}--item-title`}>{props.title}</View>

@@ -3,6 +3,13 @@
 $classPrefix: '.lj-textarea';
 
 #{$classPrefix} {
+  border: none;
+  border-radius: 0;
+
+  textarea {
+    font-size: $font-size-md;
+  }
+
   &--border {
     border: $border-base;
 

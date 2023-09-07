@@ -4,27 +4,27 @@ $classPrefix: '.lj-panel';
 
 #{$classPrefix} {
   position: relative;
-  margin: $spacing-v-md $spacing-h-md;
+  margin: $spacing-md $spacing-md;
   @include flex-col();
 
   &--header {
     @include flex-row();
-    margin-bottom: $spacing-v-md;
+    margin-bottom: $spacing-md;
   }
 
   &--content {
     @include text($color-text-desc, $font-size-md, $line-height-zh);
-    padding-left: $spacing-h-xs;
+    padding-left: $spacing-xs;
   }
 
   &--item-image {
     @include flex-row(center, center);
-    margin-right: $spacing-h-xs;
+    margin-right: $spacing-xs;
   }
 
   &--item-icon {
     @include flex-row(center, center);
-    margin-right: $spacing-h-xs;
+    margin-right: $spacing-xs;
   }
 
   &--item-block {
@@ -34,7 +34,7 @@ $classPrefix: '.lj-panel';
     border-radius: 3px;
     background: #3675ef;
     margin-top: 5px;
-    margin-right: $spacing-h-xs;
+    margin-right: $spacing-xs;
   }
 
   &--item-title {

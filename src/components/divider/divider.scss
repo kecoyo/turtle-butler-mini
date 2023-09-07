@@ -17,23 +17,23 @@ $lj-divider-line-color: $color-grey-4;
   }
 
   &--larger {
-    height: $spacing-v-xl * 2;
+    height: $spacing-xl * 2;
     font-size: $font-size-xl;
   }
   &--large {
-    height: $spacing-v-lg * 2;
+    height: $spacing-lg * 2;
     font-size: $font-size-lg;
   }
   &--normal {
-    height: $spacing-v-md * 2;
+    height: $spacing-md * 2;
     font-size: $font-size-md;
   }
   &--small {
-    height: $spacing-v-sm * 2;
+    height: $spacing-sm * 2;
     font-size: $font-size-sm;
   }
   &--smaller {
-    height: $spacing-v-xs * 2;
+    height: $spacing-xs * 2;
     font-size: $font-size-xs;
   }
 

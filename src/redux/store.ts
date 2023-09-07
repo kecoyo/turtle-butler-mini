@@ -1,10 +1,12 @@
 /* Core */
 import { configureStore } from '@reduxjs/toolkit';
-import banpaiBind from '../pages/banpai-bind/reducer';
-import index from '../pages/index/reducer';
+import accountDetail from '../pages/account-detail/reducer';
+import accountEdit from '../pages/account-edit/reducer';
+import accountList from '../pages/account-list/reducer';
+import categoryEdit from '../pages/category-edit/reducer';
+import categoryList from '../pages/category-list/reducer';
+import iconSelect from '../pages/icon-select/reducer';
 import mine from '../pages/mine/reducer';
-import myTask from '../pages/my-task/reducer';
-import schoolDetail from '../pages/school-detail/reducer';
 import textEdit from '../pages/text-edit/reducer';
 import updateProfile from '../pages/update-profile/reducer';
 import { middleware } from './middleware';
@@ -18,13 +20,17 @@ const store = configureStore({
     config,
 
     // pages
-    index,
+    categoryList,
+    categoryEdit,
+    accountList,
+    accountEdit,
+    accountDetail,
+
     mine,
     updateProfile,
-    myTask,
-    schoolDetail,
-    banpaiBind,
+
     textEdit,
+    iconSelect,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(middleware);

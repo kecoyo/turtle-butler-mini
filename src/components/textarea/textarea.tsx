@@ -14,10 +14,7 @@ export type TextareaProps = {
   onChange?: (value: string) => void;
 } & Omit<AtTextareaProps, 'value' | 'onChange'>;
 
-const defaultProps = {
-  border: true,
-  circle: true,
-};
+const defaultProps = {};
 
 const classPrefix = 'lj-textarea';
 

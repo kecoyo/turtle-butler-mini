@@ -1,4 +1,3 @@
-import schoolApi from '@/apis/schoolApi';
 import { showModal, showToast } from '@/common/utils';
 import { AppDispatch, RootState } from '@/redux/store';
 import { createSlice } from '@reduxjs/toolkit';

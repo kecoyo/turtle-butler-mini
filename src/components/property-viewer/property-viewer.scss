@@ -1,0 +1,134 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-property-viewer';
+
+#{$classPrefix} {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &--property-list {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: $color-white;
+  }
+
+  &--property-item {
+    $width: 100vw;
+    $height: 90px;
+    position: relative;
+    width: $width;
+    height: $height;
+    background-color: #ffffff;
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      left: $spacing-md;
+      bottom: 0;
+      right: 0;
+      border-bottom: $border-light;
+    }
+
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+
+    .item-wrap {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: $height;
+    }
+
+    .item-content {
+      display: flex;
+      width: $width;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      padding-left: $spacing-md;
+    }
+
+    .item-remove {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      color: $color-error;
+      flex-shrink: 0;
+      // width: 0rpx;
+      margin-right: $spacing-sm;
+
+      .lj-icon {
+        color: $color-error;
+      }
+    }
+
+    .item-name {
+      @include flex-row(flex-start, center);
+      width: 160px;
+
+      text {
+        @include text(null, $font-size-sm);
+      }
+    }
+
+    .item-value {
+      @include flex-row(flex-start, center);
+      flex: 1;
+
+      input {
+        @include text($color-text-desc, $font-size-sm);
+        width: 100%;
+        height: 100%;
+      }
+
+      text {
+        @include text($color-text-desc, $font-size-sm);
+      }
+    }
+
+    .item-drag {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-shrink: 0;
+      // width: 0rpx;
+      margin-right: $spacing-md;
+
+      .lj-icon {
+        color: $color-text-desc;
+      }
+    }
+
+    .item-delete {
+      background-color: $color-error;
+      color: $color-white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 151px;
+      flex-shrink: 0;
+    }
+  }
+
+  &--add-btn {
+    margin-top: $spacing-sm;
+    background-color: $color-white;
+    padding: $spacing-md $spacing-md;
+    @include text($color-link, $font-size-sm);
+
+    &:hover {
+      color: $color-link-hover;
+    }
+    &:active {
+      color: $color-link-active;
+    }
+  }
+}

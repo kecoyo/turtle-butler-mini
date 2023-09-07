@@ -1,0 +1,81 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-image-viewer';
+
+#{$classPrefix} {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: $color-white;
+
+  &--flex-box {
+    display: flex;
+    flex-wrap: wrap;
+    padding: $spacing-md $spacing-md 0 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  &--flex-item {
+    position: relative;
+    margin-left: $spacing-md;
+    margin-bottom: $spacing-md;
+    width: calc(20% - $spacing-md);
+    height: 100%;
+    box-sizing: border-box;
+
+    &::after {
+      content: '';
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+
+  &--item {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 5rpx;
+    transform: translateY(-50%);
+    overflow: hidden;
+    background-color: $color-grey-5;
+  }
+
+  &--remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    font-size: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+    background-color: #999;
+    opacity: 0.8;
+    @include flex-row(center, center);
+
+    .lj-icon {
+      font-size: 18px;
+      color: $color-white;
+    }
+  }
+
+  &--preview-img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &--choose-btn {
+    font-size: 0;
+    border: $border-light;
+    @include flex-row(center, center);
+
+    .lj-icon {
+      font-size: 50px;
+    }
+  }
+}

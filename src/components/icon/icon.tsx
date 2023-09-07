@@ -10,6 +10,7 @@ export type IconProps = {
   type?: 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
   size?: 'large' | 'normal' | 'small';
   prefixClass?: string | 'fa';
+  color?: string;
   onClick?: CommonEventFunction;
 } & NativeProps;
 
@@ -32,6 +33,7 @@ const Icon: React.FC<IconProps> = (p) => {
       prefixClass={props.prefixClass}
       value={props.value}
       size={0}
+      color={props.color}
       onClick={props.onClick}
     />,
   );

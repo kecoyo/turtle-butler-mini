@@ -1,5 +1,3 @@
-import schoolApi from '@/apis/schoolApi';
-import userApi from '@/apis/userApi';
 import { SendCodeType } from '@/common/enums';
 import { withNativeProps } from '@/common/native-props';
 import mergeProps from '@/common/with-default-props';

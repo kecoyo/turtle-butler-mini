@@ -1,4 +1,3 @@
-import schoolApi from '@/apis/schoolApi';
 import { NativeProps, withNativeProps } from '@/common/native-props';
 import { showToast } from '@/common/utils';
 import mergeProps from '@/common/with-default-props';

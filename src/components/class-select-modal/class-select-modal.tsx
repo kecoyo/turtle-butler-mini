@@ -1,4 +1,3 @@
-import classApi from '@/apis/classApi';
 import { ClassType } from '@/common/enums';
 import { withNativeProps } from '@/common/native-props';
 import { getSelectOptions, showToast } from '@/common/utils';

@@ -21,7 +21,6 @@ export type InputProps = {
 const defaultProps = {
   name: 'input',
   size: 'normal',
-  border: true,
 };
 
 const classPrefix = 'lj-input';

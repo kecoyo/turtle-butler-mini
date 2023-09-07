@@ -4,6 +4,7 @@ $classPrefix: '.lj-avatar';
 
 #{$classPrefix} {
   overflow: hidden;
+  background-color: $color-bg-grey;
   border-radius: $border-radius-md;
   background-clip: border-box;
   overflow: hidden;

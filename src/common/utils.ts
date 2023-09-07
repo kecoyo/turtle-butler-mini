@@ -1,10 +1,9 @@
-import phoneApi from '@/apis/phoneApi';
 import { SelectOption } from '@/components/select';
 import Taro, { getCurrentPages } from '@tarojs/taro';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import _ from 'lodash';
-import { APP_RES_URL, UPLOAD_URL } from './constants';
+import { APP_RES_URL, RES_URL } from './constants';
 import { SchoolStage } from './enums';
 
 dayjs.extend(duration);
@@ -141,7 +140,7 @@ export const showConfirm = (options: showConfirm_Options) => {
  * 获取用户头像
  */
 export const getAvatarUrl = (avatar?: string) => {
-  return avatar ? UPLOAD_URL + avatar : UPLOAD_URL + 'dmres/0/1bf71283e977d509e0d35fca4fcd3284.jpeg';
+  return avatar ? RES_URL + avatar : RES_URL + 'dmres/0/1bf71283e977d509e0d35fca4fcd3284.jpeg';
 };
 
 /**
@@ -220,8 +219,13 @@ export const getStageIdByGradeId = (gradeId: number) => {
   }
 };
 
+// 获取资源路径
+export const getResUrl = (url: string): string => {
+  return RES_URL + url;
+};
+
 // 获取config中的资源路径
-export const getConfigUrl = (url: string) => {
+export const getConfigUrl = (url: string): string => {
   return APP_RES_URL + url;
 };
 
@@ -269,4 +273,12 @@ export function getOpenerEventChannel() {
   const current = pages[pages.length - 1];
   const eventChannel = current.getOpenerEventChannel();
   return eventChannel;
+}
+
+export function px2rem(px: number) {
+  return (750 / Taro.getSystemInfoSync().screenWidth) * px;
+}
+
+export function rem2px(rem: number) {
+  return (Taro.getSystemInfoSync().screenWidth / 750) * rem;
 }
