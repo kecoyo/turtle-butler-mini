@@ -62,10 +62,19 @@ export const accountEditSlice = createSlice({
       }
     },
     // 修改账号属性值
-    changeAccountProperty: (state, action) => {
+    updateAccountProperty: (state, action) => {
       if (state.account) {
         const { index, value } = action.payload;
         state.account.properties[index].value = value;
+      }
+    },
+    // 排序账号属性
+    sortAccountProperty: (state, action) => {
+      if (state.account) {
+        const { startIndex, toIndex } = action.payload;
+        let item = state.account.properties[startIndex];
+        state.account.properties.splice(startIndex, 1);
+        state.account.properties.splice(toIndex, 0, item);
       }
     },
     // 添加账号图片
@@ -93,7 +102,8 @@ export const {
   setAccountRemark,
   addAccountProperty,
   removeAccountProperty,
-  changeAccountProperty,
+  updateAccountProperty,
+  sortAccountProperty,
   addAccountPicture,
   removeAccountPicture,
 } = accountEditSlice.actions;

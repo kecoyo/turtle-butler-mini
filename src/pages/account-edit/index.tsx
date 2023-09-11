@@ -19,7 +19,6 @@ import {
   accountEditSelector,
   addAccountPicture,
   addAccountProperty,
-  changeAccountProperty,
   clearAccountEditState,
   fetchAccountInfo,
   removeAccountPicture,
@@ -29,6 +28,8 @@ import {
   setAccountIcon,
   setAccountName,
   setAccountRemark,
+  sortAccountProperty,
+  updateAccountProperty,
 } from './reducer';
 
 const classPrefix = 'lj-account-edit-page';
@@ -73,7 +74,8 @@ const AccountEdit = () => {
   const onRemarkChange = useMemoizedFn((val: string) => dispatch(setAccountRemark(val)));
   const onAddProperty = useMemoizedFn(async (property: PropertyItem) => dispatch(addAccountProperty(property)));
   const onRemoveProperty = useMemoizedFn(async (index: number) => dispatch(removeAccountProperty(index)));
-  const onChangeProperty = useMemoizedFn(async (index: number, value: any) => dispatch(changeAccountProperty({ index, value })));
+  const onUpdateProperty = useMemoizedFn(async (index: number, value: any) => dispatch(updateAccountProperty({ index, value })));
+  const onSortProperty = useMemoizedFn(async (startIndex: number, toIndex: number) => dispatch(sortAccountProperty({ startIndex, toIndex })));
   const onAddPicture = useMemoizedFn(async (file: File) => dispatch(addAccountPicture(file)));
   const onRemovePicture = useMemoizedFn(async (index: number) => dispatch(removeAccountPicture(index)));
 
@@ -114,7 +116,14 @@ const AccountEdit = () => {
           </View>
 
           <AccountPanel title="属性">
-            <PropertyViewer properties={account.properties} editable onAdd={onAddProperty} onRemove={onRemoveProperty} onChange={onChangeProperty} />
+            <PropertyViewer
+              properties={account.properties} //
+              editable
+              onAdd={onAddProperty}
+              onRemove={onRemoveProperty}
+              onUpdate={onUpdateProperty}
+              onSort={onSortProperty}
+            />
           </AccountPanel>
 
           <AccountPanel title="图片">
