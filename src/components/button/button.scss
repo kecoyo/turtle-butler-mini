@@ -18,31 +18,37 @@ $classPrefix: '.lj-button';
     border: $border-base;
     border-color: $color-primary;
     background: $color-primary;
+    color: $color-white;
   }
   &--secondary {
     border: $border-base;
     border-color: $color-secondary;
     background: $color-secondary;
+    color: $color-white;
   }
   &--info {
     border: $border-base;
     border-color: $color-info;
     background: $color-info;
+    color: $color-white;
   }
   &--success {
     border: $border-base;
     border-color: $color-success;
     background: $color-success;
+    color: $color-white;
   }
   &--warning {
     border: $border-base;
     border-color: $color-warning;
     background: $color-warning;
+    color: $color-white;
   }
   &--error {
     border: $border-base;
     border-color: $color-error;
     background: $color-error;
+    color: $color-white;
   }
 
   // size

@@ -1,5 +1,5 @@
 import { NativeProps, withNativeProps } from '@/common/native-props';
-import { rem2px } from '@/common/utils';
+import { rem2px, showToast } from '@/common/utils';
 import mergeProps from '@/common/with-default-props';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
@@ -8,44 +8,35 @@ import { useState } from 'react';
 import AddPropertyModal from '../add-property-modal';
 import Icon from '../icon';
 import Input from '../input';
+import Link from '../link';
 import './property-viewer.scss';
-
-export interface FileItem {
-  path: string;
-  size: number;
-}
-
-export interface File {
-  url: string;
-  file?: FileItem;
-}
 
 export type PropertyViewerProps = {
   /**
    * 属性数组, 元素为对象, 包含属性 name, value（必选)
    */
-  properties: AccountProperty[];
+  properties: PropertyItem[];
   /**
-   * 是否显示添加属性按钮
+   * 是否可编辑
    */
-  showAddBtn?: boolean;
+  editable?: boolean;
   /**
    * 添加属性
    */
-  onAdd: (prop: AccountProperty) => void;
+  onAdd?: (item: PropertyItem) => void;
   /**
    * 删除属性
    * @param index 删除属性的位置
    * @returns
    */
-  onRemove: (index: number) => void;
+  onRemove?: (index: number) => void;
   /**
    * 修改属性
    * @param index 修改属性的位置
    * @param value 修改属性的值
    * @returns
    */
-  onChange: (index: number, value: any) => void;
+  onChange?: (index: number, value: any) => void;
 } & NativeProps;
 
 const defaultProps = {};
@@ -92,9 +83,11 @@ const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
   });
 
   // 确认添加属性
-  const onAddOk = useMemoizedFn((prop: AccountProperty) => {
+  const onAddOk = useMemoizedFn((prop: PropertyItem) => {
     setVisible(false);
-    props.onAdd(prop);
+    if (props.onAdd) {
+      props.onAdd(prop);
+    }
   });
 
   // 开始移除，打开确认按钮
@@ -113,7 +106,30 @@ const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
   const onRemoveOk = useMemoizedFn((index) => {
     setRemoveIndex(-1);
     setItemWrapInAni(itemWrapInAni2);
-    props.onRemove(index);
+    if (props.onRemove) {
+      props.onRemove(index);
+    }
+  });
+
+  // 复制
+  const onCopy = useMemoizedFn((item) => {
+    Taro.setClipboardData({
+      data: item.value,
+      success: () => {
+        showToast('复制成功');
+      },
+    });
+  });
+
+  // 复制全部
+  const onCopyAll = useMemoizedFn(() => {
+    let value = props.properties.map((prop) => prop.name + ':' + prop.value).join('\n');
+    Taro.setClipboardData({
+      data: value,
+      success: () => {
+        showToast('复制成功');
+      },
+    });
   });
 
   return withNativeProps(
@@ -124,34 +140,50 @@ const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
           <View key={index} className={`${classPrefix}--property-item`}>
             <View className="item-wrap" animation={removeIndex == index ? itemWrapOutAni : itemWrapInAni}>
               <View className="item-content" onClick={onRemoveCancel}>
-                <View className="item-remove" onClick={() => onRemove(index)}>
-                  <Icon value="remove" prefixClass="iconfont" size="small" />
-                </View>
+                {props.editable && (
+                  <View className="item-remove" onClick={() => onRemove(index)}>
+                    <Icon value="remove" prefixClass="iconfont" size="small" />
+                  </View>
+                )}
                 <View className="item-name">
                   <Text>{item.name}</Text>
                 </View>
                 <View className="item-value">
-                  {/* <input wx:if="{isEditing}" value="{item.value}" bindinput="bindValueInput({index})" /> */}
-                  {/* <Text bindlongtap="bindItemValueLongTap({item})">{item.value}</Text> */}
-                  <Input value={item.value} onChange={(val) => onChange(index, val)} />
+                  {props.editable ? ( //
+                    <Input value={item.value} onChange={(val) => onChange(index, val)} />
+                  ) : (
+                    <Text>{item.value}</Text>
+                  )}
                 </View>
-                <View className="item-drag" catchtouchstart="bindMoveStart({index})" catchtouchmove="bindMove({index})" catchtouchend="bindMoveEnd({index})">
-                  <Icon value="sort" prefixClass="iconfont"></Icon>
+                {props.editable ? (
+                  <View className="item-drag" catchtouchstart="bindMoveStart({index})" catchtouchmove="bindMove({index})" catchtouchend="bindMoveEnd({index})">
+                    <Icon value="drag" prefixClass="iconfont" size="small"></Icon>
+                  </View>
+                ) : (
+                  <View className="item-copy">
+                    <Link icon={<Icon value="copy" prefixClass="iconfont" size="small" />} onClick={() => onCopy(item)} />
+                  </View>
+                )}
+              </View>
+              {props.editable && (
+                <View className="item-delete" onClick={() => onRemoveOk(index)}>
+                  删除
                 </View>
-              </View>
-              <View className="item-delete" onClick={() => onRemoveOk(index)}>
-                删除
-              </View>
+              )}
             </View>
           </View>
         ))}
       </View>
-      <View className={`${classPrefix}--add-btn`} onClick={onAdd}>
-        添加属性
+      <View className={`${classPrefix}--footer`}>
+        {props.editable ? (
+          <Link icon={<Icon value="add" prefixClass="iconfont" size="small" />} text="添加属性" onClick={onAdd} />
+        ) : (
+          <Link icon={<Icon value="copy" prefixClass="iconfont" size="small" />} text="复制全部" onClick={onCopyAll} />
+        )}
       </View>
 
       {/* 添加属性弹框 */}
-      <AddPropertyModal visible={visible} onCancel={onAddCancel} onOk={onAddOk} />
+      {props.editable && <AddPropertyModal visible={visible} onCancel={onAddCancel} onOk={onAddOk} />}
     </View>,
   );
 };

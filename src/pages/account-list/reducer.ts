@@ -1,16 +1,21 @@
 import accountApi from '@/apis/accountApi';
-import { showToast } from '@/common/utils';
+import { showConfirm, showToast } from '@/common/utils';
 import { AppDispatch, RootState } from '@/redux/store';
 import { createSlice } from '@reduxjs/toolkit';
+import { setCategoryListDataChanged } from '../category-list/reducer';
 
 // 为 slice state 定义一个类型
 interface AccountListState {
   list: AccountInfo[]; // 账号列表
+
+  // 数据已经变化，需要刷新
+  dataChanged: boolean;
 }
 
 // 使用该类型定义初始 state
 const initialState: AccountListState = {
   list: [],
+  dataChanged: false,
 };
 
 export const accountListSlice = createSlice({
@@ -33,6 +38,12 @@ export const accountListSlice = createSlice({
         ...item,
       }));
       state.list = accountList;
+      state.dataChanged = false;
+    },
+
+    // 设置账号列表数据改变了，需要刷新
+    setAccountListDataChanged: (state) => {
+      state.dataChanged = true;
     },
 
     // 关闭列表项的SwipeAction
@@ -47,10 +58,20 @@ export const accountListSlice = createSlice({
       let index = action.payload;
       state.list[index].isOpened = false;
     },
+
+    // 删除账号
+    deleteAccount: (state, action) => {
+      let id = action.payload;
+      let index = state.list.findIndex((item) => item.id === id);
+      if (index >= 0) {
+        state.list.splice(index, 1);
+      }
+    },
   },
 });
 
-export const { setAccountListState, clearAccountListState, setAccountList, setSwipeActionOpened, setSwipeActionClosed } = accountListSlice.actions;
+export const { setAccountListState, clearAccountListState, setAccountList, setAccountListDataChanged, setSwipeActionOpened, setSwipeActionClosed, deleteAccount } =
+  accountListSlice.actions;
 export const accountListSelector = (state: RootState) => state.accountList;
 
 /**
@@ -67,7 +88,20 @@ export const fetchAccountList = (categoryId: number) => async (dispatch: AppDisp
  * 删除账号
  */
 export const deleteAccountAsync = (id: number) => async (dispatch: AppDispatch) => {
-  await accountApi.deleteAccount({ id });
-  showToast('删除成功');
+  await new Promise((resolve, reject) => {
+    showConfirm({
+      content: '您确定要删除该账号吗？',
+      onOk: async () => {
+        await accountApi.deleteAccount({ id });
+        showToast('删除成功');
+        dispatch(deleteAccount(id));
+
+        // 添加了新账号，需要刷新分类列表中账号数量
+        dispatch(setCategoryListDataChanged());
+
+        resolve(true);
+      },
+    });
+  });
 };
 export default accountListSlice.reducer;

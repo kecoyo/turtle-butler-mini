@@ -1,15 +1,17 @@
 import { NativeProps, withNativeProps } from '@/common/native-props';
 import mergeProps from '@/common/with-default-props';
-import { CommonEventFunction, Text } from '@tarojs/components';
+import { CommonEventFunction, Text, View } from '@tarojs/components';
 import { useMemoizedFn } from 'ahooks';
 import classNames from 'classnames';
 import { ReactNode } from 'react';
+import Icon from '../icon';
 import './link.scss';
 
 export type LinkProps = {
+  icon?: string | ReactNode;
+  text?: string;
   disabled?: boolean; // 是否禁用
   onClick?: CommonEventFunction;
-  children: ReactNode;
 } & NativeProps;
 
 const defaultProps = {};
@@ -27,14 +29,15 @@ const Link: React.FC<LinkProps> = (p) => {
 
   return withNativeProps(
     props,
-    <Text
+    <View
       className={classNames(classPrefix, {
         [`${classPrefix}--disabled`]: props.disabled,
       })}
       onClick={onClick}
     >
-      {props.children}
-    </Text>,
+      {typeof props.icon === 'string' ? <Icon value={props.icon} size="small" /> : props.icon}
+      {props.text && <Text className={`${classPrefix}--text`}>{props.text}</Text>}
+    </View>,
   );
 };
 

@@ -221,6 +221,9 @@ export const getStageIdByGradeId = (gradeId: number) => {
 
 // 获取资源路径
 export const getResUrl = (url: string): string => {
+  if (url.startsWith('http')) {
+    return url;
+  }
   return RES_URL + url;
 };
 

@@ -6,23 +6,23 @@ import { AtButton } from 'taro-ui';
 import { AtButtonProps } from 'taro-ui/types/button';
 import './button.scss';
 
-type Props = {
+export type ButtonProps = {
   type?: 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
   size?: 'large' | 'normal' | 'small';
   onClick?: () => void;
-} & Omit<AtButtonProps, 'size'> &
+} & Omit<AtButtonProps, 'size' | 'type'> &
   NativeProps;
 
-const defaultProps = {
+const defaultButtonProps = {
   size: 'normal',
   border: true,
 };
 
 const classPrefix = 'lj-button';
 
-const Button: React.FC<Props> = (p) => {
-  const props = mergeProps(defaultProps, p);
-  const otherProps = _.omit(props, ['className', 'style', 'size']);
+const Button: React.FC<ButtonProps> = (p) => {
+  const props = mergeProps(defaultButtonProps, p);
+  const otherProps = _.omit(props, ['className', 'style', 'size', 'type']);
 
   return withNativeProps(
     props,

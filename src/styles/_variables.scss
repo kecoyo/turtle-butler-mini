@@ -21,7 +21,7 @@ $hd: 2; // 基本单位
 $font-family: -apple-system, blinkmacsystemfont, 'Helvetica Neue', helvetica, segoe ui, arial, roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
 
 /* The Color of O2Team Brand */
-$color-brand: #49c265; // 品牌主色
+$color-brand: #48bf6b; // 品牌主色
 $color-brand-light: lighten($color-brand, 20%);
 $color-brand-dark: darken($color-brand, 20%);
 
@@ -31,7 +31,7 @@ $color-secondary: #f76d2f; // 用于表示辅助色
 $color-success: #00b578; // 用于表示操作成功
 $color-error: #ff3141; // 用于表示操作失败
 $color-warning: #ff8f1f; // 用于表示操作警告
-$color-info: #1677ff; // 用于表示操作信息
+$color-info: #4e6ef2; // 用于表示操作信息
 
 /* Color Palette */
 $color-black-0: #000;
@@ -67,7 +67,7 @@ $color-link-disabled: #bfbfbf; // 超链接禁用颜色。
 
 /* 背景色 */
 $color-bg: #fff;
-$color-bg-base: #f4f4f4;
+$color-bg-base: #f6f6f6;
 $color-bg-light: #ecf5fd;
 $color-bg-lighter: tint($color-bg-light, 50%);
 $color-bg-grey: #f7f7f7;

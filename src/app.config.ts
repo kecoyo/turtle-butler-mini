@@ -8,8 +8,8 @@ export default defineAppConfig({
     'pages/category-edit/index', // 分类编辑
 
     'pages/account-list/index', // 账号列表
-    'pages/account-edit/index', // 账号编辑
     'pages/account-detail/index', // 账号详情
+    'pages/account-edit/index', // 账号编辑
 
     'pages/text-edit/index', // 文本编辑框
     'pages/icon-select/index', // 图标选择
@@ -30,7 +30,7 @@ export default defineAppConfig({
       },
     ],
     color: '#666666',
-    selectedColor: '#1db79f',
+    selectedColor: '#48bf6b',
     backgroundColor: '#fff',
     borderStyle: 'white',
   },

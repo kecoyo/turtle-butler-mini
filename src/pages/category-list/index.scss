@@ -17,7 +17,7 @@ $classPrefix: '.lj-category-list-page';
   }
 
   .item-count {
-    color: $color-error;
+    @include text($color-error, $font-size-sm);
   }
 
   &--fab-button {

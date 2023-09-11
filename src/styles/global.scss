@@ -6,9 +6,7 @@
 page {
   // 默认样式
   font-family: $font-family;
-  font-size: $font-size-base;
-  color: $color-text-base;
-  line-height: $line-height-base;
+  @include text($color-text-base, $font-size-base, 1);
   background-color: $color-bg-base !important;
 }
 

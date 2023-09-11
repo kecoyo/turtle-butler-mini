@@ -50,7 +50,7 @@ export const accountEditSlice = createSlice({
     // 添加账号属性
     addAccountProperty: (state, action) => {
       if (state.account) {
-        const property = action.payload as AccountProperty;
+        const property = action.payload as PropertyItem;
         state.account.properties.push(property);
       }
     },

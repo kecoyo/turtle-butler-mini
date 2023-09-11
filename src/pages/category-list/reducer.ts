@@ -6,11 +6,15 @@ import { createSlice } from '@reduxjs/toolkit';
 // 为 slice state 定义一个类型
 interface CategoryListState {
   list: CategoryInfo[]; // 分类列表
+
+  // 数据已经变化，需要刷新
+  dataChanged: boolean;
 }
 
 // 使用该类型定义初始 state
 const initialState: CategoryListState = {
   list: [],
+  dataChanged: false,
 };
 
 export const categoryListSlice = createSlice({
@@ -35,6 +39,12 @@ export const categoryListSlice = createSlice({
         }),
       );
       state.list = categoryList;
+      state.dataChanged = false;
+    },
+
+    // 设置分类列表数据改变了，需要刷新
+    setCategoryListDataChanged: (state) => {
+      state.dataChanged = true;
     },
 
     // 关闭列表项的SwipeAction
@@ -52,7 +62,7 @@ export const categoryListSlice = createSlice({
   },
 });
 
-export const { setCategoryListState, clearCategoryListState, setCategoryList, setSwipeActionOpened, setSwipeActionClosed } = categoryListSlice.actions;
+export const { setCategoryListState, clearCategoryListState, setCategoryList, setCategoryListDataChanged, setSwipeActionOpened, setSwipeActionClosed } = categoryListSlice.actions;
 export const categoryListSelector = (state: RootState) => state.categoryList;
 
 /**

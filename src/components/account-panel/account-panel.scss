@@ -1,0 +1,31 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-account-panel';
+
+#{$classPrefix} {
+  position: relative;
+  @include flex-col();
+  margin-top: $spacing-sm;
+
+  &--header {
+    @include flex-row();
+    padding: $spacing-xs $spacing-md;
+  }
+
+  &--content {
+    background-color: $color-white;
+  }
+
+  &--item-title {
+    @include text($color-text-desc, $font-size-sm);
+    @include line(1);
+    @include flex-row();
+  }
+
+  &--item-extra {
+    @include flex-row(center, center);
+    @include text($color-text-desc);
+    text-align: right;
+    margin-left: $spacing-xs;
+  }
+}

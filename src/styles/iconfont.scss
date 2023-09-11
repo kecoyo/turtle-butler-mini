@@ -1,122 +1,82 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 4226442 */
-  src: url('//at.alicdn.com/t/c/font_4226442_ntc552cs1ni.woff2?t=1694014442578') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4226442_ntc552cs1ni.woff?t=1694014442578') format('woff'),
-       url('//at.alicdn.com/t/c/font_4226442_ntc552cs1ni.ttf?t=1694014442578') format('truetype');
+  font-family: 'iconfont'; /* Project id 4226442 */
+  src: url('//at.alicdn.com/t/c/font_4226442_643gtz8hjjp.woff2?t=1694397769924') format('woff2'),
+    url('//at.alicdn.com/t/c/font_4226442_643gtz8hjjp.woff?t=1694397769924') format('woff'),
+    url('//at.alicdn.com/t/c/font_4226442_643gtz8hjjp.ttf?t=1694397769924') format('truetype');
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
+  font-family: 'iconfont' !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.iconfont-shanchu:before {
-  content: "\e61a";
+.iconfont-drag:before {
+  content: '\e6de';
 }
 
-.iconfont-sort:before {
-  content: "\e700";
+.iconfont-copy:before {
+  content: '\ec7a';
 }
 
 .iconfont-remove:before {
-  content: "\e669";
-}
-
-.iconfont-tuodong:before {
-  content: "\e7df";
-}
-
-.iconfont-add1:before {
-  content: "\e66c";
-}
-
-.iconfont-minus:before {
-  content: "\e66d";
+  content: '\e669';
 }
 
 .iconfont-close_circle:before {
-  content: "\e66e";
-}
-
-.iconfont-selected:before {
-  content: "\e66f";
+  content: '\e66e';
 }
 
 .iconfont-delete:before {
-  content: "\e687";
-}
-
-.iconfont-Selected:before {
-  content: "\e688";
+  content: '\e687';
 }
 
 .iconfont-more:before {
-  content: "\e68a";
-}
-
-.iconfont-classification:before {
-  content: "\e69e";
-}
-
-.iconfont-information_add:before {
-  content: "\e6be";
-}
-
-.iconfont-fillin:before {
-  content: "\e6bf";
-}
-
-.iconfont-key:before {
-  content: "\e6c0";
-}
-
-.iconfont-lock:before {
-  content: "\e6c1";
+  content: '\e68a';
 }
 
 .iconfont-add:before {
-  content: "\e689";
+  content: '\e689';
 }
 
 .iconfont-profile:before {
-  content: "\e6b7";
+  content: '\e6b7';
 }
 
 .iconfont-exit:before {
-  content: "\e7cb";
+  content: '\e7cb';
 }
 
 .iconfont-home:before {
-  content: "\e6b8";
+  content: '\e6b8';
 }
 
 .iconfont-homefill:before {
-  content: "\e6bb";
+  content: '\e6bb';
 }
 
 .iconfont-my:before {
-  content: "\e78b";
+  content: '\e78b';
 }
 
 .iconfont-myfill:before {
-  content: "\e78c";
+  content: '\e78c';
 }
 
 .iconfont-right:before {
-  content: "\e683";
+  content: '\e683';
 }
 
 .iconfont-left:before {
-  content: "\e684";
+  content: '\e684';
 }
 
-.iconfont-under:before {
-  content: "\e685";
+.iconfont-down:before {
+  content: '\e685';
 }
 
 .iconfont-up:before {
-  content: "\e686";
+  content: '\e686';
 }

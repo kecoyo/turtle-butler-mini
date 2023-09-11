@@ -12,7 +12,7 @@ $classPrefix: '.lj-list-item';
   @include flex-row(space-between, center);
 
   &--item-icon {
-    margin-right: $spacing-xs;
+    margin-right: $spacing-sm;
     color: rgba(0, 0, 0, 0.45);
   }
 

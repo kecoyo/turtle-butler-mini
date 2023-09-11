@@ -14,23 +14,6 @@ interface UserInfo {
 }
 
 /**
- * 学段
- */
-interface Stage {
-  id: number;
-  name: string;
-}
-
-/**
- * 年级信息
- */
-interface Grade {
-  id: number;
-  name: string;
-  stageId?: number; // 学段ID
-}
-
-/**
  * 区域信息
  */
 interface Area {
@@ -38,18 +21,6 @@ interface Area {
   name: string;
   level: number;
   pid: number;
-}
-
-/**
- * 学校信息
- */
-interface SchoolInfo {
-  id: number;
-  name: string;
-  province: number;
-  city: number;
-  county: number;
-  phase: number; // 学段
 }
 
 /**
@@ -68,10 +39,11 @@ interface CategoryInfo {
  */
 interface AccountInfo {
   id: number; //账号ID
+  categoryId: number; // 账号分类ID
   name: string; //  账号名称
   icon: string; //  账号图标
-  properties: AccountProperty[]; // 属性
-  pictures: AccountPicture[]; // 图片
+  properties: PropertyItem[]; // 属性
+  pictures: ImageItem[]; // 图片
   remark: string; // 备注
   isOpened?: boolean; // SwipeAction isOpened
 }
@@ -79,7 +51,7 @@ interface AccountInfo {
 /**
  * 账号属性
  */
-interface AccountProperty {
+interface PropertyItem {
   name: string;
   value: string;
 }
@@ -100,62 +72,12 @@ interface IconInfo {
   icons: string[]; // 图标url列表
 }
 
-/**
- * 班级管理信息
- */
-interface ClassListItem extends ClassInfo {
-  teacherNum: number; // 教师人数
-  studentNum: number; // 学生人数
-  parentNum: number; // 家长人数
-  isMaster: boolean; // 我是否是班主任
+interface ImageFile {
+  path: string;
+  size: number;
 }
 
-/**
- * 教师信息
- */
-interface TeacherInfo {
-  id: number; // 教师id
-  name: string; // 教师姓名
-  avatar?: string; // 头像
-  phone?: string; // 手机号
-  isMaster?: boolean; // 是班主任
-}
-
-/**
- * 学生信息
- */
-interface StudentInfo {
-  id: number; // 学生id
-  name: string; // 学生姓名
-  avatar?: string; // 头像
-  parents?: ParentInfo[]; // 家长列表
-}
-
-/**
- * 家长信息
- */
-interface ParentInfo {
-  id: number; // 家长id
-  name: string; // 家长姓名
-  phone?: string; // 手机号
-  avatar?: string; // 头像
-  children?: StudentInfo[]; // 孩子列表
-}
-
-/**
- * 入校审批信息
- */
-interface JoinSchoolApprovalInfo {
-  id: number; // 消息ID
-  teacherInfo: TeacherInfo; // 入校教师
-  time: string | number | Date;
-  status: number; // 审批状态
-}
-
-/**
- * 管理员权限状态
- */
-interface AdminAuthStatus {
-  gradeAdmin: number; // 年级主任 0无权限，1有权限
-  classCharge: number; // 班主任 0无权限，1有权限
+interface ImageItem {
+  url: string;
+  file?: ImageFile;
 }

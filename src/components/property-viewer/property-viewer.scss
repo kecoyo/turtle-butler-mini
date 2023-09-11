@@ -19,7 +19,7 @@ $classPrefix: '.lj-property-viewer';
 
   &--property-item {
     $width: 100vw;
-    $height: 90px;
+    $height: 80px;
     position: relative;
     width: $width;
     height: $height;
@@ -62,7 +62,6 @@ $classPrefix: '.lj-property-viewer';
       align-items: center;
       color: $color-error;
       flex-shrink: 0;
-      // width: 0rpx;
       margin-right: $spacing-sm;
 
       .lj-icon {
@@ -73,6 +72,7 @@ $classPrefix: '.lj-property-viewer';
     .item-name {
       @include flex-row(flex-start, center);
       width: 160px;
+      margin-left: $spacing-xs;
 
       text {
         @include text(null, $font-size-sm);
@@ -84,7 +84,7 @@ $classPrefix: '.lj-property-viewer';
       flex: 1;
 
       input {
-        @include text($color-text-desc, $font-size-sm);
+        @include text(null, $font-size-sm);
         width: 100%;
         height: 100%;
       }
@@ -94,41 +94,28 @@ $classPrefix: '.lj-property-viewer';
       }
     }
 
+    .item-copy,
     .item-drag {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
+      @include flex-row(center, center);
       flex-shrink: 0;
-      // width: 0rpx;
       margin-right: $spacing-md;
-
-      .lj-icon {
-        color: $color-text-desc;
-      }
     }
 
     .item-delete {
       background-color: $color-error;
       color: $color-white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include flex-row(center, center);
       width: 151px;
       flex-shrink: 0;
     }
   }
 
-  &--add-btn {
-    margin-top: $spacing-sm;
-    background-color: $color-white;
+  &--footer {
     padding: $spacing-md $spacing-md;
-    @include text($color-link, $font-size-sm);
+    @include flex-row(flex-start, center);
 
-    &:hover {
-      color: $color-link-hover;
-    }
-    &:active {
-      color: $color-link-active;
+    .lj-link {
+      font-size: $font-size-sm;
     }
   }
 }

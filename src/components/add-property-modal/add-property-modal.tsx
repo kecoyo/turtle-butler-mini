@@ -10,8 +10,8 @@ import Input from '../input';
 import './add-property-modal.scss';
 
 export type AddPropertyModalProps = {
-  value?: AccountProperty;
-  onOk: (value: AccountProperty) => any;
+  value?: PropertyItem;
+  onOk: (value: PropertyItem) => any;
 } & Omit<ModalProps, 'onOk'>;
 
 const defaultProps = {};

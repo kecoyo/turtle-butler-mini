@@ -1,12 +1,16 @@
 import { getOpenerEventChannel, showToast } from '@/common/utils';
+import AccountPanel from '@/components/account-panel';
 import Avatar from '@/components/avatar';
+import Button from '@/components/button';
 import IconSelectPicker from '@/components/icon-select-picker';
 import { File } from '@/components/image-picker';
 import ImageViewer from '@/components/image-viewer';
 import Input from '@/components/input';
 import PropertyViewer from '@/components/property-viewer';
-import Textarea from '@/components/textarea';
+import Space from '@/components/space';
+import TextViewer from '@/components/text-viewer';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { configSelector } from '@/redux/reducers/config';
 import { View } from '@tarojs/components';
 import Taro, { useRouter } from '@tarojs/taro';
 import { useMemoizedFn, useMount, useUnmount } from 'ahooks';
@@ -21,6 +25,7 @@ import {
   removeAccountPicture,
   removeAccountProperty,
   saveAccountAsync,
+  setAccountEditState,
   setAccountIcon,
   setAccountName,
   setAccountRemark,
@@ -33,14 +38,29 @@ const classPrefix = 'lj-account-edit-page';
  */
 const AccountEdit = () => {
   const dispatch = useAppDispatch();
-  const { account, isEditing } = useAppSelector(accountEditSelector);
+  const { account } = useAppSelector(accountEditSelector);
+  const config = useAppSelector(configSelector);
   const router = useRouter();
-  const id = Number(router.params.id || 3749);
-  const categoryId = Number(router.params.categoryId || 3749);
+  const id = Number(router.params.id);
+  const categoryId = Number(router.params.categoryId);
 
   useMount(() => {
     if (id) {
       dispatch(fetchAccountInfo(id));
+    } else if (categoryId) {
+      const newAccount = {
+        id: 0,
+        categoryId,
+        name: '新账号',
+        icon: config.account.default_icon,
+        properties: [
+          { name: '账号', value: 'abcd' },
+          { name: '密码', value: '123456' },
+        ],
+        pictures: [],
+        remark: '',
+      };
+      dispatch(setAccountEditState({ account: newAccount }));
     }
   });
 
@@ -51,7 +71,7 @@ const AccountEdit = () => {
   const onNameChange = useMemoizedFn((val: string) => dispatch(setAccountName(val)));
   const onIconChange = useMemoizedFn((val: string) => dispatch(setAccountIcon(val)));
   const onRemarkChange = useMemoizedFn((val: string) => dispatch(setAccountRemark(val)));
-  const onAddProperty = useMemoizedFn(async (property: AccountProperty) => dispatch(addAccountProperty(property)));
+  const onAddProperty = useMemoizedFn(async (property: PropertyItem) => dispatch(addAccountProperty(property)));
   const onRemoveProperty = useMemoizedFn(async (index: number) => dispatch(removeAccountProperty(index)));
   const onChangeProperty = useMemoizedFn(async (index: number, value: any) => dispatch(changeAccountProperty({ index, value })));
   const onAddPicture = useMemoizedFn(async (file: File) => dispatch(addAccountPicture(file)));
@@ -74,111 +94,46 @@ const AccountEdit = () => {
 
     const eventChannel = getOpenerEventChannel();
     eventChannel.emit('onOk');
+
     Taro.navigateBack();
   });
 
   return (
     <View className={classPrefix}>
-      <View className={`${classPrefix}--container`}>
-        {account ? (
-          <View>
-            <View className="account-info">
-              <View className="account-icon">
-                <IconSelectPicker onChange={onIconChange}>
-                  <Avatar image={account.icon} />
-                </IconSelectPicker>
-              </View>
-              <View className="account-title">
-                <Input placeholder="请输入名称" value={account.name} onChange={onNameChange} />
-                {/* <Text>{account.name}</Text> */}
-              </View>
+      {account ? (
+        <View className={`${classPrefix}--container`}>
+          <View className="account-info">
+            <View className="account-icon">
+              <IconSelectPicker onChange={onIconChange}>
+                <Avatar image={account.icon} circle />
+              </IconSelectPicker>
             </View>
-
-            <View className="panel">
-              <View className="panel-title">属性</View>
-              <View className="panel-content">
-                <PropertyViewer properties={account.properties} onAdd={onAddProperty} onRemove={onRemoveProperty} onChange={onChangeProperty} />
-              </View>
+            <View className="account-title">
+              <Input placeholder="请输入名称" value={account.name} onChange={onNameChange} />
             </View>
-
-            {/* <View wx:if="{isEditing}">
-                <View className="space"></View>
-                <View className="weui-cells weui-cells_after-title">
-                  <View className="weui-cell weui-cell_link" bindtap="bindAddProperty">
-                    <View className="weui-cell__bd">添加属性</View>
-                  </View>
-                </View>
-              </View> */}
-
-            {/* <View wx:if="{isEditing && !hasPicture}">
-                <View className="space"></View>
-                <View className="weui-cells weui-cells_after-title">
-                  <View className="weui-cell weui-cell_link" bindtap="bindAddPicture">
-                    <View className="weui-cell__bd">添加图片</View>
-                  </View>
-                </View>
-              </View> */}
-
-            <View className="panel">
-              <View className="panel-title">图片</View>
-              <View className="panel-content">
-                <ImageViewer length={5} files={account.pictures as File[]} onAdd={onAddPicture} onRemove={onRemovePicture} />
-              </View>
-            </View>
-
-            <View className="panel">
-              <View className="panel-title">备注</View>
-              <View className="panel-content">
-                <Textarea placeholder="请输入备注" height={200} maxLength={1000} value={account.remark} onChange={onRemarkChange} />
-              </View>
-            </View>
-
-            {/* <View wx:if="{isEditing && !hasRemark}">
-                <View className="space"></View>
-                <View className="weui-cells weui-cells_after-title">
-                  <View className="weui-cell weui-cell_link" bindtap="bindAddRemark">
-                    <View className="weui-cell__bd">添加备注</View>
-                  </View>
-                </View>
-              </View> */}
-
-            {/* <View wx:if="{hasRemark}">
-                <View className="weui-cells__title">备注</View>
-                <View className="weui-cells weui-cells_after-title">
-                  <View className="weui-cell">
-                    <View className="weui-cell__bd">
-                      <textarea wx:if="{isEditing}" className="weui-textarea" placeholder="请输入文本" value="{account.remark}" bindinput="bindRemarkInput" />
-                      <text wx:else className="weui-textarea">
-                        {account.remark || ''}
-                      </text>
-                    </View>
-                  </View>
-                </View>
-              </View> */}
           </View>
-        ) : null}
-      </View>
 
-      <View className={`${classPrefix}--footer`}>
-        <View className="footer-left">
-          {isEditing ? (
-            <View className="button" bindtap="bindEditCancel()">
-              取消
-            </View>
-          ) : null}
+          <AccountPanel title="属性">
+            <PropertyViewer properties={account.properties} editable onAdd={onAddProperty} onRemove={onRemoveProperty} onChange={onChangeProperty} />
+          </AccountPanel>
+
+          <AccountPanel title="图片">
+            <ImageViewer length={5} images={account.pictures} editable onAdd={onAddPicture} onRemove={onRemovePicture} />
+          </AccountPanel>
+
+          <AccountPanel title="备注">
+            <TextViewer maxLength={1000} text={account.remark} editable onChange={onRemarkChange} />
+          </AccountPanel>
+
+          <View className={`${classPrefix}--footer`}>
+            <Space justifyContent="space-evenly">
+              <Button type="primary" full onClick={onSave}>
+                保存
+              </Button>
+            </Space>
+          </View>
         </View>
-        <View className="footer-right">
-          {isEditing ? (
-            <View className="button" bindtap="bindEditDone()">
-              完成
-            </View>
-          ) : (
-            <View className="button" bindtap="bindEditStart()">
-              编辑
-            </View>
-          )}
-        </View>
-      </View>
+      ) : null}
     </View>
   );
 };

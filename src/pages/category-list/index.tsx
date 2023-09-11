@@ -6,7 +6,7 @@ import ListView from '@/components/list-view';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { globalSelector } from '@/redux/reducers/global';
 import { MovableArea, MovableView, Text, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import Taro, { useDidShow } from '@tarojs/taro';
 import { useMemoizedFn, useMount, useUpdateEffect } from 'ahooks';
 import { AtFab, AtSwipeAction } from 'taro-ui';
 import './index.scss';
@@ -20,11 +20,17 @@ const classPrefix = 'lj-category-list-page';
 const CategoryList = () => {
   const dispatch = useAppDispatch();
   const { userInfo } = useAppSelector(globalSelector);
-  const { list, openedIndex } = useAppSelector(categoryListSelector);
+  const { list, dataChanged } = useAppSelector(categoryListSelector);
 
   // 登录成功后，加载分类列表
   useMount(() => {
     if (userInfo) onLoad();
+  });
+
+  useDidShow(() => {
+    if (dataChanged) {
+      onLoad();
+    }
   });
 
   // 用户信息变化时，更新分类列表
@@ -92,9 +98,9 @@ const CategoryList = () => {
 
   const onItemClick = useMemoizedFn((item) => {
     Taro.navigateTo({
-      url: '/pages/account-list/index?categoryId=' + item.id,
+      url: '/pages/account-list/index?categoryId=' + item.id + '&categoryName=' + item.name,
       events: {
-        onOk: onLoad,
+        onRefresh: onLoad,
       },
     });
   });

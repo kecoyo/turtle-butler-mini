@@ -54,8 +54,7 @@ $classPrefix: '.lj-image-viewer';
     border-radius: 50%;
     overflow: hidden;
     text-align: center;
-    background-color: #999;
-    opacity: 0.8;
+    background-color: $color-error;
     @include flex-row(center, center);
 
     .lj-icon {

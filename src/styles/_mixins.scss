@@ -1,8 +1,20 @@
 /* 文本 */
 @mixin text($color: $color-text-base, $font-size: $font-size-base, $line-height: $line-height-base) {
-  color: $color;
-  font-size: $font-size;
-  line-height: $line-height;
+  @if ($color) {
+    color: $color;
+  } @else {
+    color: $color-text-base;
+  }
+  @if ($font-size) {
+    font-size: $font-size;
+  } @else {
+    font-size: $font-size-base;
+  }
+  @if ($line-height) {
+    line-height: $line-height;
+  } @else {
+    line-height: $line-height-base;
+  }
 }
 
 /* 背景图 */
@@ -73,4 +85,15 @@
 }
 @mixin flex-col-end($align-items: flex-start) {
   @include flex-col(flex-end, $align-items);
+}
+
+@mixin link() {
+  color: $color-link;
+
+  &:hover {
+    color: $color-link-hover;
+  }
+  &:active {
+    color: $color-link-active;
+  }
 }
