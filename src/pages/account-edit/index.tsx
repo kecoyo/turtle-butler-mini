@@ -28,6 +28,7 @@ import {
   setAccountIcon,
   setAccountName,
   setAccountRemark,
+  sortAccountPicture,
   sortAccountProperty,
   updateAccountProperty,
 } from './reducer';
@@ -78,6 +79,7 @@ const AccountEdit = () => {
   const onSortProperty = useMemoizedFn(async (startIndex: number, toIndex: number) => dispatch(sortAccountProperty({ startIndex, toIndex })));
   const onAddPicture = useMemoizedFn(async (file: File) => dispatch(addAccountPicture(file)));
   const onRemovePicture = useMemoizedFn(async (index: number) => dispatch(removeAccountPicture(index)));
+  const onSortPicture = useMemoizedFn(async (startIndex: number, toIndex: number) => dispatch(sortAccountPicture({ startIndex, toIndex })));
 
   const onSave = useMemoizedFn(async () => {
     if (!account) return;
@@ -127,7 +129,7 @@ const AccountEdit = () => {
           </AccountPanel>
 
           <AccountPanel title="图片">
-            <ImageViewer length={5} images={account.pictures} editable onAdd={onAddPicture} onRemove={onRemovePicture} />
+            <ImageViewer images={account.pictures} editable onAdd={onAddPicture} onRemove={onRemovePicture} onSort={onSortPicture} />
           </AccountPanel>
 
           <AccountPanel title="备注">

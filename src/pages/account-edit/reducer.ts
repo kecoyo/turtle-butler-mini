@@ -91,6 +91,15 @@ export const accountEditSlice = createSlice({
         state.account.pictures.splice(index, 1);
       }
     },
+    // 排序账号图片
+    sortAccountPicture: (state, action) => {
+      if (state.account) {
+        const { startIndex, toIndex } = action.payload;
+        let item = state.account.pictures[startIndex];
+        state.account.pictures.splice(startIndex, 1);
+        state.account.pictures.splice(toIndex, 0, item);
+      }
+    },
   },
 });
 
@@ -106,6 +115,7 @@ export const {
   sortAccountProperty,
   addAccountPicture,
   removeAccountPicture,
+  sortAccountPicture,
 } = accountEditSlice.actions;
 export const accountEditSelector = (state: RootState) => state.accountEdit;
 

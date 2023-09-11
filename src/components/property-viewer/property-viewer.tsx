@@ -40,8 +40,8 @@ export type PropertyViewerProps = {
   onUpdate?: (index: number, value: any) => void;
   /**
    * 移动属性
-   * @param startIndex 移动属性的开始位置
-   * @param toIndex 移动属性的停止位置
+   * @param startIndex 开始位置
+   * @param toIndex 目标位置
    * @returns
    */
   onSort?: (startIndex: number, toIndex: number) => void;
