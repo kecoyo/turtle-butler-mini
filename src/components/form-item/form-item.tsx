@@ -3,21 +3,8 @@ import mergeProps from '@/common/with-default-props';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 import React, { JSXElementConstructor, ReactElement, ReactNode } from 'react';
-import AreaSelect from '../area-select';
-import DateSelect from '../date-select';
 import Icon from '../icon';
-import Input from '../input';
-import RadioGroup from '../radio-group';
-import Select from '../select';
-import TeacherSelect from '../teacher-select';
 import './form-item.scss';
-
-const _Select = <Select />;
-const _AreaSelect = <AreaSelect />;
-const _DateSelect = <DateSelect />;
-const _TeacherSelect = <TeacherSelect />;
-const _Input = <Input />;
-const _RadioGroup = <RadioGroup />;
 
 type Props = {
   thumb?: string | ReactNode;

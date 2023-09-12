@@ -17,15 +17,6 @@ $classPrefix: '.lj-property-viewer';
     background-color: $color-white;
   }
 
-  &--footer {
-    padding: $spacing-md $spacing-md;
-    @include flex-row(flex-start, center);
-
-    .lj-link {
-      font-size: $font-size-sm;
-    }
-  }
-
   .property-item {
     $width: 100vw;
     $height: 80px;
@@ -128,5 +119,18 @@ $classPrefix: '.lj-property-viewer';
 
   .mainend {
     opacity: 1;
+  }
+
+  &--footer {
+    padding: $spacing-md $spacing-md;
+    @include flex-row(flex-start, center);
+
+    .lj-icon {
+      font-size: $font-size-md;
+    }
+
+    .lj-link {
+      font-size: $font-size-sm;
+    }
   }
 }

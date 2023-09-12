@@ -6,7 +6,6 @@ import Taro from '@tarojs/taro';
 import { useMemoizedFn, useMount } from 'ahooks';
 import classNames from 'classnames';
 import { useState } from 'react';
-import AddPropertyModal from '../add-property-modal';
 import Icon from '../icon';
 import Input from '../input';
 import Link from '../link';
@@ -57,7 +56,6 @@ const itemHeight = rem2px(80);
 
 const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
   const props = mergeProps(defaultProps, p);
-  const [visible, setVisible] = useState(false);
   const [removeIndex, setRemoveIndex] = useState(-1);
   const [itemWrapInAni, setItemWrapInAni] = useState<any>(null);
   const [itemWrapInAni2, setItemWrapInAni2] = useState<any>(null);
@@ -93,17 +91,16 @@ const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
 
   // 添加属性，打开添加弹框
   const onAdd = useMemoizedFn(() => {
-    setVisible(true);
-  });
-
-  // 取消添加属性
-  const onAddCancel = useMemoizedFn(() => {
-    setVisible(false);
+    Taro.navigateTo({
+      url: '/pages/add-property/index',
+      events: {
+        onOk: onAddOk,
+      },
+    });
   });
 
   // 确认添加属性
   const onAddOk = useMemoizedFn((prop: PropertyItem) => {
-    setVisible(false);
     if (props.onAdd) {
       props.onAdd(prop);
     }
@@ -243,9 +240,6 @@ const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
           <Link icon={<Icon value="copy" prefixClass="iconfont" size="small" />} text="复制全部" onClick={onCopyAll} />
         )}
       </View>
-
-      {/* 添加属性弹框 */}
-      {props.editable && <AddPropertyModal visible={visible} onCancel={onAddCancel} onOk={onAddOk} />}
     </View>,
   );
 };
