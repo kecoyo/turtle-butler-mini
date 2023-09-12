@@ -1,0 +1,14 @@
+@import '@/styles/libs.scss';
+
+$classPrefix: '.lj-add-property-page';
+
+#{$classPrefix} {
+  width: 100%;
+
+  &--content {
+  }
+
+  &--footer {
+    padding: $spacing-md $spacing-md;
+  }
+}

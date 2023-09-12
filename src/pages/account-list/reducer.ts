@@ -93,9 +93,9 @@ export const deleteAccountAsync = (id: number) => async (dispatch: AppDispatch) 
       content: '您确定要删除该账号吗？',
       onOk: async () => {
         await accountApi.deleteAccount({ id });
-        showToast('删除成功');
-        dispatch(deleteAccount(id));
+        await showToast('删除成功');
 
+        dispatch(deleteAccount(id));
         // 添加了新账号，需要刷新分类列表中账号数量
         dispatch(setCategoryListDataChanged());
 

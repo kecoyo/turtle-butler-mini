@@ -11,8 +11,9 @@ export default defineAppConfig({
     'pages/account-detail/index', // 账号详情
     'pages/account-edit/index', // 账号编辑
 
-    'pages/text-edit/index', // 文本编辑框
-    'pages/icon-select/index', // 图标选择
+    'pages/add-property/index', // 添加属性
+    'pages/text-edit/index', // 编辑文本
+    'pages/icon-select/index', // 选择图标
   ],
   tabBar: {
     list: [

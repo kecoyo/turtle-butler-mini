@@ -50,6 +50,7 @@ const AccountDetail = () => {
 
   const onDelete = useMemoizedFn(async () => {
     await dispatch(deleteAccountAsync(id));
+
     Taro.navigateBack();
   });
 

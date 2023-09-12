@@ -136,7 +136,7 @@ export const saveAccountAsync = (account: AccountInfo) => async (dispatch: AppDi
   } else {
     await accountApi.createAccount(account);
   }
-  showToast('保存成功');
+  await showToast('保存成功');
 };
 
 export default accountEditSlice.reducer;

@@ -98,7 +98,6 @@ const AccountEdit = () => {
 
     const eventChannel = getOpenerEventChannel();
     eventChannel.emit('onOk');
-
     Taro.navigateBack();
   });
 

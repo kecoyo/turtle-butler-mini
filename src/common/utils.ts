@@ -67,9 +67,16 @@ export const hideLoading = () => {
 
 // 显示提示信息
 export const showToast = (title: string) => {
-  return Taro.showToast({
-    icon: 'none',
-    title: title,
+  let time = 1500;
+  return new Promise((resolve, reject) => {
+    Taro.showToast({
+      icon: 'none',
+      title: title,
+      duration: time,
+    });
+    setTimeout(() => {
+      resolve(true);
+    }, time);
   });
 };
 
