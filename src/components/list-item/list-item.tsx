@@ -8,13 +8,14 @@ import './list-item.scss';
 
 type ListItemProps = {
   icon?: string | ReactNode; // 元素的Icon
-  title: string; // 元素的标题
+  title?: string; // 元素的标题
   note?: string; // 元素的描述信息
   extra?: string | ReactNode; // 额外信息的文本
   arrow?: 'none' | 'right' | 'down' | 'left' | 'up'; // 箭头的方向
   hasBorder?: boolean; // 是否有边框
   disabled?: boolean; // 是否禁用
   onClick?: CommonEventFunction; // 用户点击元素触发的事件
+  onLongPress?: CommonEventFunction; // 用户点击元素触发的事件
 } & NativeProps;
 
 const defaultProps = {
@@ -34,6 +35,7 @@ const ListItem: React.FC<ListItemProps> = (p) => {
         'has-border': props.hasBorder,
       })}
       onClick={props.onClick}
+      onLongPress={props.onLongPress}
     >
       {props.icon && <View className={`${classPrefix}--item-icon`}>{typeof props.icon === 'string' ? <Icon value={props.icon} /> : props.icon}</View>}
       <View className={`${classPrefix}--item-content`}>

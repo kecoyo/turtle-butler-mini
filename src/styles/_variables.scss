@@ -71,6 +71,7 @@ $color-bg-base: #f6f6f6;
 $color-bg-light: #ecf5fd;
 $color-bg-lighter: tint($color-bg-light, 50%);
 $color-bg-grey: #f7f7f7;
+$color-bg-sort: #fff7cf; // 拖动排序时，占位背景色
 
 /* 边框颜色 */
 $color-border-base: #dedede;

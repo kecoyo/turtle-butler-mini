@@ -1,0 +1,87 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4226442 */
+  src: url('iconfont.woff2?t=1694502273921') format('woff2'),
+       url('iconfont.woff?t=1694502273921') format('woff'),
+       url('iconfont.ttf?t=1694502273921') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconfont-drag:before {
+  content: "\e649";
+}
+
+.iconfont-type:before {
+  content: "\e6de";
+}
+
+.iconfont-copy:before {
+  content: "\ec7a";
+}
+
+.iconfont-remove:before {
+  content: "\e669";
+}
+
+.iconfont-close_circle:before {
+  content: "\e66e";
+}
+
+.iconfont-delete:before {
+  content: "\e687";
+}
+
+.iconfont-more:before {
+  content: "\e68a";
+}
+
+.iconfont-add:before {
+  content: "\e689";
+}
+
+.iconfont-profile:before {
+  content: "\e6b7";
+}
+
+.iconfont-exit:before {
+  content: "\e7cb";
+}
+
+.iconfont-home:before {
+  content: "\e6b8";
+}
+
+.iconfont-homefill:before {
+  content: "\e6bb";
+}
+
+.iconfont-my:before {
+  content: "\e78b";
+}
+
+.iconfont-myfill:before {
+  content: "\e78c";
+}
+
+.iconfont-right:before {
+  content: "\e683";
+}
+
+.iconfont-left:before {
+  content: "\e684";
+}
+
+.iconfont-down:before {
+  content: "\e685";
+}
+
+.iconfont-up:before {
+  content: "\e686";
+}
+

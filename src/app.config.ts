@@ -1,15 +1,15 @@
 export default defineAppConfig({
   pages: [
-    // tabs
-    'pages/category-list/index', // 分类列表
-    'pages/mine/index', // 我的
-    'pages/update-profile/index', // 修改个人资料
-
+    'pages/category-list/index', // 分类列表（首页）
     'pages/category-edit/index', // 分类编辑
+    'pages/category-sort/index', // 分类排序
 
     'pages/account-list/index', // 账号列表
     'pages/account-detail/index', // 账号详情
     'pages/account-edit/index', // 账号编辑
+
+    'pages/mine/index', // 我的
+    'pages/update-profile/index', // 修改个人资料
 
     'pages/add-property/index', // 添加属性
     'pages/text-edit/index', // 编辑文本

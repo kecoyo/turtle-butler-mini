@@ -5,6 +5,7 @@ import accountEdit from '../pages/account-edit/reducer';
 import accountList from '../pages/account-list/reducer';
 import categoryEdit from '../pages/category-edit/reducer';
 import categoryList from '../pages/category-list/reducer';
+import categorySort from '../pages/category-sort/reducer';
 import iconSelect from '../pages/icon-select/reducer';
 import mine from '../pages/mine/reducer';
 import textEdit from '../pages/text-edit/reducer';
@@ -22,6 +23,7 @@ const store = configureStore({
     // pages
     categoryList,
     categoryEdit,
+    categorySort,
     accountList,
     accountEdit,
     accountDetail,

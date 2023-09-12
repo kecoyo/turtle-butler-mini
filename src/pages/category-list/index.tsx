@@ -105,6 +105,15 @@ const CategoryList = () => {
     });
   });
 
+  const onItemLongPress = useMemoizedFn(() => {
+    Taro.navigateTo({
+      url: '/pages/category-sort/index',
+      events: {
+        onOk: onLoad,
+      },
+    });
+  });
+
   return (
     <View className={classPrefix}>
       <MovableArea style={{ display: 'none' }}></MovableArea>
@@ -130,6 +139,7 @@ const CategoryList = () => {
               title={item.name}
               extra={<Text className="item-count">{item.count}</Text>}
               onClick={() => onItemClick(item)}
+              onLongPress={() => onItemLongPress(item)}
             />
           </AtSwipeAction>
         )}

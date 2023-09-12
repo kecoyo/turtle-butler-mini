@@ -59,6 +59,17 @@ const categoryApi = {
   }) => {
     return request.post('/api/category/deleteCategory', data);
   },
+
+  /**
+   * 排序账号分类
+   * @description
+   * @returns
+   */
+  sortCategory: async (data: {
+    ids: number[]; // 分类ID数组
+  }) => {
+    return request.post('/api/category/sortCategory', data);
+  },
 };
 
 export default categoryApi;
