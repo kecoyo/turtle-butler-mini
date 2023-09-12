@@ -34,11 +34,11 @@ $classPrefix: '.lj-property-viewer';
       border-bottom: $border-light;
     }
 
-    &:last-child {
-      &::after {
-        display: none;
-      }
-    }
+    // &:last-child {
+    //   &::after {
+    //     display: none;
+    //   }
+    // }
 
     .item-wrap {
       display: flex;
@@ -126,7 +126,7 @@ $classPrefix: '.lj-property-viewer';
     @include flex-row(flex-start, center);
 
     .lj-icon {
-      font-size: $font-size-md;
+      font-size: $icon-size-sm;
     }
 
     .lj-link {
