@@ -84,3 +84,13 @@ switch .wx-switch-input::after {
 .flex1 {
   flex: 1;
 }
+
+/* at-action-sheet */
+
+.at-action-sheet__item {
+  @include text();
+}
+
+.at-action-sheet__footer {
+  @include text();
+}

@@ -3,6 +3,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import accountDetail from '../pages/account-detail/reducer';
 import accountEdit from '../pages/account-edit/reducer';
 import accountList from '../pages/account-list/reducer';
+import accountMove from '../pages/account-move/reducer';
+import accountSort from '../pages/account-sort/reducer';
 import categoryEdit from '../pages/category-edit/reducer';
 import categoryList from '../pages/category-list/reducer';
 import categorySort from '../pages/category-sort/reducer';
@@ -27,6 +29,8 @@ const store = configureStore({
     accountList,
     accountEdit,
     accountDetail,
+    accountSort,
+    accountMove,
 
     mine,
     updateProfile,

@@ -7,6 +7,8 @@ export default defineAppConfig({
     'pages/account-list/index', // 账号列表
     'pages/account-detail/index', // 账号详情
     'pages/account-edit/index', // 账号编辑
+    'pages/account-sort/index', // 账号排序
+    'pages/account-move/index', // 账号移动
 
     'pages/mine/index', // 我的
     'pages/update-profile/index', // 修改个人资料

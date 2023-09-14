@@ -1,16 +1,16 @@
-import { showConfirm, showToast } from '@/common/utils';
+import { showToast } from '@/common/utils';
 import Avatar from '@/components/avatar';
 import Icon from '@/components/icon';
 import ListItem from '@/components/list-item';
 import ListView from '@/components/list-view';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { globalSelector } from '@/redux/reducers/global';
-import { MovableArea, MovableView, Text, View } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
 import { useMemoizedFn, useMount, useUpdateEffect } from 'ahooks';
-import { AtFab, AtSwipeAction } from 'taro-ui';
+import { AtActionSheet, AtActionSheetItem, AtFab } from 'taro-ui';
 import './index.scss';
-import { categoryListSelector, deleteCategoryAsync, fetchCategoryList, setSwipeActionClosed, setSwipeActionOpened } from './reducer';
+import { categoryListSelector, closeMoreActionSheet, deleteCategoryAsync, fetchCategoryList, openMoreActionSheet } from './reducer';
 
 const classPrefix = 'lj-category-list-page';
 
@@ -20,7 +20,7 @@ const classPrefix = 'lj-category-list-page';
 const CategoryList = () => {
   const dispatch = useAppDispatch();
   const { userInfo } = useAppSelector(globalSelector);
-  const { list, dataChanged } = useAppSelector(categoryListSelector);
+  const { list, moreOpened, moreItem, moreItemIndex, dataChanged } = useAppSelector(categoryListSelector);
 
   // 登录成功后，加载分类列表
   useMount(() => {
@@ -51,28 +51,9 @@ const CategoryList = () => {
     });
   });
 
-  const onSwipeActionOpened = useMemoizedFn((index?: number) => {
-    dispatch(setSwipeActionOpened(index));
-  });
+  const onUpdate = useMemoizedFn((item: CategoryInfo, index?: number) => {
+    onCloseMoreActionSheet();
 
-  const onSwipeActionClosed = useMemoizedFn((index?: number) => {
-    dispatch(setSwipeActionClosed(index));
-  });
-
-  const onSwipeActionClick = useMemoizedFn((e, item, index?: number) => {
-    switch (e.text) {
-      case '编辑':
-        onUpdate(item, index);
-        break;
-      case '删除':
-        onDelete(item, index);
-        break;
-      default:
-        break;
-    }
-  });
-
-  const onUpdate = useMemoizedFn((item: any, index?: number) => {
     Taro.navigateTo({
       url: '/pages/category-edit/index?id=' + item.id,
       events: {
@@ -81,19 +62,26 @@ const CategoryList = () => {
     });
   });
 
-  const onDelete = useMemoizedFn((item: CategoryInfo, index?: number) => {
+  const onDelete = useMemoizedFn(async (item: CategoryInfo, index?: number) => {
+    onCloseMoreActionSheet();
+
     if ((item.count || 0) > 0) {
       showToast('分类不为空，不能删除');
       return;
     }
 
-    showConfirm({
-      content: '您确定要删除该分类吗？',
-      onOk: async () => {
-        await dispatch(deleteCategoryAsync(item.id, index));
-        await onLoad();
-      },
-    });
+    await dispatch(deleteCategoryAsync(item.id));
+  });
+
+  // 关闭ActionSheet
+  const onCloseMoreActionSheet = useMemoizedFn(() => {
+    dispatch(closeMoreActionSheet());
+  });
+
+  const onItemMoreClick = useMemoizedFn((e: any, item: CategoryInfo, index?: number) => {
+    e[0].stopPropagation();
+
+    dispatch(openMoreActionSheet({ item, index }));
   });
 
   const onItemClick = useMemoizedFn((item) => {
@@ -114,40 +102,44 @@ const CategoryList = () => {
     });
   });
 
+  const renderFooter = useMemoizedFn(() => {
+    return <View className={`${classPrefix}--footer`}></View>;
+  });
+
   return (
     <View className={classPrefix}>
-      <MovableArea style={{ display: 'none' }}></MovableArea>
-      <MovableView style={{ display: 'none' }}></MovableView>
       <ListView
         onLoad={onLoad}
         list={list}
         renderItem={(item, i) => (
-          <AtSwipeAction
-            onOpened={() => onSwipeActionOpened(i)}
-            onClosed={() => onSwipeActionClosed(i)}
-            isOpened={item.isOpened}
-            autoClose
-            options={[
-              { text: '编辑', style: { backgroundColor: '#6190E8' } },
-              { text: '删除', style: { backgroundColor: '#FF4949' } },
-            ]}
-            onClick={(e) => onSwipeActionClick(e, item, i)}
-          >
-            <ListItem
-              key={item.id} //
-              icon={<Avatar image={item.icon} circle />}
-              title={item.name}
-              extra={<Text className="item-count">{item.count}</Text>}
-              onClick={() => onItemClick(item)}
-              onLongPress={() => onItemLongPress(item)}
-            />
-          </AtSwipeAction>
+          <ListItem
+            key={item.id} //
+            icon={<Avatar image={item.icon} circle />}
+            title={item.name}
+            extra={
+              <>
+                <Text className="item-count">{item.count}</Text>
+                <Icon className="item-more" value="more" prefixClass="iconfont" onClick={(e) => onItemMoreClick(e, item, i)} />
+              </>
+            }
+            arrow="none"
+            onClick={() => onItemClick(item)}
+            onLongPress={() => onItemLongPress()}
+          />
         )}
         pullDownRefresh
+        renderFooter={renderFooter}
       />
       <AtFab className={`${classPrefix}--fab-button`} onClick={onCreate}>
         <Icon value="add" color="#ffffff" />
       </AtFab>
+
+      <AtActionSheet isOpened={moreOpened} cancelText="取消" title={'账号分类：' + moreItem?.name} onClose={onCloseMoreActionSheet} onCancel={onCloseMoreActionSheet}>
+        <AtActionSheetItem onClick={() => onUpdate(moreItem!, moreItemIndex)}>编辑</AtActionSheetItem>
+        <AtActionSheetItem onClick={() => onDelete(moreItem!, moreItemIndex)}>
+          <Text className="item-delete">删除</Text>
+        </AtActionSheetItem>
+      </AtActionSheet>
     </View>
   );
 };

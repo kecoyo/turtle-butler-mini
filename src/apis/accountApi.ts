@@ -61,6 +61,29 @@ const accountApi = {
   }) => {
     return request.post('/api/account/deleteAccount', data);
   },
+
+  /**
+   * 排序账号
+   * @description
+   * @returns
+   */
+  sortAccount: async (data: {
+    ids: number[]; // 账号ID数组
+  }) => {
+    return request.post('/api/account/sortAccount', data);
+  },
+
+  /**
+   * 移动账号
+   * @description
+   * @returns
+   */
+  moveAccount: async (data: {
+    id: number; // 要移动的账号id
+    categoryId: number; // 目标分类id
+  }) => {
+    return request.post('/api/account/moveAccount', data);
+  },
 };
 
 export default accountApi;

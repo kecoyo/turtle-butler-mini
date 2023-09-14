@@ -11,15 +11,22 @@ $classPrefix: '.lj-account-list-page';
     width: 100vw;
   }
 
-  .at-swipe-action__option {
-    width: 130px;
-    padding: 0;
-    @include flex-row(center, center);
+  .item-more {
+    transform: rotate(90deg);
+    margin-left: $spacing-xs;
+  }
+
+  .item-delete {
+    color: $color-error;
   }
 
   &--fab-button {
     position: fixed;
     bottom: $spacing-md;
     right: $spacing-md;
+  }
+
+  &--footer {
+    height: 110px;
   }
 }
