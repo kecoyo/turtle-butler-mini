@@ -69,7 +69,7 @@ const ImageViewer: React.FC<ImageViewerProps> = (p) => {
   const [moving, setMoving] = useState(false);
 
   const onAdd = useMemoizedFn(() => {
-    uploadImage('account_picture', (url) => {
+    uploadImage('account_picture', 9, (url) => {
       if (props.onAdd) {
         props.onAdd({ url });
       }
@@ -92,6 +92,8 @@ const ImageViewer: React.FC<ImageViewerProps> = (p) => {
   });
 
   const onMoveStart = useMemoizedFn((e, index) => {
+    if (!props.editable) return;
+
     setMoving(true);
 
     x = e.touches[0].clientX;

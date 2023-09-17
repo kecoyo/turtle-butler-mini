@@ -41,7 +41,7 @@ const Upload: React.FC<Props> = (p) => {
   // };
 
   const onUpload = useMemoizedFn(async () => {
-    await uploadImage(props.tags, onChange);
+    await uploadImage(props.tags, 1, onChange);
   });
 
   const onChange = useMemoizedFn(async (url: string) => {

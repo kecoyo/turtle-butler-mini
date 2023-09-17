@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro';
 import mineType from 'mine-type';
 import SparkMD5 from 'spark-md5';
 import { APP_ID } from './constants';
-import { showErrorMsg } from './utils';
+import { hideLoading, showErrorMsg, showLoading } from './utils';
 
 interface TempFile {
   path: string; // 文件路径
@@ -17,22 +17,24 @@ interface TempFile {
   status: string; // 状态
 }
 
-// 选择图片
-const chooseImage = () => {
-  return new Promise<TempFile | null>((resolve) => {
+// 选择图片，可多选
+const chooseImage = (count?: number) => {
+  return new Promise<TempFile[]>((resolve) => {
     Taro.chooseImage({
-      count: 1,
+      count, // 默认9
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: (result) => {
-        let file = result.tempFiles[0] as TempFile;
-        file.name = file.path.substring(file.path.lastIndexOf('/') + 1).toLowerCase();
-        file.ext = file.name.substring(file.name.lastIndexOf('.') + 1);
-        file.mime = mineType.getContentType(file.ext);
-        resolve(file);
+        let files = result.tempFiles as TempFile[];
+        for (const file of files) {
+          file.name = file.path.substring(file.path.lastIndexOf('/') + 1).toLowerCase();
+          file.ext = file.name.substring(file.name.lastIndexOf('.') + 1);
+          file.mime = mineType.getContentType(file.ext);
+        }
+        resolve(files);
       },
       fail: () => {
-        resolve(null);
+        resolve([]);
       },
     });
   });
@@ -152,22 +154,29 @@ const queryAndUploadFile = async (file: TempFile) => {
 };
 
 // 上传图片
-const uploadImage = async (tags: string, callback: (url: string) => void) => {
+const uploadImage = async (tags: string, count: number, callback: (url: string) => void) => {
+  let files = await chooseImage(count);
+  if (files.length === 0) {
+    return; // 取消上传
+  }
+
   try {
-    let file = await chooseImage();
-    if (!file) return;
+    showLoading('上传中...');
+    for (const file of files) {
+      let fileMd5 = await getFileMd5(file.path);
+      if (!fileMd5) throw new Error('getFileMd5 error');
 
-    let fileMd5 = await getFileMd5(file.path);
-    if (!fileMd5) throw new Error('getFileMd5 error');
+      file.hash = fileMd5;
+      file.tags = tags;
 
-    file.hash = fileMd5;
-    file.tags = tags;
+      let url = await queryAndUploadFile(file);
+      if (!url) throw new Error('uploadFile error');
 
-    let url = await queryAndUploadFile(file);
-    if (!url) throw new Error('uploadFile error');
-
-    callback(url);
+      callback(url);
+    }
+    hideLoading();
   } catch (err) {
+    hideLoading();
     showErrorMsg(err);
   }
 };

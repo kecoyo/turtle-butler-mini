@@ -46,21 +46,12 @@ const UpdateProfile = () => {
     dispatch(clearUpdateProfileState());
   });
 
-  const onNameChange = useMemoizedFn((val: string) => {
-    dispatch(updateBaseInfoAsync({ name: val }));
-  });
-  const onAvatarChange = useMemoizedFn((val: string) => {
-    dispatch(updateBaseInfoAsync({ avatar: val }));
-  });
-  const onGenderChange = useMemoizedFn((val) => {
-    dispatch(updateBaseInfoAsync({ birthday: val }));
-  });
-  const onAreaChange = useMemoizedFn((val) => {
-    dispatch(updateBaseInfoAsync({ province: val[0].id, city: val[1].id, county: val[2].id }));
-  });
-  const onRemarkChange = useMemoizedFn((val: string) => {
-    dispatch(updateBaseInfoAsync({ remark: val }));
-  });
+  const onNameChange = useMemoizedFn((val: string) => dispatch(updateBaseInfoAsync({ name: val })));
+  const onAvatarChange = useMemoizedFn((val: string) => dispatch(updateBaseInfoAsync({ avatar: val })));
+  const onGenderChange = useMemoizedFn((val) => dispatch(updateBaseInfoAsync({ gender: val })));
+  const onBirthdayChange = useMemoizedFn((val) => dispatch(updateBaseInfoAsync({ birthday: val })));
+  const onAreaChange = useMemoizedFn((val) => dispatch(updateBaseInfoAsync({ province: val[0].id, city: val[1].id, county: val[2].id })));
+  const onRemarkChange = useMemoizedFn((val: string) => dispatch(updateBaseInfoAsync({ remark: val })));
 
   return (
     <View className={classPrefix}>
@@ -71,19 +62,19 @@ const UpdateProfile = () => {
           <ListItem title="头像" extra={<Avatar image={avatar} circle />} />
         </Upload>
         <TextPicker type="input" title="姓名" maxLength={50} require value={name} onChange={onNameChange}>
-          <ListItem title="姓名" extra={name} />
+          <ListItem title="姓名" extra={<View className="user-name">{name}</View>} />
         </TextPicker>
         <SelectPicker options={getEnumOptions(Gender)} value={gender} onChange={onGenderChange}>
           <ListItem title="性别" extra={Gender[gender]} />
         </SelectPicker>
-        <DatePicker value={birthday} onChange={onGenderChange}>
+        <DatePicker value={birthday} onChange={onBirthdayChange}>
           <ListItem title="生日" extra={birthday} />
         </DatePicker>
         <AreaPicker onChange={onAreaChange}>
           <ListItem title="地区" extra={areaNames.join('/')} />
         </AreaPicker>
         <TextPicker type="textarea" title="个性签名" maxLength={200} value={remark} onChange={onRemarkChange}>
-          <ListItem title="个性签名" extra={remark} />
+          <ListItem title="个性签名" extra={<View className="user-remark">{remark}</View>} />
         </TextPicker>
       </AtList>
     </View>

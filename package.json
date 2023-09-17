@@ -6,6 +6,7 @@
   "license": "MIT",
   "author": "",
   "scripts": {
+    "build": "npm run build:weapp",
     "build:alipay": "taro build --type alipay",
     "build:h5": "taro build --type h5",
     "build:jd": "taro build --type jd",
@@ -23,7 +24,8 @@
     "dev:rn": "npm run build:rn -- --watch",
     "dev:swan": "npm run build:swan -- --watch",
     "dev:tt": "npm run build:tt -- --watch",
-    "dev:weapp": "npm run build:weapp -- --watch"
+    "dev:weapp": "npm run build:weapp -- --watch",
+    "start": "npm run dev:weapp"
   },
   "browserslist": [
     "last 3 versions",

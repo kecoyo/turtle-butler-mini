@@ -11,6 +11,10 @@ $classPrefix: '.lj-list-item';
   background-color: #fff;
   @include flex-row(space-between, center);
 
+  &:active {
+    background-color: #ecf3f8;
+  }
+
   &--item-icon {
     margin-right: $spacing-sm;
     color: rgba(0, 0, 0, 0.45);
