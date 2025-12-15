@@ -1,4 +1,4 @@
-import openApi from '@/apis/openApi';
+import userApi from '@/apis/userApi';
 import { showToast } from '@/common/utils';
 import { updateUserInfo } from '@/redux/reducers/global';
 import { AppDispatch, AppGetState, RootState } from '@/redux/store';
@@ -72,10 +72,22 @@ export const fetchExtendInfo = () => async (dispatch: AppDispatch) => {
 
 // 修改基本信息
 export const updateBaseInfoAsync = (baseInfo: any) => async (dispatch: AppDispatch, getState: AppGetState) => {
-  await openApi.updateBaseInfo(baseInfo);
+  const response = await userApi.updateBaseInfo(baseInfo);
   showToast('修改成功');
-  dispatch(setUpdateProfileState(baseInfo));
-  dispatch(updateUserInfo(baseInfo));
+  // 使用API返回的完整用户数据更新本地状态
+  if (response) {
+    dispatch(setUpdateProfileState(response));
+    // 更新全局userInfo，使用服务器返回的完整数据
+    dispatch(updateUserInfo(response));
+  } else {
+    // 如果API没有返回数据，则使用传入的数据
+    dispatch(setUpdateProfileState(baseInfo));
+    const updateData = { ...baseInfo };
+    if (updateData.name && !updateData.nickname) {
+      updateData.nickname = updateData.name;
+    }
+    dispatch(updateUserInfo(updateData));
+  }
 };
 
 export default updateProfileSlice.reducer;

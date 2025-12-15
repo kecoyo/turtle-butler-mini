@@ -12,7 +12,7 @@ const accountApi = {
   getAccountList: async (data: {
     categoryId: number; // 分类ID
   }) => {
-    return request.get('/api/account/getAccountList', data);
+    return request.get('/api/account/list', { category_id: data.categoryId });
   },
 
   /**
@@ -23,19 +23,31 @@ const accountApi = {
   getAccountInfo: async (data: {
     id: number; // 账号ID
   }) => {
-    return request.get('/api/account/getAccountInfo', data);
+    return request.get('/api/account/info', { id: data.id });
   },
 
   /**
-   * 创建账号
+   * 添加账号
    * @description
    * @returns
    */
-  createAccount: async (data: {
+  addAccount: async (data: {
+    id?: number; // 账号ID（新建时为0）
+    categoryId: number; // 分类ID
     name: string; // 账号名称
     icon: string; // 账号图标
+    properties?: PropertyItem[]; // 属性列表
+    pictures?: AccountPicture[]; // 图片列表
+    remark?: string; // 备注
   }) => {
-    return request.post('/api/account/createAccount', data);
+    return request.post('/api/account/add', {
+      category_id: data.categoryId,
+      name: data.name,
+      icon: data.icon,
+      properties: data.properties || [],
+      pictures: data.pictures || [],
+      remark: data.remark || '',
+    });
   },
 
   /**
@@ -47,8 +59,18 @@ const accountApi = {
     id: number; // 账号ID
     name: string; // 账号名称
     icon: string; // 账号图标
+    properties?: PropertyItem[]; // 属性列表
+    pictures?: AccountPicture[]; // 图片列表
+    remark?: string; // 备注
   }) => {
-    return request.post('/api/account/updateAccount', data);
+    return request.post('/api/account/update', {
+      id: data.id,
+      name: data.name,
+      icon: data.icon,
+      properties: data.properties || [],
+      pictures: data.pictures || [],
+      remark: data.remark || '',
+    });
   },
 
   /**
@@ -59,7 +81,7 @@ const accountApi = {
   deleteAccount: async (data: {
     id: number; // 账号ID
   }) => {
-    return request.post('/api/account/deleteAccount', data);
+    return request.post('/api/account/delete', { id: data.id });
   },
 
   /**
@@ -70,7 +92,7 @@ const accountApi = {
   sortAccount: async (data: {
     ids: number[]; // 账号ID数组
   }) => {
-    return request.post('/api/account/sortAccount', data);
+    return request.post('/api/account/sort', { ids: data.ids });
   },
 
   /**
@@ -82,7 +104,10 @@ const accountApi = {
     id: number; // 要移动的账号id
     categoryId: number; // 目标分类id
   }) => {
-    return request.post('/api/account/moveAccount', data);
+    return request.post('/api/account/move', {
+      id: data.id,
+      category_id: data.categoryId,
+    });
   },
 };
 

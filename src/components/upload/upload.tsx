@@ -20,26 +20,6 @@ const Upload: React.FC<Props> = (p) => {
   const props = mergeProps(defaultProps, p);
   const [src, setSrc] = useState('');
 
-  // useMount(() => {
-  //   updateImage(props.image);
-  // });
-
-  // useUpdateEffect(() => {
-  //   updateImage(props.image);
-  // }, [props.image]);
-
-  // const updateImage = (image: string | undefined) => {
-  //   if (image) {
-  //     if (image.startsWith('dmres/')) {
-  //       setSrc(DMRES_URL + image);
-  //     } else {
-  //       setSrc(image);
-  //     }
-  //   } else {
-  //     setSrc('image');
-  //   }
-  // };
-
   const onUpload = useMemoizedFn(async () => {
     await uploadImage(props.tags, 1, onChange);
   });

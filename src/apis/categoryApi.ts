@@ -10,7 +10,7 @@ const categoryApi = {
    * @returns
    */
   getCategoryList: async () => {
-    return request.get('/api/category/getCategoryList');
+    return request.get('/api/category/list');
   },
 
   /**
@@ -21,19 +21,22 @@ const categoryApi = {
   getCategoryInfo: async (data: {
     id: number; // 分类ID
   }) => {
-    return request.get('/api/category/getCategoryInfo', data);
+    return request.get('/api/category/info', { id: data.id });
   },
 
   /**
-   * 创建账号分类
+   * 添加账号分类
    * @description
    * @returns
    */
   createCategory: async (data: {
     name: string; // 分类名称
-    icon: string; // 分类图标
+    icon?: string; // 分类图标（可选）
   }) => {
-    return request.post('/api/category/createCategory', data);
+    return request.post('/api/category/add', {
+      name: data.name,
+      icon: data.icon || '',
+    });
   },
 
   /**
@@ -44,9 +47,13 @@ const categoryApi = {
   updateCategory: async (data: {
     id: number; // 分类ID
     name: string; // 分类名称
-    icon: string; // 分类图标
+    icon?: string; // 分类图标（可选）
   }) => {
-    return request.post('/api/category/updateCategory', data);
+    return request.post('/api/category/update', {
+      id: data.id,
+      name: data.name,
+      icon: data.icon || '',
+    });
   },
 
   /**
@@ -57,7 +64,7 @@ const categoryApi = {
   deleteCategory: async (data: {
     id: number; // 分类ID
   }) => {
-    return request.post('/api/category/deleteCategory', data);
+    return request.post('/api/category/delete', { id: data.id });
   },
 
   /**
@@ -68,7 +75,7 @@ const categoryApi = {
   sortCategory: async (data: {
     ids: number[]; // 分类ID数组
   }) => {
-    return request.post('/api/category/sortCategory', data);
+    return request.post('/api/category/sort', { ids: data.ids });
   },
 };
 

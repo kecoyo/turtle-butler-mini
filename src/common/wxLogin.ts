@@ -1,8 +1,7 @@
-import openApi from '@/apis/openApi';
+import loginApi from '@/apis/loginApi';
 import { setUserInfo } from '@/redux/reducers/global';
 import store from '@/redux/store';
 import Taro from '@tarojs/taro';
-import { APP_ID } from './constants';
 
 /**
  * 微信登录，获取code
@@ -31,13 +30,12 @@ const wxlogin = (): Promise<string> => {
 export const checkLogin = async (): Promise<void> => {
   console.log('✌ ~ loginByCode');
   let code = await wxlogin();
-  let userInfo = await openApi.loginByCode({ appId: APP_ID, code });
+  let userInfo = await loginApi.miniProgram({ code });
   if (userInfo) {
     console.log('✌ ~ loginByCode:success', userInfo);
     await store.dispatch(setUserInfo(userInfo));
   } else {
     console.log('✌ ~ loginByCode:fail', userInfo);
-    Taro.navigateTo({ url: '/pages/login/index' });
   }
 };
 
@@ -47,7 +45,7 @@ export const checkLogin = async (): Promise<void> => {
 export const silentLogin = async (): Promise<void> => {
   console.log('✌ ~ silentLogin');
   let code = await wxlogin();
-  let userInfo = await openApi.loginByCode({ appId: APP_ID, code });
+  let userInfo = await loginApi.miniProgram({ code });
   if (userInfo) {
     console.log('✌ ~ silentLogin:success', userInfo);
     await store.dispatch(setUserInfo(userInfo));

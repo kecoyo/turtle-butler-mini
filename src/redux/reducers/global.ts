@@ -1,4 +1,4 @@
-import openApi from '@/apis/openApi';
+import areaApi from '@/apis/areaApi';
 import { createSlice } from '@reduxjs/toolkit';
 import Taro from '@tarojs/taro';
 import dayjs from 'dayjs';
@@ -72,7 +72,7 @@ export const globalSelector = (state: RootState) => state.global;
  * @returns
  */
 export const fetchAllAreas = () => async (dispatch: AppDispatch) => {
-  let areas = await openApi.getAllAreas();
+  let areas = await areaApi.getAllAreas();
   dispatch(setAllAreas(areas));
 };
 

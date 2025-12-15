@@ -92,6 +92,8 @@ export const categoryListSelector = (state: RootState) => state.categoryList;
  */
 export const fetchCategoryList = () => async (dispatch: AppDispatch) => {
   let list = await categoryApi.getCategoryList();
+
+    console.log("🚀 ~ fetchCategoryList ~ list:", list)
   dispatch(setCategoryList(list));
 };
 

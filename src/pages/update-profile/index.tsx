@@ -32,13 +32,23 @@ const UpdateProfile = () => {
 
   useMount(() => {
     if (userInfo) {
-      dispatch(setUpdateProfileState(_.pick(userInfo, Object.keys({ name, phone, avatar, gender, birthday, email, idCard, province, city, county, remark }))));
+      // 统一使用name字段，如果userInfo中有nickname但没有name，则使用nickname
+      const userData = {
+        ...userInfo,
+        name: userInfo.name || (userInfo as any).nickname || '',
+      };
+      dispatch(setUpdateProfileState(_.pick(userData, Object.keys({ name, phone, avatar, gender, birthday, email, idCard, province, city, county, remark }))));
     }
   });
 
   useUpdateEffect(() => {
     if (userInfo) {
-      dispatch(setUpdateProfileState(_.pick(userInfo, Object.keys({ name, phone, avatar, gender, birthday, email, idCard, province, city, county, remark }))));
+      // 统一使用name字段，如果userInfo中有nickname但没有name，则使用nickname
+      const userData = {
+        ...userInfo,
+        name: userInfo.name || (userInfo as any).nickname || '',
+      };
+      dispatch(setUpdateProfileState(_.pick(userData, Object.keys({ name, phone, avatar, gender, birthday, email, idCard, province, city, county, remark }))));
     }
   }, [userInfo]);
 

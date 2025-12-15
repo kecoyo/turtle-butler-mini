@@ -134,7 +134,7 @@ export const saveAccountAsync = (account: AccountInfo) => async (dispatch: AppDi
   if (account.id) {
     await accountApi.updateAccount(account);
   } else {
-    await accountApi.createAccount(account);
+    await accountApi.addAccount(account);
   }
   await showToast('保存成功');
 };

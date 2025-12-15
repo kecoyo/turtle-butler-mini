@@ -25,7 +25,7 @@ class App extends React.Component<Props> {
     }
 
     store.dispatch(initConfigFromStorage());
-    store.dispatch(fetchConfig());
+    // store.dispatch(fetchConfig());
   }
 
   render() {

@@ -1,4 +1,4 @@
-import openApi from '@/apis/openApi';
+import uploadApi from '@/apis/uploadApi';
 import Taro from '@tarojs/taro';
 import mineType from 'mine-type';
 import SparkMD5 from 'spark-md5';
@@ -63,13 +63,12 @@ const getFileMd5 = (filePath: string) => {
 const uploadFile = async (file: TempFile): Promise<string> => {
   return new Promise((resolve, reject) => {
     Taro.uploadFile({
-      url: openApi.uploadFile.url,
-      name: openApi.uploadFile.name,
+      url: uploadApi.uploadFile.url,
+      name: uploadApi.uploadFile.name,
       filePath: file.path,
       fileName: file.name,
       header: { Authorization: Taro.getStorageSync('token') },
       formData: {
-        appId: APP_ID,
         tags: file.tags,
       },
       success: (result) => {
@@ -115,8 +114,7 @@ const uploadFileChunk = async (file: TempFile, start?: number): Promise<string> 
 
   const length = file.size - start >= chunkSize ? chunkSize : file.size - start;
   const chunk = await readFileChunk(file, start, length);
-  const res = await openApi.uploadFileChunk({
-    appId: APP_ID,
+  const res = await uploadApi.uploadChunk({
     tags: file.tags,
     hash: file.hash,
     name: file.name,
@@ -130,8 +128,10 @@ const uploadFileChunk = async (file: TempFile, start?: number): Promise<string> 
     file.status = 'done';
     file.percent = 100;
     return res.data.url; // 成功返回url
-  } else if (res.code === 1 && res.data === start + length) {
-    return await uploadFileChunk(file, start + length); // 继续上传
+  } else if (res.code === 1) {
+    // 继续上传，使用返回的position或计算下一个位置
+    const nextPosition = res.data?.position ?? res.data ?? start + length;
+    return await uploadFileChunk(file, nextPosition); // 继续上传
   } else {
     throw new Error(res.msg);
   }
@@ -139,15 +139,17 @@ const uploadFileChunk = async (file: TempFile, start?: number): Promise<string> 
 
 // 查询，并上传文件
 const queryAndUploadFile = async (file: TempFile) => {
-  const res = await openApi.queryFile({
-    appId: APP_ID,
+  const res = await uploadApi.query({
+    tags: file.tags,
     hash: file.hash,
   });
   if (res.code === 0) {
     return res.data.url; // 成功返回url
   } else if (res.code === 1) {
     // return await uploadFile(file); // 开始上传
-    return await uploadFileChunk(file, res.data); // 开始上传、继续上传
+    // 开始上传、继续上传，使用返回的position或默认0
+    const startPosition = res.data?.position ?? res.data ?? 0;
+    return await uploadFileChunk(file, startPosition);
   } else {
     throw new Error(res.msg);
   }

@@ -3,14 +3,19 @@
  */
 interface UserInfo {
   id: number; // ID
-  name: string; // 姓名
-  gender: 0; // 性别
-  avatar: string; // 头像
-  birthday: Date | string | number; // 生日
-  phone: string; // 手机号登录
-  email: string; // Email
-  remark: string; // 备注
-  token: string; // token
+  nickname?: string; // 昵称
+  name?: string; // 姓名
+  gender?: number; // 性别
+  avatar?: string; // 头像
+  birthday?: Date | string | number; // 生日
+  phone?: string; // 手机号登录
+  email?: string; // Email
+  remark?: string; // 备注
+  province?: number; // 省
+  city?: number; // 市
+  county?: number; // 区县
+  idCard?: string; // 身份证
+  token?: string; // token
 }
 
 /**

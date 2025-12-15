@@ -44,7 +44,7 @@ const Mine = () => {
       <Image className="top-image" src={getConfigUrl(config.mine.bg_png)} mode="aspectFill" />
       <View className={`${classPrefix}--user-info`}>
         <Avatar className="avatar" image={userInfo?.avatar} circle size="large" />
-        <Text className="user-name">{userInfo?.name}</Text>
+        <Text className="user-name">{userInfo?.name || (userInfo as any)?.nickname || '未登录'}</Text>
       </View>
       <View className={`${classPrefix}--list`}>
         {items.map((item) => (
