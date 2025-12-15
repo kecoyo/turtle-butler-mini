@@ -6,11 +6,8 @@ module.exports = {
   // plugins: ['@tarojs/plugin-mock'],
   plugins: [],
   defineConstants: {
-    BASE_URL: '"http://localhost:7011"', // 本地接口
-    // BASE_URL: '"https://turtle-butler.cpolar.cn"', // 线上接口
-
-    OPEN_BASE_URL: '"http://localhost:7010"',
-    // OPEN_BASE_URL: '"https://turtle-open.cpolar.cn"',
+    BASE_URL: '"http://localhost:9090"', // 本地接口
+    // BASE_URL: '"https://turtle-admin.kecoyo.top"', // 线上接口
   },
   mini: {},
   h5: {},

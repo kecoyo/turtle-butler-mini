@@ -4,8 +4,7 @@ module.exports = {
     NODE_ENV: '"production"',
   },
   defineConstants: {
-    BASE_URL: '"https://turtle-butler.cpolar.cn"',
-    OPEN_BASE_URL: '"https://turtle-open.cpolar.cn"',
+    BASE_URL: '"https://turtle-admin.kecoyo.top"',
   },
   mini: {},
   h5: {

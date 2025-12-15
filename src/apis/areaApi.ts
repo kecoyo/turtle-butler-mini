@@ -9,7 +9,7 @@ const areaApi = {
    * @returns
    */
   getAllAreas: async () => {
-    return request.post(`${OPEN_BASE_URL}/api/area/list`);
+    return request.post(`${BASE_URL}/api/area/list`);
   },
 };
 

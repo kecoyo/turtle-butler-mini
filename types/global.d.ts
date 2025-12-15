@@ -21,7 +21,6 @@ declare namespace NodeJS {
  * config.defineConstants
  */
 declare var BASE_URL: string;
-declare var OPEN_BASE_URL: string;
 
 /**
  * API

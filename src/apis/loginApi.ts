@@ -10,7 +10,7 @@ const loginApi = {
   miniProgram: async (data: {
     code: string;
   }) => {
-    return request.post(`${OPEN_BASE_URL}/api/login/miniProgram`, { code: data.code }, { showLoading: false }).then((res) => {
+    return request.post(`${BASE_URL}/api/login/miniProgram`, { code: data.code }, { showLoading: false }).then((res) => {
       if (res.code === 0) {
         return res.data; // {code: 0, msg: "success", data: {…}}
       } else if (res.code === 1) {

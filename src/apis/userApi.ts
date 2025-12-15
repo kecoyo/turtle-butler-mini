@@ -21,7 +21,7 @@ const userApi = {
     city?: number; // 市
     county?: number; // 区县
   }) => {
-    return request.post(`${OPEN_BASE_URL}/api/user/updateBaseInfo`, data);
+    return request.post(`${BASE_URL}/api/user/updateBaseInfo`, data);
   },
 };
 

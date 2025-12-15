@@ -11,14 +11,14 @@ const uploadApi = {
     tags: string; // 文件标签
     hash: string; // 文件hash
   }) => {
-    return request.post(`${OPEN_BASE_URL}/api/upload/query`, data, { showLoading: false });
+    return request.post(`${BASE_URL}/api/upload/query`, data, { showLoading: false });
   },
 
   /**
    * 表单文件上传（使用Taro.uploadFile上传）
    */
   uploadFile: {
-    url: `${OPEN_BASE_URL}/api/upload/uploadFile`,
+    url: `${BASE_URL}/api/upload/uploadFile`,
     name: 'file',
   },
 
@@ -37,7 +37,7 @@ const uploadApi = {
     length: number; // 分片长度
     content: string; // 分片内容（base64）
   }) => {
-    return request.post(`${OPEN_BASE_URL}/api/upload/uploadChunk`, data, { showLoading: false });
+    return request.post(`${BASE_URL}/api/upload/uploadChunk`, data, { showLoading: false });
   },
 };
 
