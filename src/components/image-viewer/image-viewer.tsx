@@ -1,14 +1,14 @@
 import { NativeProps, withNativeProps } from '@/common/native-props';
-import uploadImage from '@/common/upload-image';
-import { getResUrl, rem2px } from '@/common/utils';
+import { chooseImageAndUpload } from '@/common/upload-image';
+import { getResUrl, processImageUrl, rem2px } from '@/common/utils';
 import mergeProps from '@/common/with-default-props';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useMemoizedFn } from 'ahooks';
 import classNames from 'classnames';
 import { useState } from 'react';
-import Icon from '../icon';
-import Image from '../image';
+import { IconFont } from '@nutui/icons-react-taro';
+import { Image } from '@nutui/nutui-react-taro';
 import './image-viewer.scss';
 
 export type ImageViewerProps = {
@@ -68,12 +68,11 @@ const ImageViewer: React.FC<ImageViewerProps> = (p) => {
   const [dragTop, setDragTop] = useState(-1); // 拖动top
   const [moving, setMoving] = useState(false);
 
-  const onAdd = useMemoizedFn(() => {
-    uploadImage('account_picture', 9, (url) => {
-      if (props.onAdd) {
-        props.onAdd({ url });
-      }
-    });
+  const onAdd = useMemoizedFn(async () => {
+    const url = await chooseImageAndUpload('account_picture', 9);
+    if (props.onAdd) {
+      props.onAdd({ url });
+    }
   });
 
   const onRemove = useMemoizedFn((val) => {
@@ -163,17 +162,17 @@ const ImageViewer: React.FC<ImageViewerProps> = (p) => {
             >
               {props.editable && (
                 <View className="remove-btn" onClick={() => onRemove(index)}>
-                  <Icon prefixClass="iconfont" value="delete" />
+                  <IconFont name="delete" fontClassName="iconfont" classPrefix="iconfont" size={12} color="#fff" />
                 </View>
               )}
-              <Image className="preview-img" src={file.url} mode="aspectFit" onClick={() => onPreview(index)} />
+              <Image className="preview-img" src={processImageUrl(file.url)} mode="aspectFit" onClick={() => onPreview(index)} />
             </View>
             {toIndex == index && startIndex < index && <View className="image-item" style={{ width: itemSize, height: itemSize }} />}
           </>
         ))}
         {props.editable && (
           <View className="image-item" style={{ width: itemSize, height: itemSize }} onClick={onAdd}>
-            <Icon prefixClass="iconfont" value="add" />
+            <IconFont name="add" fontClassName="iconfont" classPrefix="iconfont" size={16} />
           </View>
         )}
       </View>

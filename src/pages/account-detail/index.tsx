@@ -1,9 +1,10 @@
+import { processImageUrl } from '@/common/utils';
 import AccountPanel from '@/components/account-panel';
-import Avatar from '@/components/avatar';
-import Button from '@/components/button';
+import { Avatar } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import ImageViewer from '@/components/image-viewer';
 import PropertyViewer from '@/components/property-viewer';
-import Space from '@/components/space';
+import { Space } from '@nutui/nutui-react-taro';
 import TextViewer from '@/components/text-viewer';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { Text, View } from '@tarojs/components';
@@ -60,7 +61,7 @@ const AccountDetail = () => {
         <View className={`${classPrefix}--container`}>
           <View className="account-info">
             <View className="account-icon">
-              <Avatar image={account.icon} circle />
+              <Avatar src={processImageUrl(account.icon)} />
             </View>
             <View className="account-title">
               <Text>{account.name}</Text>
@@ -84,11 +85,11 @@ const AccountDetail = () => {
           )}
 
           <View className={`${classPrefix}--footer`}>
-            <Space justifyContent="space-evenly">
-              <Button type="info" onClick={onEdit}>
+            <Space justify="evenly">
+              <Button type="info" style={{ width: '100px' }} onClick={onEdit}>
                 编辑
               </Button>
-              <Button type="error" onClick={onDelete}>
+              <Button type="danger" style={{ width: '100px' }} onClick={onDelete}>
                 删除
               </Button>
             </Space>

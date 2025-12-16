@@ -23,10 +23,16 @@ $classPrefix: '.lj-category-list-page';
     color: $color-error;
   }
 
-  &--fab-button {
+  &--hover-button {
+    z-index: 1000;
     position: fixed;
-    bottom: $spacing-md;
-    right: $spacing-md;
+    bottom: 90px;
+    right: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 50% 50% !important;
+    width: 100px;
+    height: 100px;
+    padding: 0;
   }
 
   &--footer {

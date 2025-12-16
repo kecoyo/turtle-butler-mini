@@ -1,9 +1,11 @@
 import iconApi from '@/apis/iconApi';
 import { AppDispatch, AppGetState, RootState } from '@/redux/store';
 import { createSlice } from '@reduxjs/toolkit';
-import { TabItem } from 'taro-ui/types/tabs';
-
 // 为 slice state 定义一个类型
+interface TabItem {
+  title: string;
+}
+
 interface IconSelectState {
   tabList: TabItem[];
   tabIndex: number;

@@ -6,9 +6,6 @@ import { AppDispatch, RootState } from '../store';
 
 // 为 slice state 定义一个类型
 interface ConfigState {
-  account: {
-    default_icon: string;
-  };
   mine: {
     bg_png: string;
   };
@@ -20,9 +17,6 @@ interface ConfigState {
 
 // 使用该类型定义初始 state
 const initialState: ConfigState = {
-  account: {
-    default_icon: 'upload/butler_icon/2f/1fb149e400aabb1e19966f71d4ddf2.png',
-  },
   mine: {
     bg_png: 'assets/mine/bg.png',
   },

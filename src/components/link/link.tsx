@@ -4,7 +4,7 @@ import { CommonEventFunction, Text, View } from '@tarojs/components';
 import { useMemoizedFn } from 'ahooks';
 import classNames from 'classnames';
 import { ReactNode } from 'react';
-import Icon from '../icon';
+import { IconFont } from '@nutui/icons-react-taro';
 import './link.scss';
 
 export type LinkProps = {
@@ -35,7 +35,7 @@ const Link: React.FC<LinkProps> = (p) => {
       })}
       onClick={onClick}
     >
-      {typeof props.icon === 'string' ? <Icon value={props.icon} size="small" /> : props.icon}
+      {typeof props.icon === 'string' ? <IconFont name={props.icon} fontClassName="iconfont" classPrefix="iconfont" size={16} /> : props.icon}
       {props.text && <Text className={`${classPrefix}--text`}>{props.text}</Text>}
     </View>,
   );

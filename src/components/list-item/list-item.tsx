@@ -3,7 +3,7 @@ import mergeProps from '@/common/with-default-props';
 import { CommonEventFunction, View } from '@tarojs/components';
 import classNames from 'classnames';
 import { ReactNode } from 'react';
-import Icon from '../icon';
+import { IconFont } from '@nutui/icons-react-taro';
 import './list-item.scss';
 
 type ListItemProps = {
@@ -37,7 +37,7 @@ const ListItem: React.FC<ListItemProps> = (p) => {
       onClick={props.onClick}
       onLongPress={props.onLongPress}
     >
-      {props.icon && <View className={`${classPrefix}--item-icon`}>{typeof props.icon === 'string' ? <Icon value={props.icon} /> : props.icon}</View>}
+      {props.icon && <View className={`${classPrefix}--item-icon`}>{typeof props.icon === 'string' ? <IconFont name={props.icon} fontClassName="iconfont" classPrefix="iconfont" size={16} /> : props.icon}</View>}
       <View className={`${classPrefix}--item-content`}>
         <View className={`${classPrefix}--item-title`}>{props.title}</View>
         {props.note && <View className={`${classPrefix}--item-note`}>{props.note}</View>}
@@ -45,7 +45,7 @@ const ListItem: React.FC<ListItemProps> = (p) => {
       {props.extra && <View className={`${classPrefix}--item-extra`}>{props.extra}</View>}
       {props.arrow !== 'none' && (
         <View className={`${classPrefix}--item-arrow`}>
-          <Icon value={`${props.arrow}`} prefixClass="iconfont" size="small" />
+          <IconFont name={`${props.arrow}`} fontClassName="iconfont" classPrefix="iconfont" size={16} />
         </View>
       )}
     </View>,

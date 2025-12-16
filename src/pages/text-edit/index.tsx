@@ -1,8 +1,7 @@
 import { getOpenerEventChannel, showToast } from '@/common/utils';
-import Button from '@/components/button';
-import Input from '@/components/input';
-import Space from '@/components/space';
-import Textarea from '@/components/textarea';
+import { Button } from '@nutui/nutui-react-taro';
+import { Input } from '@nutui/nutui-react-taro';
+import { Space, TextArea } from '@nutui/nutui-react-taro';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
@@ -41,13 +40,13 @@ const TextEdit = () => {
 
   return (
     <View className={classPrefix}>
-      <Space className={`${classPrefix}--container`} direction="column">
+      <Space className={`${classPrefix}--container`} direction="vertical">
         {type === 'textarea' ? ( //
-          <Textarea placeholder="请输入" maxLength={maxLength} value={value || ''} onChange={onChange} />
+          <TextArea placeholder="请输入" maxLength={maxLength} value={value || ''} onChange={onChange} />
         ) : (
           <Input placeholder="请输入" maxLength={maxLength} value={value || ''} onChange={onChange} />
         )}
-        <Button type="primary" onClick={onOk}>
+        <Button type="primary" block size="large" onClick={onOk}>
           确 定
         </Button>
       </Space>

@@ -2,7 +2,7 @@ import { NativeProps, withNativeProps } from '@/common/native-props';
 import mergeProps from '@/common/with-default-props';
 import { View } from '@tarojs/components';
 import { useMemoizedFn } from 'ahooks';
-import Textarea from '../textarea';
+import { TextArea } from '@nutui/nutui-react-taro';
 import './text-viewer.scss';
 
 export type TextViewerProps = {
@@ -47,7 +47,7 @@ const TextViewer: React.FC<TextViewerProps> = (p) => {
     <View className={classPrefix}>
       {props.editable ? (
         <View className={`${classPrefix}--edit`}>
-          <Textarea value={props.text} onChange={onChange} height={200} maxLength={props.maxLength} />
+          <TextArea value={props.text} onChange={onChange} rows={8} maxLength={props.maxLength} />
         </View>
       ) : (
         <View className={`${classPrefix}--view`}>{renderView()}</View>

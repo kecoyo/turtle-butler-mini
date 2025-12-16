@@ -1,7 +1,7 @@
 import { NativeProps, withNativeProps } from '@/common/native-props';
 import mergeProps from '@/common/with-default-props';
 import { Text, View } from '@tarojs/components';
-import { AtActivityIndicator } from 'taro-ui';
+import { Loading } from '@nutui/nutui-react-taro';
 import './load-more.scss';
 
 type Props = {
@@ -20,7 +20,12 @@ const LoadMore: React.FC<Props> = (p) => {
   return withNativeProps(
     props,
     <View className={classPrefix}>
-      {props.status === 'loading' && <AtActivityIndicator content="加载中..."></AtActivityIndicator>}
+      {props.status === 'loading' && (
+        <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Loading type="spinner" />
+          <Text style={{ marginLeft: '8px' }}>加载中...</Text>
+        </View>
+      )}
       {props.status === 'more' && <Text>上拉加载更多</Text>}
       {props.status === 'noMore' && <Text>已经到底了</Text>}
     </View>,

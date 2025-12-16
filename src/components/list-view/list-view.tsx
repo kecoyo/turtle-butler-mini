@@ -3,9 +3,12 @@ import mergeProps from '@/common/with-default-props';
 import { View } from '@tarojs/components';
 import { useMemoizedFn, useMount, useUpdateEffect } from 'ahooks';
 import React, { ReactNode, useState } from 'react';
-import Empty from '../empty';
+import { Empty, Image } from '@nutui/nutui-react-taro';
 import ScrollView, { ScrollViewProps } from '../scroll-view';
 import './list-view.scss';
+import { getConfigUrl } from '@/common/utils';
+import { useAppSelector } from '@/redux/hooks';
+import { configSelector } from '@/redux/reducers/config';
 
 export type ListViewProps = {
   initialLoad?: boolean; // 是否初始加载
@@ -33,6 +36,7 @@ const classPrefix = `lj-list-view`;
 
 const ListView: React.FC<ListViewProps> = (p) => {
   const props = mergeProps(defaultProps, p);
+  const config = useAppSelector(configSelector);
   const [loading, setLoading] = useState(typeof props.loading !== 'undefined' ? props.loading : true);
 
   useMount(() => {
@@ -74,7 +78,10 @@ const ListView: React.FC<ListViewProps> = (p) => {
       {props.renderHeader && <View className={`${classPrefix}-header`}>{props.renderHeader()}</View>}
       {!loading && props.list.length === 0 && (
         <View className={`${classPrefix}-empty`}>
-          <Empty />
+          <Empty 
+            image={<Image src={getConfigUrl(config.others.empty_png)} />}
+            title="暂无数据" 
+            style={{ backgroundColor: 'transparent' }} />
         </View>
       )}
       <View className={`${classPrefix}-list`}>{props.list.map(props.renderItem)}</View>

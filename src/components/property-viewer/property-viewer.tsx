@@ -6,8 +6,8 @@ import Taro from '@tarojs/taro';
 import { useMemoizedFn, useMount } from 'ahooks';
 import classNames from 'classnames';
 import { useState } from 'react';
-import Icon from '../icon';
-import Input from '../input';
+import { IconFont } from '@nutui/icons-react-taro';
+import { Input } from '@nutui/nutui-react-taro';
 import Link from '../link';
 import './property-viewer.scss';
 
@@ -199,7 +199,7 @@ const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
                 <View className="item-content" onClick={onRemoveCancel}>
                   {props.editable && (
                     <View className="item-remove" onClick={() => onRemove(index)}>
-                      <Icon value="remove" prefixClass="iconfont" size="small" />
+                      <IconFont name="remove" fontClassName="iconfont" classPrefix="iconfont" size={12} color="#fff" />
                     </View>
                   )}
                   <View className="item-name">
@@ -214,11 +214,11 @@ const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
                   </View>
                   {props.editable ? (
                     <View className="item-drag" onTouchStart={(e) => onMoveStart(e, index)} onTouchMove={(e) => onMove(e, index)} catchMove onTouchEnd={(e) => onMoveEnd(e, index)}>
-                      <Icon value="drag" prefixClass="iconfont" size="small"></Icon>
+                      <IconFont name="drag" fontClassName="iconfont" classPrefix="iconfont" size={16} />
                     </View>
                   ) : (
                     <View className="item-copy">
-                      <Link icon={<Icon value="copy" prefixClass="iconfont" size="small" />} onClick={() => onCopy(item)} />
+                      <Link icon={<IconFont name="copy" fontClassName="iconfont" classPrefix="iconfont" size={16} />} onClick={() => onCopy(item)} />
                     </View>
                   )}
                 </View>
@@ -235,9 +235,9 @@ const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
       </View>
       <View className={`${classPrefix}--footer`}>
         {props.editable ? (
-          <Link icon={<Icon value="add" prefixClass="iconfont" size="small" />} text="添加属性" onClick={onAdd} />
+          <Link icon={<IconFont name="add" fontClassName="iconfont" classPrefix="iconfont" size={14} />} text="添加属性" onClick={onAdd} />
         ) : (
-          <Link icon={<Icon value="copy" prefixClass="iconfont" size="small" />} text="复制全部" onClick={onCopyAll} />
+          <Link icon={<IconFont name="copy" fontClassName="iconfont" classPrefix="iconfont" size={14} />} text="复制全部" onClick={onCopyAll} />
         )}
       </View>
     </View>,

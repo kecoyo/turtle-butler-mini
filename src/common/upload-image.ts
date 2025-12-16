@@ -155,8 +155,8 @@ const queryAndUploadFile = async (file: TempFile) => {
   }
 };
 
-// 上传图片
-const uploadImage = async (tags: string, count: number, callback: (url: string) => void) => {
+// 选择图片，并上传
+const chooseImageAndUpload = async (tags: string, count: number) => {
   let files = await chooseImage(count);
   if (files.length === 0) {
     return; // 取消上传
@@ -174,7 +174,7 @@ const uploadImage = async (tags: string, count: number, callback: (url: string) 
       let url = await queryAndUploadFile(file);
       if (!url) throw new Error('uploadFile error');
 
-      callback(url);
+      return url;
     }
     hideLoading();
   } catch (err) {
@@ -183,4 +183,55 @@ const uploadImage = async (tags: string, count: number, callback: (url: string) 
   }
 };
 
-export default uploadImage;
+// 上传裁剪后的图片
+const uploadCropperImage = async (tags: string, filePath: string): Promise<string> => {
+  try {
+    showLoading('上传中...');
+
+    // 获取文件信息
+    const fileInfo = await Taro.getFileInfo({ filePath });
+    const fileName = filePath.substring(filePath.lastIndexOf('/') + 1).toLowerCase();
+    const ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+    const mime = mineType.getContentType(ext);
+
+    // 创建文件对象
+    const file: TempFile = {
+      path: filePath,
+      size: (fileInfo as any).size || 0,
+      tags: tags,
+      name: fileName,
+      ext: ext,
+      mime: mime,
+      hash: '',
+      percent: 0,
+      status: '',
+    };
+
+    // 计算 MD5
+    const fileMd5 = await getFileMd5(filePath);
+    file.hash = fileMd5;
+
+    // 查询并上传文件
+    const queryRes = await uploadApi.query({
+      tags: file.tags,
+      hash: file.hash,
+    });
+
+    let url: string;
+    if (queryRes.code === 0) {
+      url = queryRes.data.url;
+    } else {
+      // 需要上传文件
+      url = await uploadFile(file);
+    }
+
+    hideLoading();
+    return url;
+  } catch (err) {
+    hideLoading();
+    showErrorMsg(err);
+    throw err;
+  }
+};
+
+export { chooseImageAndUpload, uploadCropperImage };

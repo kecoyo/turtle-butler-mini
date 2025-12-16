@@ -63,10 +63,6 @@ $classPrefix: '.lj-property-viewer';
       color: $color-error;
       flex-shrink: 0;
       margin-right: $spacing-sm;
-
-      .lj-icon {
-        color: $color-error;
-      }
     }
 
     .item-name {
@@ -124,10 +120,6 @@ $classPrefix: '.lj-property-viewer';
   &--footer {
     padding: $spacing-md $spacing-md;
     @include flex-row(flex-start, center);
-
-    .lj-icon {
-      font-size: $icon-size-sm;
-    }
 
     .lj-link {
       font-size: $font-size-sm;

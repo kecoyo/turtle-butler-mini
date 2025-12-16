@@ -1,6 +1,6 @@
-import { showToast } from '@/common/utils';
-import Avatar from '@/components/avatar';
-import Icon from '@/components/icon';
+import { processImageUrl, showToast } from '@/common/utils';
+import { Avatar } from '@nutui/nutui-react-taro';
+import { IconFont, Plus } from '@nutui/icons-react-taro';
 import ListItem from '@/components/list-item';
 import ListView from '@/components/list-view';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -8,7 +8,7 @@ import { globalSelector } from '@/redux/reducers/global';
 import { Text, View } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
 import { useMemoizedFn, useMount, useUpdateEffect } from 'ahooks';
-import { AtActionSheet, AtActionSheetItem, AtFab } from 'taro-ui';
+import { ActionSheet, Button } from '@nutui/nutui-react-taro';
 import './index.scss';
 import { categoryListSelector, closeMoreActionSheet, deleteCategoryAsync, fetchCategoryList, openMoreActionSheet } from './reducer';
 
@@ -79,8 +79,7 @@ const CategoryList = () => {
   });
 
   const onItemMoreClick = useMemoizedFn((e: any, item: CategoryInfo, index?: number) => {
-    e[0].stopPropagation();
-
+    e.stopPropagation();
     dispatch(openMoreActionSheet({ item, index }));
   });
 
@@ -114,12 +113,12 @@ const CategoryList = () => {
         renderItem={(item, i) => (
           <ListItem
             key={item.id} //
-            icon={<Avatar image={item.icon} circle />}
+            icon={<Avatar src={processImageUrl(item.icon)} />}
             title={item.name}
             extra={
               <>
                 <Text className="item-count">{item.count}</Text>
-                <Icon className="item-more" value="more" prefixClass="iconfont" onClick={(e) => onItemMoreClick(e, item, i)} />
+                <IconFont className="item-more" name="more" fontClassName="iconfont" classPrefix="iconfont" size={16} onClick={(e) => onItemMoreClick(e, item, i)} />
               </>
             }
             arrow="none"
@@ -130,16 +129,33 @@ const CategoryList = () => {
         pullDownRefresh
         renderFooter={renderFooter}
       />
-      <AtFab className={`${classPrefix}--fab-button`} onClick={onCreate}>
-        <Icon value="add" color="#ffffff" />
-      </AtFab>
+      <Button
+        className={`${classPrefix}--hover-button`}
+        shape="round"
+        type="primary"
+        size="xlarge"
+        onClick={onCreate}>
+        <Plus color="#ffffff" size={18} />
+      </Button>
 
-      <AtActionSheet isOpened={moreOpened} cancelText="取消" title={'账号分类：' + moreItem?.name} onClose={onCloseMoreActionSheet} onCancel={onCloseMoreActionSheet}>
-        <AtActionSheetItem onClick={() => onUpdate(moreItem!, moreItemIndex)}>编辑</AtActionSheetItem>
-        <AtActionSheetItem onClick={() => onDelete(moreItem!, moreItemIndex)}>
-          <Text className="item-delete">删除</Text>
-        </AtActionSheetItem>
-      </AtActionSheet>
+      <ActionSheet
+        visible={moreOpened}
+        cancelText="取消"
+        title={'账号分类：' + moreItem?.name}
+        onClose={onCloseMoreActionSheet}
+        onCancel={onCloseMoreActionSheet}
+        options={[
+          { name: '编辑' },
+          { name: '删除' },
+        ]}
+        onSelect={(item) => {
+          if (item.name === '编辑') {
+            onUpdate(moreItem!, moreItemIndex);
+          } else if (item.name === '删除') {
+            onDelete(moreItem!, moreItemIndex);
+          }
+        }}
+      />
     </View>
   );
 };

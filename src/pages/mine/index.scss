@@ -16,10 +16,9 @@ $classPrefix: '.lj-mine-page';
     margin: 0 auto 0;
 
     .avatar {
+      --nutui-avatar-large-width: 160px;
+      --nutui-avatar-large-height: 160px;
       margin-top: -80px;
-      border: 8px solid #fff;
-      width: 160px;
-      height: 160px;
     }
 
     .user-name {

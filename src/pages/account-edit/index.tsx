@@ -1,13 +1,13 @@
-import { getOpenerEventChannel, showToast } from '@/common/utils';
+import { getOpenerEventChannel, processImageUrl, showToast } from '@/common/utils';
 import AccountPanel from '@/components/account-panel';
-import Avatar from '@/components/avatar';
-import Button from '@/components/button';
+import { Avatar } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import IconSelectPicker from '@/components/icon-select-picker';
 import { File } from '@/components/image-picker';
 import ImageViewer from '@/components/image-viewer';
-import Input from '@/components/input';
+import { Input } from '@nutui/nutui-react-taro';
 import PropertyViewer from '@/components/property-viewer';
-import Space from '@/components/space';
+import { Space } from '@nutui/nutui-react-taro';
 import TextViewer from '@/components/text-viewer';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { configSelector } from '@/redux/reducers/config';
@@ -54,7 +54,7 @@ const AccountEdit = () => {
         id: 0,
         categoryId,
         name: '新账号',
-        icon: config.account.default_icon,
+        icon: "",
         properties: [
           { name: '账号', value: 'abcd' },
           { name: '密码', value: '123456' },
@@ -108,7 +108,7 @@ const AccountEdit = () => {
           <View className="account-info">
             <View className="account-icon">
               <IconSelectPicker onChange={onIconChange}>
-                <Avatar image={account.icon} circle />
+                <Avatar src={processImageUrl(account.icon)} />
               </IconSelectPicker>
             </View>
             <View className="account-title">
@@ -136,8 +136,8 @@ const AccountEdit = () => {
           </AccountPanel>
 
           <View className={`${classPrefix}--footer`}>
-            <Space justifyContent="space-evenly">
-              <Button type="primary" full onClick={onSave}>
+            <Space justify="evenly">
+              <Button type="primary" block size="large" style={{ width: '100px' }} onClick={onSave}>
                 保存
               </Button>
             </Space>

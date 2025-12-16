@@ -1,9 +1,9 @@
-import { getOpenerEventChannel, showToast } from '@/common/utils';
-import Avatar from '@/components/avatar';
-import Button from '@/components/button';
+import { getOpenerEventChannel, processImageUrl, showToast } from '@/common/utils';
+import { Avatar } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import FormItem from '@/components/form-item';
 import IconSelectPicker from '@/components/icon-select-picker';
-import Input from '@/components/input';
+import { Input } from '@nutui/nutui-react-taro';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { View } from '@tarojs/components';
 import Taro, { useRouter } from '@tarojs/taro';
@@ -51,17 +51,17 @@ const CategoryEdit = () => {
     <View className={classPrefix}>
       <View className={`${classPrefix}--container`}>
         <FormItem title="分类名称">
-          <Input placeholder="请输入" value={name} maxLength={30} onChange={onNameChange} border={false} />
+          <Input placeholder="请输入" value={name} maxLength={30} onChange={onNameChange} />
         </FormItem>
         <FormItem title="分类图标">
           <IconSelectPicker onChange={onIconChange}>
-            <Avatar image={icon} circle />
+            <Avatar src={processImageUrl(icon)} />
           </IconSelectPicker>
         </FormItem>
       </View>
 
       <View className={`${classPrefix}--footer`}>
-        <Button type="primary" full onClick={onSave}>
+        <Button type="primary" block size="large" onClick={onSave}>
           保存
         </Button>
       </View>

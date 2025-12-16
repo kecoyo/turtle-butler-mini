@@ -1,5 +1,6 @@
-import Avatar from '@/components/avatar';
-import Icon from '@/components/icon';
+import { processImageUrl } from '@/common/utils';
+import { Avatar } from '@nutui/nutui-react-taro';
+import { IconFont, Plus } from '@nutui/icons-react-taro';
 import ListItem from '@/components/list-item';
 import ListView from '@/components/list-view';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -7,7 +8,7 @@ import { View } from '@tarojs/components';
 import Taro, { useDidShow, useRouter } from '@tarojs/taro';
 import { useMemoizedFn, useMount, useUnmount } from 'ahooks';
 import _ from 'lodash';
-import { AtActionSheet, AtActionSheetItem, AtFab } from 'taro-ui';
+import { ActionSheet, Button } from '@nutui/nutui-react-taro';
 import { setCategoryListDataChanged } from '../category-list/reducer';
 import './index.scss';
 import { accountListSelector, clearAccountListState, closeMoreActionSheet, deleteAccountAsync, fetchAccountList, openMoreActionSheet } from './reducer';
@@ -82,14 +83,12 @@ const AccountList = () => {
 
   const onDelete = useMemoizedFn((item: AccountInfo, index: number) => {
     onCloseMoreActionSheet();
-
     dispatch(deleteAccountAsync(item.id));
   });
 
   // 点击more, 打开ActionSheet
   const onItemMoreClick = useMemoizedFn((e: any, item: AccountInfo, index?: number) => {
-    e[0].stopPropagation();
-
+    e.stopPropagation();
     dispatch(openMoreActionSheet({ item, index }));
   });
 
@@ -125,12 +124,12 @@ const AccountList = () => {
         renderItem={(item, i) => (
           <ListItem
             key={item.id} //
-            icon={<Avatar image={item.icon} circle />}
+            icon={<Avatar src={processImageUrl(item.icon)} />}
             title={item.name}
             note={_.get(item, 'properties[0].name') + '：' + _.get(item, 'properties[0].value')}
             extra={
               <>
-                <Icon className="item-more" value="more" prefixClass="iconfont" onClick={(e) => onItemMoreClick(e, item, i)} />
+                <IconFont className="item-more" name="more" fontClassName="iconfont" classPrefix="iconfont" size={16} onClick={(e) => onItemMoreClick(e, item, i)} />
               </>
             }
             arrow="none"
@@ -141,21 +140,36 @@ const AccountList = () => {
         pullDownRefresh
         renderFooter={renderFooter}
       />
-      <AtFab className={`${classPrefix}--fab-button`} onClick={onCreate}>
-        <Icon value="add" color="#ffffff" />
-      </AtFab>
+      <Button
+        className={`${classPrefix}--hover-button`}
+        shape="round"
+        type="primary"
+        size="xlarge"
+        onClick={onCreate}>
+        <Plus color="#ffffff" size={18} />
+      </Button>
 
-      <AtActionSheet isOpened={moreOpened} cancelText="取消" title={'账号：' + moreItem?.name} onClose={onCloseMoreActionSheet} onCancel={onCloseMoreActionSheet}>
-        <AtActionSheetItem className="item-update" onClick={() => onUpdate(moreItem!, moreItemIndex!)}>
-          编辑
-        </AtActionSheetItem>
-        <AtActionSheetItem className="item-delete" onClick={() => onDelete(moreItem!, moreItemIndex!)}>
-          删除
-        </AtActionSheetItem>
-        <AtActionSheetItem className="item-move" onClick={() => onMove(moreItem!, moreItemIndex!)}>
-          移动
-        </AtActionSheetItem>
-      </AtActionSheet>
+      <ActionSheet
+        visible={moreOpened}
+        cancelText="取消"
+        title={'账号：' + moreItem?.name}
+        onClose={onCloseMoreActionSheet}
+        onCancel={onCloseMoreActionSheet}
+        options={[
+          { name: '编辑' },
+          { name: '删除' },
+          { name: '移动' },
+        ]}
+        onSelect={(item) => {
+          if (item.name === '编辑') {
+            onUpdate(moreItem!, moreItemIndex!);
+          } else if (item.name === '删除') {
+            onDelete(moreItem!, moreItemIndex!);
+          } else if (item.name === '移动') {
+            onMove(moreItem!, moreItemIndex!);
+          }
+        }}
+      />
     </View>
   );
 };

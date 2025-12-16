@@ -1,8 +1,8 @@
 import categoryApi from '@/apis/categoryApi';
-import { getOpenerEventChannel, rem2px, showToast } from '@/common/utils';
-import Avatar from '@/components/avatar';
-import Button from '@/components/button';
-import Icon from '@/components/icon';
+import { getOpenerEventChannel, processImageUrl, rem2px, showToast } from '@/common/utils';
+import { Avatar } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
+import { IconFont } from '@nutui/icons-react-taro';
 import ListItem from '@/components/list-item';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { View } from '@tarojs/components';
@@ -93,11 +93,11 @@ const CategorySort = () => {
                 'item-moving': startIndex == index,
               })}
               key={item.id} //
-              icon={<Avatar image={item.icon} circle />}
+              icon={<Avatar src={processImageUrl(item.icon)} />}
               title={item.name}
               extra={
                 <View className="item-drag" onTouchStart={(e) => onMoveStart(e, index)} onTouchMove={(e) => onMove(e, index)} catchMove onTouchEnd={(e) => onMoveEnd(e, index)}>
-                  <Icon prefixClass="iconfont" value="drag" />
+                  <IconFont name="drag" fontClassName="iconfont" classPrefix="iconfont" size={16} />
                 </View>
               }
               arrow="none"
@@ -110,7 +110,7 @@ const CategorySort = () => {
 
       {list.length > 0 && (
         <View className={`${classPrefix}--footer`}>
-          <Button type="primary" full onClick={onSave}>
+          <Button type="primary" block size="large" onClick={onSave}>
             保存
           </Button>
         </View>

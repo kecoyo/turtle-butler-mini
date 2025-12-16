@@ -43,11 +43,6 @@ $classPrefix: '.lj-image-viewer';
       text-align: center;
       background-color: $color-error;
       @include flex-row(center, center);
-
-      .lj-icon {
-        font-size: 18px;
-        color: $color-white;
-      }
     }
 
     .preview-img {

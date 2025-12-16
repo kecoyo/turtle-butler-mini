@@ -1,11 +1,11 @@
-import { getOpenerEventChannel } from '@/common/utils';
-import Avatar from '@/components/avatar';
+import { getOpenerEventChannel, processImageUrl } from '@/common/utils';
+import { Avatar } from '@nutui/nutui-react-taro';
 import ScrollView from '@/components/scroll-view';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useMemoizedFn, useMount } from 'ahooks';
-import { AtTabs, AtTabsPane } from 'taro-ui';
+import { Tabs } from '@nutui/nutui-react-taro';
 import './index.scss';
 import { fetchIconSelectList, iconSelectSelector, setIconSelectState } from './reducer';
 
@@ -24,7 +24,10 @@ const IconSelect = () => {
     }
   });
 
-  const onTabIndexChange = useMemoizedFn((index: number) => dispatch(setIconSelectState({ tabIndex: index })));
+  const onTabIndexChange = useMemoizedFn((value: string | number) => {
+    const index = typeof value === 'number' ? value : parseInt(value as string, 10);
+    dispatch(setIconSelectState({ tabIndex: index }));
+  });
 
   const onIconClick = useMemoizedFn((icon: string) => {
     const eventChannel = getOpenerEventChannel();
@@ -34,21 +37,21 @@ const IconSelect = () => {
 
   return (
     <View className={classPrefix}>
-      <AtTabs tabList={tabList} current={tabIndex} onClick={onTabIndexChange}>
+      <Tabs value={tabIndex} onChange={onTabIndexChange}>
         {iconList.map((item, i) => (
-          <AtTabsPane key={i} current={tabIndex} index={i}>
+          <Tabs.TabPane key={i} title={tabList[i]?.title || ''}>
             <ScrollView>
               <View className={`${classPrefix}--icon-list`}>
                 {(item.icons || []).map((icon, j) => (
                   <View key={j} className={`${classPrefix}--icon-item`} onClick={() => onIconClick(icon)}>
-                    <Avatar image={icon} circle />
+                    <Avatar src={processImageUrl(icon)} />
                   </View>
                 ))}
               </View>
             </ScrollView>
-          </AtTabsPane>
+          </Tabs.TabPane>
         ))}
-      </AtTabs>
+      </Tabs>
     </View>
   );
 };

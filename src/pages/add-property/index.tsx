@@ -1,7 +1,7 @@
 import { getOpenerEventChannel, showToast } from '@/common/utils';
-import Button from '@/components/button';
+import { Button } from '@nutui/nutui-react-taro';
 import FormItem from '@/components/form-item';
-import Input from '@/components/input';
+import { Input } from '@nutui/nutui-react-taro';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useMemoizedFn } from 'ahooks';
@@ -41,7 +41,7 @@ const AddProperty = () => {
         </FormItem>
       </View>
       <View className={`${classPrefix}--footer`}>
-        <Button type="primary" full onClick={onOk}>
+        <Button type="primary" block size="large" onClick={onOk}>
           确 定
         </Button>
       </View>

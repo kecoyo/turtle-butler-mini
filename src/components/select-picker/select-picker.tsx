@@ -28,7 +28,6 @@ const SelectPicker: React.FC<SelectPickerProps> = (p) => {
   const props = mergeProps(defaultProps, p);
   const range = props.options.map((opt) => opt.label);
   const selectedIndex = props.options.findIndex((opt) => opt.value === props.value);
-  console.log('🚀 ~ file: select-picker.tsx:31 ~ selectedIndex:', selectedIndex);
 
   const onChange = useMemoizedFn((e) => {
     let index = e.detail.value;

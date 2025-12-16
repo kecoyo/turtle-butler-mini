@@ -6,27 +6,16 @@ $classPrefix: '.lj-link';
   @include flex-row(center, center);
   color: $color-link;
 
-  .lj-icon {
-    color: $color-link;
-    margin-right: $spacing-xxs;
-  }
-
   &--text {
     margin-top: 1px;
   }
 
   &:active {
     color: $color-link-active;
-    .lj-icon {
-      color: $color-link-active;
-    }
   }
 
   &:hover {
     color: $color-link-hover;
-    .lj-icon {
-      color: $color-link-hover;
-    }
   }
 
   &--disabled {
@@ -35,9 +24,6 @@ $classPrefix: '.lj-link';
     &:hover,
     &:active {
       color: $color-link-disabled;
-      .lj-icon {
-        color: $color-link-disabled;
-      }
     }
   }
 }

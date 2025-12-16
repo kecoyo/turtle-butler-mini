@@ -97,3 +97,18 @@
     color: $color-link-active;
   }
 }
+
+/* 文本行数限制 */
+@mixin line($line-num: 1) {
+  @if $line-num == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line-num;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

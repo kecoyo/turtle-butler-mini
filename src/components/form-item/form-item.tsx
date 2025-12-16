@@ -3,7 +3,7 @@ import mergeProps from '@/common/with-default-props';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 import React, { JSXElementConstructor, ReactElement, ReactNode } from 'react';
-import Icon from '../icon';
+import { IconFont } from '@nutui/icons-react-taro';
 import './form-item.scss';
 
 type Props = {
@@ -55,7 +55,7 @@ const FormItem: React.FC<Props> = (p) => {
         [`${classPrefix}--border`]: props.hasBorder,
       })}
     >
-      {props.icon && <View className={`${classPrefix}--item-icon`}>{typeof props.icon === 'string' ? <Icon value={props.icon} /> : props.icon}</View>}
+      {props.icon && <View className={`${classPrefix}--item-icon`}>{typeof props.icon === 'string' ? <IconFont name={props.icon} fontClassName="iconfont" classPrefix="iconfont" size={16} /> : props.icon}</View>}
       <View className={`${classPrefix}--item-title`}>{props.title}</View>
       <View className={`${classPrefix}--item-content`}>{props.children}</View>
     </View>,

@@ -1,10 +1,14 @@
-import { SelectOption } from '@/components/select';
 import Taro, { getCurrentPages } from '@tarojs/taro';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import _ from 'lodash';
-import { APP_RES_URL, RES_URL } from './constants';
+import { APP_RES_URL, DEFAULT_AVATAR_URL, RES_URL } from './constants';
 import { SchoolStage } from './enums';
+
+export interface SelectOption {
+  value: number;
+  label: string;
+}
 
 dayjs.extend(duration);
 
@@ -151,6 +155,19 @@ export const getAvatarUrl = (avatar?: string) => {
 };
 
 /**
+ * 处理图片 URL（处理 upload/ 前缀）
+ */
+export const processImageUrl = (image?: string): string => {
+  if (!image) {
+    return '';
+  }
+  if (image.startsWith('upload/')) {
+    return RES_URL + image;
+  }
+  return image;
+};
+
+/**
  * 将枚举中的项转换成Select组件的Options.
  * @param enumObj 任意枚举对象
  * @param isAll 是否添加全部选项
@@ -286,9 +303,9 @@ export function getOpenerEventChannel() {
 }
 
 export function px2rem(px: number) {
-  return (750 / Taro.getSystemInfoSync().screenWidth) * px;
+  return (750 / Taro.getWindowInfo().screenWidth) * px;
 }
 
 export function rem2px(rem: number) {
-  return (Taro.getSystemInfoSync().screenWidth / 750) * rem;
+  return (Taro.getWindowInfo().screenWidth / 750) * rem;
 }

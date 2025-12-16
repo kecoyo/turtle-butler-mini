@@ -1,7 +1,7 @@
 import accountApi from '@/apis/accountApi';
-import { getOpenerEventChannel, showToast } from '@/common/utils';
-import Avatar from '@/components/avatar';
-import Button from '@/components/button';
+import { getOpenerEventChannel, processImageUrl, showToast } from '@/common/utils';
+import { Avatar } from '@nutui/nutui-react-taro';
+import { Button } from '@nutui/nutui-react-taro';
 import ListItem from '@/components/list-item';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { Radio, RadioGroup, View } from '@tarojs/components';
@@ -64,7 +64,7 @@ const AccountMove = () => {
             <ListItem
               className={classNames({})}
               key={item.id} //
-              icon={<Avatar image={item.icon} circle />}
+              icon={<Avatar src={processImageUrl(item.icon)} />}
               title={item.name}
               extra={
                 <View className="item-drag">
@@ -79,7 +79,7 @@ const AccountMove = () => {
 
       {list.length > 0 && (
         <View className={`${classPrefix}--footer`}>
-          <Button type="primary" full onClick={onSave}>
+          <Button type="primary" block size="large" onClick={onSave}>
             保存
           </Button>
         </View>

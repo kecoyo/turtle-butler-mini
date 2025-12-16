@@ -1,7 +1,7 @@
 import { Gender } from '@/common/enums';
-import { getEnumOptions } from '@/common/utils';
+import { getEnumOptions, processImageUrl } from '@/common/utils';
 import AreaPicker from '@/components/area-picker';
-import Avatar from '@/components/avatar';
+import { Avatar } from '@nutui/nutui-react-taro';
 import DatePicker from '@/components/date-picker';
 import ListItem from '@/components/list-item';
 import SelectPicker from '@/components/select-picker';
@@ -9,10 +9,9 @@ import TextPicker from '@/components/text-picker';
 import Upload from '@/components/upload';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { globalSelector } from '@/redux/reducers/global';
-import { Input, Textarea, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { useMemoizedFn, useMount, useUnmount, useUpdateEffect } from 'ahooks';
 import _ from 'lodash';
-import { AtList } from 'taro-ui';
 import './index.scss';
 import { clearUpdateProfileState, setUpdateProfileState, updateUserInfoAsync, updateProfileSelector } from './reducer';
 
@@ -26,7 +25,6 @@ const UpdateProfile = () => {
   const { nickname, phone, avatar, gender, birthday, email, idCard, province, city, county, remark } = useAppSelector(updateProfileSelector);
   const { userInfo, allAreaMap } = useAppSelector(globalSelector);
   const areaNames = [province, city, county].filter((id) => id).map((id) => allAreaMap[id].name);
-  // ;
 
   useMount(() => {
     if (userInfo) {
@@ -56,14 +54,11 @@ const UpdateProfile = () => {
   const onBirthdayChange = useMemoizedFn((val) => dispatch(updateUserInfoAsync({ birthday: val })));
   const onAreaChange = useMemoizedFn((val) => dispatch(updateUserInfoAsync({ province: val[0].id, city: val[1].id, county: val[2].id })));
   const onRemarkChange = useMemoizedFn((val: string) => dispatch(updateUserInfoAsync({ remark: val })));
-
   return (
     <View className={classPrefix}>
-      <Input style={{ display: 'none' }} />
-      <Textarea style={{ display: 'none' }} />
-      <AtList>
-        <Upload tags="avatar" onChange={onAvatarChange}>
-          <ListItem title="头像" extra={<Avatar image={avatar} circle />} />
+      <View>
+        <Upload tags="user_avatar" onChange={onAvatarChange}>
+          <ListItem title="头像" extra={<Avatar src={processImageUrl(avatar)} />} />
         </Upload>
         <TextPicker type="input" title="昵称" maxLength={50} require value={nickname} onChange={onNicknameChange}>
           <ListItem title="昵称" extra={<View className="user-name">{nickname}</View>} />
@@ -80,7 +75,7 @@ const UpdateProfile = () => {
         <TextPicker type="textarea" title="个性签名" maxLength={200} value={remark} onChange={onRemarkChange}>
           <ListItem title="个性签名" extra={<View className="user-remark">{remark}</View>} />
         </TextPicker>
-      </AtList>
+      </View>
     </View>
   );
 };

@@ -1,9 +1,9 @@
 import { NativeProps, withNativeProps } from '@/common/native-props';
-import uploadImage from '@/common/upload-image';
+import { chooseImageAndUpload } from '@/common/upload-image';
 import mergeProps from '@/common/with-default-props';
 import { View } from '@tarojs/components';
 import { useMemoizedFn } from 'ahooks';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import './upload.scss';
 
 type Props = {
@@ -18,10 +18,10 @@ const classPrefix = `lj-upload`;
 
 const Upload: React.FC<Props> = (p) => {
   const props = mergeProps(defaultProps, p);
-  const [src, setSrc] = useState('');
 
   const onUpload = useMemoizedFn(async () => {
-    await uploadImage(props.tags, 1, onChange);
+    const url = await chooseImageAndUpload(props.tags, 1);
+    onChange(url);
   });
 
   const onChange = useMemoizedFn(async (url: string) => {
