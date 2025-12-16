@@ -5,12 +5,12 @@ import request from './request';
  */
 const userApi = {
   /**
-   * 更新用户基本信息
+   * 更新用户信息
    * @param data
    * @returns
    */
-  updateBaseInfo: async (data: {
-    name?: string; // 姓名
+  updateUserInfo: async (data: {
+    nickname?: string; // 昵称
     avatar?: string; // 头像
     gender?: number; // 性别
     idCard?: string; // 身份证
@@ -21,7 +21,7 @@ const userApi = {
     city?: number; // 市
     county?: number; // 区县
   }) => {
-    return request.post(`${BASE_URL}/api/user/updateBaseInfo`, data);
+    return request.post(`${BASE_URL}/api/user/update`, data);
   },
 };
 

@@ -8,14 +8,13 @@ import SelectPicker from '@/components/select-picker';
 import TextPicker from '@/components/text-picker';
 import Upload from '@/components/upload';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { configSelector } from '@/redux/reducers/config';
 import { globalSelector } from '@/redux/reducers/global';
 import { Input, Textarea, View } from '@tarojs/components';
 import { useMemoizedFn, useMount, useUnmount, useUpdateEffect } from 'ahooks';
 import _ from 'lodash';
 import { AtList } from 'taro-ui';
 import './index.scss';
-import { clearUpdateProfileState, setUpdateProfileState, updateBaseInfoAsync, updateProfileSelector } from './reducer';
+import { clearUpdateProfileState, setUpdateProfileState, updateUserInfoAsync, updateProfileSelector } from './reducer';
 
 const classPrefix = 'lj-update-profile-page';
 
@@ -24,31 +23,26 @@ const classPrefix = 'lj-update-profile-page';
  */
 const UpdateProfile = () => {
   const dispatch = useAppDispatch();
-  const { name, phone, code, avatar, gender, birthday, email, idCard, province, city, county, remark } = useAppSelector(updateProfileSelector);
+  const { nickname, phone, avatar, gender, birthday, email, idCard, province, city, county, remark } = useAppSelector(updateProfileSelector);
   const { userInfo, allAreaMap } = useAppSelector(globalSelector);
-  const config = useAppSelector(configSelector);
   const areaNames = [province, city, county].filter((id) => id).map((id) => allAreaMap[id].name);
   // ;
 
   useMount(() => {
     if (userInfo) {
-      // 统一使用name字段，如果userInfo中有nickname但没有name，则使用nickname
       const userData = {
         ...userInfo,
-        name: userInfo.name || (userInfo as any).nickname || '',
       };
-      dispatch(setUpdateProfileState(_.pick(userData, Object.keys({ name, phone, avatar, gender, birthday, email, idCard, province, city, county, remark }))));
+      dispatch(setUpdateProfileState(_.pick(userData, Object.keys({ nickname, phone, avatar, gender, birthday, email, idCard, province, city, county, remark }))));
     }
   });
 
   useUpdateEffect(() => {
     if (userInfo) {
-      // 统一使用name字段，如果userInfo中有nickname但没有name，则使用nickname
       const userData = {
         ...userInfo,
-        name: userInfo.name || (userInfo as any).nickname || '',
       };
-      dispatch(setUpdateProfileState(_.pick(userData, Object.keys({ name, phone, avatar, gender, birthday, email, idCard, province, city, county, remark }))));
+      dispatch(setUpdateProfileState(_.pick(userData, Object.keys({ nickname, phone, avatar, gender, birthday, email, idCard, province, city, county, remark }))));
     }
   }, [userInfo]);
 
@@ -56,12 +50,12 @@ const UpdateProfile = () => {
     dispatch(clearUpdateProfileState());
   });
 
-  const onNameChange = useMemoizedFn((val: string) => dispatch(updateBaseInfoAsync({ name: val })));
-  const onAvatarChange = useMemoizedFn((val: string) => dispatch(updateBaseInfoAsync({ avatar: val })));
-  const onGenderChange = useMemoizedFn((val) => dispatch(updateBaseInfoAsync({ gender: val })));
-  const onBirthdayChange = useMemoizedFn((val) => dispatch(updateBaseInfoAsync({ birthday: val })));
-  const onAreaChange = useMemoizedFn((val) => dispatch(updateBaseInfoAsync({ province: val[0].id, city: val[1].id, county: val[2].id })));
-  const onRemarkChange = useMemoizedFn((val: string) => dispatch(updateBaseInfoAsync({ remark: val })));
+  const onNicknameChange = useMemoizedFn((val: string) => dispatch(updateUserInfoAsync({ nickname: val })));
+  const onAvatarChange = useMemoizedFn((val: string) => dispatch(updateUserInfoAsync({ avatar: val })));
+  const onGenderChange = useMemoizedFn((val) => dispatch(updateUserInfoAsync({ gender: val })));
+  const onBirthdayChange = useMemoizedFn((val) => dispatch(updateUserInfoAsync({ birthday: val })));
+  const onAreaChange = useMemoizedFn((val) => dispatch(updateUserInfoAsync({ province: val[0].id, city: val[1].id, county: val[2].id })));
+  const onRemarkChange = useMemoizedFn((val: string) => dispatch(updateUserInfoAsync({ remark: val })));
 
   return (
     <View className={classPrefix}>
@@ -71,8 +65,8 @@ const UpdateProfile = () => {
         <Upload tags="avatar" onChange={onAvatarChange}>
           <ListItem title="头像" extra={<Avatar image={avatar} circle />} />
         </Upload>
-        <TextPicker type="input" title="姓名" maxLength={50} require value={name} onChange={onNameChange}>
-          <ListItem title="姓名" extra={<View className="user-name">{name}</View>} />
+        <TextPicker type="input" title="昵称" maxLength={50} require value={nickname} onChange={onNicknameChange}>
+          <ListItem title="昵称" extra={<View className="user-name">{nickname}</View>} />
         </TextPicker>
         <SelectPicker options={getEnumOptions(Gender)} value={gender} onChange={onGenderChange}>
           <ListItem title="性别" extra={Gender[gender]} />

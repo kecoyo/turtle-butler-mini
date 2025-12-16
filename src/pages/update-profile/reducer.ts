@@ -3,12 +3,11 @@ import { showToast } from '@/common/utils';
 import { updateUserInfo } from '@/redux/reducers/global';
 import { AppDispatch, AppGetState, RootState } from '@/redux/store';
 import { createSlice } from '@reduxjs/toolkit';
-import dayjs from 'dayjs';
 
 // 为 slice state 定义一个类型
 interface UpdateProfileState {
   // 基本信息
-  name: string; // 姓名
+  nickname: string; // 昵称
   avatar: string; // 头像
   gender: number; // 性别
   phone: string; // 手机号
@@ -24,7 +23,7 @@ interface UpdateProfileState {
 
 // 使用该类型定义初始 state
 const initialState: UpdateProfileState = {
-  name: '',
+  nickname: '',
   avatar: '',
   gender: 0,
   phone: '',
@@ -56,23 +55,10 @@ export const updateProfileSlice = createSlice({
 export const { setUpdateProfileState, clearUpdateProfileState } = updateProfileSlice.actions;
 export const updateProfileSelector = (state: RootState) => state.updateProfile;
 
-/**
- * 获取手机公开设置
- * @returns
- */
-export const fetchExtendInfo = () => async (dispatch: AppDispatch) => {
-  const extendInfo = await userApi.getExtendInfo({});
-  dispatch(
-    setUpdateProfileState({
-      ...extendInfo,
-      birth: extendInfo.birth ? dayjs(extendInfo.birth * 1000).format('YYYY-MM-DD') : '',
-    }),
-  );
-};
 
-// 修改基本信息
-export const updateBaseInfoAsync = (baseInfo: any) => async (dispatch: AppDispatch, getState: AppGetState) => {
-  const response = await userApi.updateBaseInfo(baseInfo);
+// 修改用户信息
+export const updateUserInfoAsync = (baseInfo: any) => async (dispatch: AppDispatch, getState: AppGetState) => {
+  const response = await userApi.updateUserInfo(baseInfo);
   showToast('修改成功');
   // 使用API返回的完整用户数据更新本地状态
   if (response) {
@@ -83,8 +69,10 @@ export const updateBaseInfoAsync = (baseInfo: any) => async (dispatch: AppDispat
     // 如果API没有返回数据，则使用传入的数据
     dispatch(setUpdateProfileState(baseInfo));
     const updateData = { ...baseInfo };
-    if (updateData.name && !updateData.nickname) {
-      updateData.nickname = updateData.name;
+    // 统一使用nickname字段，如果传入了name则转换为nickname
+    if ((updateData as any).name && !updateData.nickname) {
+      updateData.nickname = (updateData as any).name;
+      delete (updateData as any).name;
     }
     dispatch(updateUserInfo(updateData));
   }
