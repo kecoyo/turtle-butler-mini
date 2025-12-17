@@ -22,7 +22,7 @@ const Mine = () => {
 
   const items = [
     { key: 'update-profile', title: '修改个人资料', icon: <IconFont name="profile" fontClassName="iconfont" classPrefix="iconfont" size={16} />, extra: null },
-    { key: 'logoff', title: '退出账号', icon: <IconFont name="exit" fontClassName="iconfont" classPrefix="iconfont" size={16} />, extra: null },
+    // { key: 'logoff', title: '退出账号', icon: <IconFont name="exit" fontClassName="iconfont" classPrefix="iconfont" size={16} />, extra: null },
   ];
 
   const onItemClick = useMemoizedFn((item) => {

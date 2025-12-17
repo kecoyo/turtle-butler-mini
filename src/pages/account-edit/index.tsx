@@ -3,7 +3,6 @@ import AccountPanel from '@/components/account-panel';
 import { Avatar } from '@nutui/nutui-react-taro';
 import { Button } from '@nutui/nutui-react-taro';
 import IconSelectPicker from '@/components/icon-select-picker';
-import { File } from '@/components/image-picker';
 import ImageViewer from '@/components/image-viewer';
 import { Input } from '@nutui/nutui-react-taro';
 import PropertyViewer from '@/components/property-viewer';
@@ -41,7 +40,6 @@ const classPrefix = 'lj-account-edit-page';
 const AccountEdit = () => {
   const dispatch = useAppDispatch();
   const { account } = useAppSelector(accountEditSelector);
-  const config = useAppSelector(configSelector);
   const router = useRouter();
   const id = Number(router.params.id);
   const categoryId = Number(router.params.categoryId);
@@ -77,7 +75,7 @@ const AccountEdit = () => {
   const onRemoveProperty = useMemoizedFn(async (index: number) => dispatch(removeAccountProperty(index)));
   const onUpdateProperty = useMemoizedFn(async (index: number, value: any) => dispatch(updateAccountProperty({ index, value })));
   const onSortProperty = useMemoizedFn(async (startIndex: number, toIndex: number) => dispatch(sortAccountProperty({ startIndex, toIndex })));
-  const onAddPicture = useMemoizedFn(async (file: File) => dispatch(addAccountPicture(file)));
+  const onAddPicture = useMemoizedFn(async (file: ImageItem) => dispatch(addAccountPicture(file)));
   const onRemovePicture = useMemoizedFn(async (index: number) => dispatch(removeAccountPicture(index)));
   const onSortPicture = useMemoizedFn(async (startIndex: number, toIndex: number) => dispatch(sortAccountPicture({ startIndex, toIndex })));
 

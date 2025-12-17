@@ -69,16 +69,13 @@ const ImageViewer: React.FC<ImageViewerProps> = (p) => {
   const [moving, setMoving] = useState(false);
 
   const onAdd = useMemoizedFn(async () => {
-    const url = await chooseImageAndUpload('account_picture', 9);
-    if (props.onAdd) {
-      props.onAdd({ url });
-    }
+    chooseImageAndUpload('account_picture', 9, (url) => {
+      props.onAdd?.({ url });
+    });
   });
 
-  const onRemove = useMemoizedFn((val) => {
-    if (props.onRemove) {
-      props.onRemove(val);
-    }
+  const onRemove = useMemoizedFn((index: number) => {
+    props.onRemove?.(index);
   });
 
   // 预览图片
@@ -162,7 +159,7 @@ const ImageViewer: React.FC<ImageViewerProps> = (p) => {
             >
               {props.editable && (
                 <View className="remove-btn" onClick={() => onRemove(index)}>
-                  <IconFont name="delete" fontClassName="iconfont" classPrefix="iconfont" size={12} color="#fff" />
+                  <IconFont name="delete" fontClassName="iconfont" classPrefix="iconfont" size={10} color="#fff" />
                 </View>
               )}
               <Image className="preview-img" src={processImageUrl(file.url)} mode="aspectFit" onClick={() => onPreview(index)} />

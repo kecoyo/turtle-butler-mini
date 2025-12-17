@@ -7,7 +7,10 @@ $classPrefix: '.lj-text-viewer';
   width: 100%;
   overflow: hidden;
 
-  &--eidt {
+  &--textarea {
+    .nut-textarea-textarea {
+      height: 150px;
+    }
   }
 
   &--view {

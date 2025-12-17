@@ -47,7 +47,7 @@ const TextViewer: React.FC<TextViewerProps> = (p) => {
     <View className={classPrefix}>
       {props.editable ? (
         <View className={`${classPrefix}--edit`}>
-          <TextArea value={props.text} onChange={onChange} rows={8} maxLength={props.maxLength} />
+          <TextArea className={`${classPrefix}--textarea`} value={props.text} onChange={onChange} rows={8} maxLength={props.maxLength} />
         </View>
       ) : (
         <View className={`${classPrefix}--view`}>{renderView()}</View>

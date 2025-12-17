@@ -2,7 +2,7 @@ import Taro, { getCurrentPages } from '@tarojs/taro';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import _ from 'lodash';
-import { APP_RES_URL, DEFAULT_AVATAR_URL, RES_URL } from './constants';
+import { APP_RES_URL, RES_URL } from './constants';
 import { SchoolStage } from './enums';
 
 export interface SelectOption {

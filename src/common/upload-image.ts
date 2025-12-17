@@ -2,7 +2,6 @@ import uploadApi from '@/apis/uploadApi';
 import Taro from '@tarojs/taro';
 import mineType from 'mine-type';
 import SparkMD5 from 'spark-md5';
-import { APP_ID } from './constants';
 import { hideLoading, showErrorMsg, showLoading } from './utils';
 
 interface TempFile {
@@ -138,7 +137,7 @@ const uploadFileChunk = async (file: TempFile, start?: number): Promise<string> 
 };
 
 // 查询，并上传文件
-const queryAndUploadFile = async (file: TempFile) => {
+const queryAndUpload = async (file: TempFile) => {
   const res = await uploadApi.query({
     tags: file.tags,
     hash: file.hash,
@@ -156,7 +155,7 @@ const queryAndUploadFile = async (file: TempFile) => {
 };
 
 // 选择图片，并上传
-const chooseImageAndUpload = async (tags: string, count: number) => {
+const chooseImageAndUpload = async (tags: string, count: number, callback: (url: string) => void) => {
   let files = await chooseImage(count);
   if (files.length === 0) {
     return; // 取消上传
@@ -171,10 +170,10 @@ const chooseImageAndUpload = async (tags: string, count: number) => {
       file.hash = fileMd5;
       file.tags = tags;
 
-      let url = await queryAndUploadFile(file);
+      let url = await queryAndUpload(file);
       if (!url) throw new Error('uploadFile error');
 
-      return url;
+      callback(url);
     }
     hideLoading();
   } catch (err) {
@@ -209,21 +208,13 @@ const uploadCropperImage = async (tags: string, filePath: string): Promise<strin
 
     // 计算 MD5
     const fileMd5 = await getFileMd5(filePath);
+    if (!fileMd5) throw new Error('getFileMd5 error');
+
     file.hash = fileMd5;
 
     // 查询并上传文件
-    const queryRes = await uploadApi.query({
-      tags: file.tags,
-      hash: file.hash,
-    });
-
-    let url: string;
-    if (queryRes.code === 0) {
-      url = queryRes.data.url;
-    } else {
-      // 需要上传文件
-      url = await uploadFile(file);
-    }
+    let url = await queryAndUpload(file);
+    if (!url) throw new Error('uploadFile error');
 
     hideLoading();
     return url;

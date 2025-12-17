@@ -20,14 +20,11 @@ const Upload: React.FC<Props> = (p) => {
   const props = mergeProps(defaultProps, p);
 
   const onUpload = useMemoizedFn(async () => {
-    const url = await chooseImageAndUpload(props.tags, 1);
-    onChange(url);
-  });
-
-  const onChange = useMemoizedFn(async (url: string) => {
-    if (url && props.onChange) {
-      props.onChange(url);
-    }
+    chooseImageAndUpload(props.tags, 1, (url) => {
+      if (url && props.onChange) {
+        props.onChange(url);
+      }
+    });
   });
 
   return withNativeProps(
