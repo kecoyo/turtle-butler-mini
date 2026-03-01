@@ -199,7 +199,7 @@ const PropertyViewer: React.FC<PropertyViewerProps> = (p) => {
                 <View className="item-content" onClick={onRemoveCancel}>
                   {props.editable && (
                     <View className="item-remove" onClick={() => onRemove(index)}>
-                      <IconFont name="remove" fontClassName="iconfont" classPrefix="iconfont" size={12} color="#fff" />
+                      <IconFont name="remove" fontClassName="iconfont" classPrefix="iconfont" size={16} />
                     </View>
                   )}
                   <View className="item-name">
